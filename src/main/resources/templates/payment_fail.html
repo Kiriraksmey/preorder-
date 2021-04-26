@@ -1,0 +1,65 @@
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}">
+<head>
+	<title>Home Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+	<div class="box-verified-error box-content">
+		<div class="form-verified">
+			<form>
+				<div class="box-title">
+					<div class="icon-verified"><img src="images/error.png"></div>
+					<h2 th:text="${paymentDes}"></h2>
+					<div class="desc" ><span th:text="#{please.click}"></span> <a href="javascript:redirectHomepage();" th:text="#{here}">here</a> <span th:text="#{try.again}">to try again</span></div>
+				</div>
+				<div class="box-info">
+					<div class="logo"><img width="170" src="images/logo_sub.svg"></div>
+					<div class="warning-transaction" th:text="#{page.three.heading}"></div>
+					<div class="wp-elcontrol">
+						<div class="el-control">
+							<label th:text="#{page.three.orderId}"></label>
+							<span class="codeid" th:text="${invoiceID}"></span>
+						</div>
+						<div class="el-control">
+							<label th:text="#{subtotal}"></label>
+							<span class="price" ><span th:text="${subtotal}"></span> <span th:text="${curr}"></span></span>
+						</div>
+						<div class="el-control">
+							<label th:text="#{total}"></label>
+							<span class="price"><span th:text="${total}"></span> <span th:text="${curr}"></span></span>
+						</div>
+					</div>
+				</div>
+				<div class="inp-button">
+					<a class="btn-submit" id="btnsubmit" href="javascript:redirectHomepage();" th:text="#{labelContinueShopping}"></a>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+		function callbackPayment(status) {
+			var message = {
+				status: status
+			};
+			console.log('status ' + status);
+			try{
+				// ios
+				window.webkit.messageHandlers.callbackPayment.postMessage(status);
+			}catch (e) {
+				console.log('err ' + e);
+			}
+			try {
+				// android
+				Android.callbackPayment(status);
+			}catch (e) {
+				console.log('err ' + e);
+			}
+		}
+
+		window.onload = callbackPayment(1);
+	</script>
+</div>
+</body>
+</html>

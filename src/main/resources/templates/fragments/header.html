@@ -1,0 +1,41 @@
+<header id="header">
+    <div class="container">
+        <div id="top">
+            <div id="mainmenu-mobile">
+                <div id="btn-mainmenu">
+                    <img src="images/icon-menu.png">
+                    <span th:text="#{label.menu}"></span>
+                </div>
+            </div>
+            <div id="logo"><a href="javascript:redirectHomepage();"><img width="180" src="images/logo.svg"></a></div>
+            <div id="mainmenu-desktop">
+                <div class="wrap-menu">
+                    <div class="inner-menu">
+                        <ul class="list-mainmenu">
+                            <li class="active"><a href="javascript:redirectHomepage();"><img class="icon-menu" src="images/icon-home.png"><span th:text="#{menu.home}"></span></span></a></li>
+                            <li><a href="#"><img class="icon-menu" src="images/icon-map.png"><span th:text="#{menu.about}"></span></a></li>
+                            <li><a href="#"><img class="icon-menu" src="images/icon-user.png"><span  th:text="#{menu.register}"></span></a></li>
+                            <li><a href="#"><img class="icon-menu" src="images/icon-login.png"><span  th:text="#{menu.signin}"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div id="language">
+                <div class="flag-first" onclick="">
+                    <div th:switch="${#locale.language}">
+                        <div th:case="'en'"><img src="images/flag_eng.png">EN</div>
+                        <div th:case="'cn'"><img src="images/flag_chn.png">CH</div>
+                        <div th:case="'kh'"><img src="images/flag_khm.jpg">KH</div>
+
+                    </div>
+                </div>
+                <ul class="list-lang">
+                    <li class=""><a href="?lang=en"><img src="images/flag_eng.png">EN</a></li>
+                    <li><a href="?lang=cn"><img src="images/flag_chn.png">CH</a></li>
+                    <li><a href="?lang=kh"><img src="images/flag_khm.jpg">KH</a></li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</header>

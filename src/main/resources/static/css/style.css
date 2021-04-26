@@ -1,0 +1,2445 @@
+/* Webfont: BloggerSans */
+@font-face {
+  font-family: 'DINRoundOT';
+  src: url('../fonts/DINRoundOT.eot');
+  src: url('../fonts/DINRoundOT.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */ url('../fonts/DINRoundOT.woff') format('woff'), /* Modern Browsers */ url('../fonts/DINRoundOT.ttf') format('truetype'), /* Safari, Android, iOS */ url('../fonts/DINRoundOT.svg#BloggerSans') format('svg');
+  font-style: normal;
+  font-weight: normal;
+  text-rendering: optimizeLegibility;
+
+  /* IE9 Compat Modes */
+  /* Legacy iOS */
+}
+@font-face {
+  font-family: 'DINRoundOT-Medium';
+  src: url('../fonts/DINRoundOT-Medium.eot');
+  src: local('â˜º'), url('../fonts/DINRoundOT-Medium.woff') format('woff'), url('../fonts/DINRoundOT-Medium.ttf') format('truetype'), url('../fonts/DINRoundOT-Medium.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  margin: 0;
+  font-family: "DINRoundOT", Arial;
+  line-height: 24px;
+  font-size: 15px;
+  color: #383435;
+}
+p {
+  margin: 0 0 10px 0;
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  margin: 0 0 10px 0;
+  font-family: 'DINRoundOT-Medium';
+  font-weight: normal;
+}
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+}
+div.clearfix {
+  clear: both;
+}
+*,
+div,
+input,
+:after,
+:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0;
+}
+.text-center {
+  text-align: center;
+}
+.marginBot20 {
+  margin-bottom: 20px;
+}
+.marginTop20 {
+  margin-top: 20px;
+}
+.marginBT20 {
+  margin: 20px 0;
+}
+.marginBot30 {
+  margin-bottom: 30px;
+}
+.marginBot50 {
+  margin-bottom: 50px;
+}
+.transition {
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.colorgreen {
+  color: #64ab23;
+}
+.colororange {
+  color: #e6a917;
+}
+.db-flex {
+  display: flex;
+  display: -webkit-flex;
+}
+.db-al-center {
+  align-items: center;
+  -webkit-align-items: center;
+}
+.hidden {
+  display: none;
+}
+.visibility {
+  display: inline-block;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.text-center {
+  text-align: center;
+}
+.cred {
+  color: #ec1c24;
+}
+img {
+  max-width: 100%;
+}
+input[type="color"],
+input[type="date"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="email"],
+input[type="month"],
+input[type="number"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="text"],
+input[type="time"],
+input[type="url"],
+input[type="week"],
+select:focus,
+select,
+textarea {
+  font-size: 16px;
+  font-family: "DINRoundOT", Arial;
+}
+input:disabled {
+  background-color: #ebebe4 !important;
+  -webkit-text-fill-color: #383435;
+  /* Override iOS / Android font color change */
+  -webkit-opacity: 1;
+  /* Override iOS opacity change affecting text & background color */
+  color: #383435;
+  /* Override IE font color change */
+}
+div.wrapper {
+  position: relative;
+}
+div.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+div.container .wrap-inner {
+  overflow: hidden;
+}
+header {
+  background-color: #ec1c24;
+  color: #ffffff;
+}
+header.nta-static {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9;
+  border-bottom: 1px solid #c9181f;
+}
+header #top {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  -webkit-align-items: center;
+}
+header #top a {
+  color: #fff;
+}
+header #top #mainmenu-desktop ul.list-mainmenu {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+}
+header #top #mainmenu-desktop ul.list-mainmenu li {
+  float: left;
+}
+header #top #mainmenu-desktop ul.list-mainmenu li a {
+  display: inline-block;
+  font-size: 15px;
+  text-transform: uppercase;
+  padding: 26px 30px;
+  border-left: 2px solid #c5171e;
+  font-family: 'DINRoundOT-Medium';
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+header #top #mainmenu-desktop ul.list-mainmenu li a .icon-menu {
+  vertical-align: bottom;
+  margin-right: 10px;
+}
+header #top #mainmenu-desktop ul.list-mainmenu li:last-child a {
+  border-right: 2px solid #c5171e;
+}
+header #top #mainmenu-desktop ul.list-mainmenu li.active a,
+header #top #mainmenu-desktop ul.list-mainmenu li:hover a {
+  background-color: #d41920;
+}
+header #top #language {
+  font-size: 15px;
+  position: relative;
+  padding: 19px 0px;
+  font-family: 'DINRoundOT-Medium';
+}
+header #top #language .flag-first {
+  display: inline-block;
+  vertical-align: top;
+  padding: 8px 30px 8px 10px;
+  border: 1px solid #fff;
+  border-radius: 4px;
+  position: relative;
+  cursor: pointer;
+}
+header #top #language .flag-first:after {
+  position: absolute;
+  content: "";
+  width: 8px;
+  height: 5px;
+  background: url('../images/icon-arrow.png') no-repeat;
+  top: 20px;
+  right: 10px;
+}
+header #top #language .flag-first img {
+  vertical-align: bottom;
+  margin-right: 10px;
+}
+header #top #language .list-lang {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  background-color: #FFF;
+  box-shadow: 2px 3px 6px #898989;
+  width: 100%;
+  visibility: hidden;
+  opacity: 0;
+  z-index: 0;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+header #top #language .list-lang li a {
+  display: block;
+  vertical-align: top;
+  padding: 10px;
+  line-height: normal;
+  color: #383435;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+header #top #language .list-lang li a img {
+  vertical-align: bottom;
+  margin-right: 10px;
+}
+header #top #language .list-lang li.active a,
+header #top #language .list-lang li:hover a {
+  background-color: #ec1c24;
+  color: #fff;
+}
+header #top #language:hover .list-lang {
+  top: 100%;
+  visibility: visible;
+  opacity: 1;
+  z-index: 1;
+}
+.maincontent {
+  /*==================================================================*/
+  /*==================================================================*/
+  /*====================================================================*/
+  /*====================================================================*/
+  /*=====================================================*/
+  /*=====================================================*/
+  /*=================================================================*/
+  /*=================================================================*/
+}
+.maincontent .amount-deposit {
+  text-align: center;
+}
+.maincontent .amount-deposit.box-content {
+  padding: 60px 0;
+}
+.maincontent .amount-deposit.box-content h2 {
+  color: #ec1c24;
+  margin-bottom: 30px;
+}
+.maincontent .amount-deposit.box-content h3 {
+  color: #ec1c24;
+  margin-bottom: 17px;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control {
+  margin-bottom: 15px;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control input {
+  width: 100%;
+  display: inline-block;
+  vertical-align: top;
+  height: 54px;
+  line-height: 54px;
+  border-radius: 50px;
+  border: 1px solid #e0e1e8;
+  padding: 0 20px 0 60px;
+  font-size: 18px;
+  color: #383435;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control input::-webkit-input-placeholder {
+  color: #383435;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control input:-ms-input-placeholder {
+  color: #383435;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control input::placeholder {
+  color: #383435;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control input.phone {
+  background: url(../images/inp-phone.png) no-repeat;
+  background-position: 25px center;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control input.topup {
+  background: url(../images/inp-topup.png) no-repeat;
+  background-position: 25px center;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-control input.payment {
+  background: url(../images/inp-credit.png) no-repeat;
+  background-position: 20px center;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-inp {
+  max-width: 600px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto 40px;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-amount {
+  margin-bottom: 27px;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li {
+  display: inline-block;
+  vertical-align: top;
+  margin: 13px;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li label {
+  cursor: pointer;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li label input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li label .checkmark {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 20px;
+  width: 70px;
+  height: 70px;
+  line-height: 68px;
+  border: 2px solid #e7e7ee;
+  border-radius: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li label .checkmark:hover {
+  background-color: #ec1c24;
+  color: #fff;
+  border-color: #ec1c24;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li label input[type="radio"]:checked ~ .checkmark {
+  background-color: #ec1c24;
+  color: #fff;
+  border-color: #ec1c24;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-checked {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 24px;
+  border: 1px solid #e7e7ee;
+  border-radius: 40px;
+  color: #6d6e71;
+  margin-bottom: 60px;
+  font-size: 16px;
+  max-width: 320px;
+  width: 100%;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-checked .check_agree {
+  cursor: pointer;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-checked #check_agree {
+  cursor: pointer;
+  position: absolute;
+  opacity: 0;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-checked .checkmark {
+  display: inline-block;
+  vertical-align: text-bottom;
+  width: 18px;
+  height: 18px;
+  border-radius: 2px;
+  margin-right: 5px;
+  background-color: #0c807f;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-checked #check_agree:checked ~ .checkmark {
+  background: url('../images/icon-checked.png') no-repeat #0c807f;
+  background-position: center;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-checked a {
+  color: #6d6e71;
+  text-decoration: underline;
+}
+.maincontent .amount-deposit.box-content .form-deposit form .inp-checked a:hover {
+  color: #0c807f;
+  text-decoration: none;
+}
+.maincontent .amount-refill {
+  padding: 60px 0;
+}
+.maincontent .amount-refill .wp-btn .btn-back {
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 15px;
+  border: 1px solid #e0e1e8;
+  background-color: #f9f9fb;
+  border-radius: 4px;
+  color: #0c807f;
+  font-weight: bold;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.maincontent .amount-refill .wp-btn .btn-back:hover {
+  background-color: #0c807f;
+  border-color: #0c807f;
+  color: #fff;
+}
+.maincontent .amount-refill .refill-top {
+  margin-bottom: 40px;
+}
+.maincontent .amount-refill .refill-top h2 {
+  color: #6d6e71;
+  margin-bottom: 20px;
+}
+.maincontent .amount-refill .refill-top .item-price {
+  color: #ec1c24;
+  font-size: 48px;
+  line-height: 46px;
+  font-weight: bold;
+}
+.maincontent .amount-refill .form-payment {
+  max-width: 800px;
+  width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.maincontent .amount-refill .form-payment .wp-number {
+  margin-bottom: 50px;
+}
+.maincontent .amount-refill .form-payment .wp-number .number-card {
+  display: inline-block;
+  width: 100%;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  font-size: 24px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.maincontent .amount-refill .form-payment .wp-number .number-card .number {
+  font-size: 36px;
+  font-weight: bold;
+  color: #0c807f;
+}
+.maincontent .amount-refill .form-payment h3 {
+  color: #ec1c24;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.maincontent .transaction-summary {
+  padding: 60px 0;
+}
+.maincontent .transaction-summary .form-transaction {
+  width: 800px;
+  max-width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.maincontent .transaction-summary .form-transaction .box-title {
+  font-size: 30px;
+  color: #ec1c24;
+  text-align: center;
+  padding-bottom: 40px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 0;
+}
+.maincontent .transaction-summary .form-transaction .el-order {
+  padding: 37px 0;
+  text-align: center;
+  font-size: 24px;
+  color: #6d6e71;
+}
+.maincontent .transaction-summary .form-transaction .el-order .code {
+  margin-left: 10px;
+  color: #383435;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .transaction-summary .form-transaction .box-amount {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 24px;
+  color: #6d6e71;
+  margin-bottom: 60px;
+}
+.maincontent .transaction-summary .form-transaction .box-amount .el {
+  width: 50%;
+  float: left;
+  padding: 29px 0;
+}
+.maincontent .transaction-summary .form-transaction .box-amount .el:first-child {
+  border-right: 2px solid #ddd;
+}
+.maincontent .transaction-summary .form-transaction .box-amount .el .title {
+  margin-bottom: 10px;
+}
+.maincontent .transaction-summary .form-transaction .box-amount .el .cardnumber {
+  font-size: 30px;
+  color: #0c807f;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .transaction-summary .form-transaction .box-amount .el .price {
+  font-size: 30px;
+  color: #ec1c24;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser {
+  margin-bottom: 60px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card {
+  width: 370px;
+  max-width: 100%;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control {
+  margin-bottom: 23px;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control label {
+  display: block;
+  color: #6d6e71;
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control .inner-input {
+  position: relative;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control .inner-input.success:after {
+  position: absolute;
+  right: -25px;
+  top: 18px;
+  content: "";
+  width: 13px;
+  height: 10px;
+  background: url('../images/validated.png') no-repeat;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control .inner-input.require:after {
+  position: absolute;
+  right: -22px;
+  top: 18px;
+  content: "";
+  width: 10px;
+  height: 11px;
+  background: url('../images/validate.png') no-repeat;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control input {
+  width: 100%;
+  padding: 0 15px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  border: 1px solid #ddd;
+  text-align: center;
+  color: #383435;
+  font-size: 18px;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control input::-webkit-input-placeholder {
+  color: #383435;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control input:-ms-input-placeholder {
+  color: #383435;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control input::placeholder {
+  color: #383435;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col .inp-control {
+  margin-bottom: 0;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col .inp-control.el-date {
+  width: 170px;
+  max-width: 100%;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col .inp-control.el-pass {
+  width: 110px;
+  max-width: 100%;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank {
+  width: 270px;
+  max-width: 100%;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank .list-bank {
+  margin: 20px 0 30px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  -webkit-align-items: center;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank .list-bank li {
+  padding: 0 10px;
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank .list-bank li img {
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank .list-bank li.active img {
+  -webkit-filter: grayscale(0);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(0);
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank .show-tagbank img {
+  -webkit-filter: grayscale(100%);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(100%);
+}
+.maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank .show-tagbank.active img {
+  -webkit-filter: grayscale(0);
+  /* Safari 6.0 - 9.0 */
+  filter: grayscale(0);
+}
+.maincontent .box-verified {
+  padding: 60px 0;
+}
+.maincontent .box-verified .form-verified {
+  width: 660px;
+  max-width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.maincontent .box-verified .form-verified .box-title {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.maincontent .box-verified .form-verified .box-title .icon-verified {
+  margin-bottom: 10px;
+}
+.maincontent .box-verified .form-verified .box-title h3 {
+  font-size: 24px;
+  color: #383435;
+  margin-bottom: 15px;
+}
+.maincontent .box-verified .form-verified .box-title h2 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #383435;
+}
+.maincontent .box-verified .form-verified .box-title .desc {
+  font-size: 24px;
+  color: #00ba3d;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .box-verified .form-verified .box-info {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 0 70px 60px;
+  font-size: 18px;
+  color: #6d6e71;
+  margin-bottom: 60px;
+}
+.maincontent .box-verified .form-verified .box-info .logo {
+  text-align: center;
+  margin-top: -2px;
+  margin-bottom: 30px;
+}
+.maincontent .box-verified .form-verified .box-info .address {
+  margin-bottom: 20px;
+}
+.maincontent .box-verified .form-verified .box-info .tel {
+  margin-bottom: 15px;
+}
+.maincontent .box-verified .form-verified .box-info .hotline {
+  margin-bottom: 20px;
+}
+.maincontent .box-verified .form-verified .box-info .date {
+  background-color: #f5f7fa;
+  padding: 12px 10px;
+  margin-bottom: 20px;
+}
+.maincontent .box-verified .form-verified .box-info span {
+  color: #383435;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .box-verified .form-verified .box-info span.price {
+  color: #ec1c24;
+}
+.maincontent .box-verified .form-verified .box-info .wp-elcontrol {
+  margin-bottom: 50px;
+}
+.maincontent .box-verified .form-verified .box-info .wp-elcontrol .el-control {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 25px;
+}
+.maincontent .box-verified .form-verified .box-info .wp-elcontrol .el-control:last-child {
+  margin-bottom: 0;
+}
+.maincontent .box-verified .form-verified .box-info .wp-btnprint {
+  text-align: center;
+}
+.maincontent .box-verified .form-verified .box-info .wp-btnprint > a {
+  cursor: pointer;
+  color: #383435;
+}
+.maincontent .box-verified .form-verified .box-info .wp-btnprint > a img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.maincontent .box-verified-error {
+  padding: 60px 0;
+}
+.maincontent .box-verified-error .form-verified {
+  width: 660px;
+  max-width: 100%;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.maincontent .box-verified-error .form-verified .box-title {
+  text-align: center;
+  margin-bottom: 70px;
+}
+.maincontent .box-verified-error .form-verified .box-title .icon-verified {
+  margin-bottom: 20px;
+}
+.maincontent .box-verified-error .form-verified .box-title h2 {
+  font-size: 30px;
+  margin-bottom: 15px;
+  color: #383435;
+  color: #00ba3d;
+}
+.maincontent .box-verified-error .form-verified .box-title .desc {
+  font-size: 24px;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .box-verified-error .form-verified .box-title .desc > a {
+  color: #00ba3d;
+  text-decoration: underline;
+}
+.maincontent .box-verified-error .form-verified .box-title .desc > a:hover {
+  text-decoration: none;
+}
+.maincontent .box-verified-error .form-verified .box-info {
+  border: 2px dashed #ddd;
+  border-radius: 8px;
+  padding: 0 70px 60px;
+  font-size: 18px;
+  color: #6d6e71;
+  margin-bottom: 60px;
+}
+.maincontent .box-verified-error .form-verified .box-info .logo {
+  text-align: center;
+  margin-top: -2px;
+  margin-bottom: 60px;
+}
+.maincontent .box-verified-error .form-verified .box-info .warning-transaction {
+  background-color: #f5f7fa;
+  padding: 18px 10px;
+  margin-bottom: 20px;
+  font-size: 36px;
+  color: #383435;
+  font-family: 'DINRoundOT-Medium';
+  text-align: center;
+  line-height: 34px;
+}
+.maincontent .box-verified-error .form-verified .box-info span {
+  color: #383435;
+  font-family: 'DINRoundOT-Medium';
+}
+.maincontent .box-verified-error .form-verified .box-info span.price {
+  color: #ec1c24;
+}
+.maincontent .box-verified-error .form-verified .box-info .wp-elcontrol .el-control {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 25px;
+}
+.maincontent .box-verified-error .form-verified .box-info .wp-elcontrol .el-control:last-child {
+  margin-bottom: 0;
+}
+.inp-button {
+  text-align: center;
+}
+.inp-button .btn-submit {
+  font-family: 'DINRoundOT-Medium';
+  display: inline-block;
+  vertical-align: top;
+  padding: 15px 30px;
+  min-width: 260px;
+  border-radius: 6px;
+  font-size: 24px;
+  color: #fff;
+  background-color: #ec1c24;
+  border: 0;
+  border-bottom: 4px solid #b40007;
+  cursor: pointer;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.inp-button .btn-submit:hover {
+  background-color: #b40007;
+}
+.panel-group .panel {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+.panel-group .panel .panel-heading {
+  padding: 20px 20px 20px 65px;
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+  position: relative;
+}
+.panel-group .panel .panel-heading:after {
+  position: absolute;
+  top: 28px;
+  right: 20px;
+  content: "";
+  width: 14px;
+  height: 8px;
+  background: url('../images/icon-arrow-black.png') no-repeat;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.panel-group .panel .panel-heading.open:after {
+  transform: rotate(180deg);
+  -webkit-transform: rotate(180deg);
+  -moz-transform: rotate(180deg);
+  -ms-transform: rotate(180deg);
+  -o-transform: rotate(180deg);
+}
+.panel-group .panel .panel-heading.head-creadit {
+  background: url('../images/img_credit.png') no-repeat;
+  background-position: 20px center;
+}
+.panel-group .panel .panel-heading.head-ewallet {
+  background: url('../images/img_wallet.png') no-repeat;
+  background-position: 20px center;
+}
+.panel-group .panel .panel-body {
+  padding: 20px;
+  background-color: #f9f9fb;
+}
+.panel-group .panel .panel-body.collapse {
+  display: none;
+}
+.panel-group .panel .list-payment li {
+  display: inline-block;
+  vertical-align: top;
+  margin-right: 12px;
+}
+.panel-group .panel .list-payment li label {
+  cursor: pointer;
+}
+.panel-group .panel .list-payment li label input {
+  position: absolute;
+  opacity: 0;
+}
+.panel-group .panel .list-payment li label input:checked ~ .checkmark {
+  border-color: #ec1c24;
+}
+.panel-group .panel .list-payment li label .checkmark {
+  min-width: 160px;
+  min-height: 100px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.panel-group .panel .list-payment li label .checkmark img {
+  margin: auto;
+}
+.wp-recaptcha .g-recaptcha {
+  display: inline-block;
+  vertical-align: top;
+  margin-top: 15px;
+}
+#popup-wechat {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  visibility: hidden;
+  opacity: 0;
+}
+#popup-wechat .modal-dialog {
+  width: 600px;
+  max-width: 100%;
+  padding: 15px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+#popup-wechat .modal-dialog .modal-content {
+  background-color: #01bd4c;
+  color: #fff;
+  text-align: center;
+}
+#popup-wechat .modal-dialog .modal-content .modal-header .close {
+  background-color: #01aa44;
+  margin: 5px;
+  color: #fff;
+  width: 40px;
+  height: 40px;
+  line-height: 38px;
+  text-align: center;
+  border: 0;
+  font-size: 24px;
+  cursor: pointer;
+}
+#popup-wechat .modal-dialog .modal-content .modal-header .logo-title {
+  margin-bottom: 30px;
+}
+#popup-wechat .modal-dialog .modal-content .modal-footer {
+  padding: 20px 0;
+  font-size: 18px;
+}
+#popup-wechat.open {
+  z-index: 1040;
+  opacity: 1;
+  visibility: visible;
+}
+#popup-wechat.open .modal-dialog {
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+footer {
+  background-color: #ec1c24;
+  color: #fff;
+  padding: 25px 0;
+}
+footer .footer-inner .ft-elements {
+  width: 50%;
+  float: left;
+  color: #6d6e71;
+  font-size: 16px;
+  font-weight: bold;
+}
+footer .footer-inner .ft-elements.contact {
+  color: #0c807f;
+  font-size: 18px;
+}
+.wrap-menu-mobile {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  background-color: #ec1c24;
+  z-index: 12;
+  transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  visibility: hidden;
+  opacity: 0;
+  font-size: 14px;
+  color: #fff;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.wrap-menu-mobile a {
+  color: #fff;
+}
+.wrap-menu-mobile.openmenu {
+  transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.wrap-menu-mobile .inner-menu {
+  position: relative;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile #closemenu {
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Arial";
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .logo {
+  text-align: center;
+  padding: 10px 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li {
+  float: left;
+  padding: 0 5px;
+  border-right: 1px solid #ffffff;
+  line-height: 14px;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li:first-child {
+  padding-left: 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li:last-child {
+  border-right: 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li:last-child {
+  padding-right: 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li a {
+  display: block;
+}
+.wrap-menu-mobile .list-mainmenu {
+  font-weight: bold;
+  padding: 0 15px;
+}
+.wrap-menu-mobile .list-mainmenu li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff;
+}
+.wrap-menu-mobile .list-mainmenu li a {
+  display: block;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method {
+  text-align: left;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method label.title {
+  width: 160px;
+  font-size: 18px;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method .span_error_input_index {
+  display: block;
+  color: #ec1c24;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp {
+  max-width: 740px;
+  margin: 0 auto;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  margin-bottom: 20px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control {
+  flex: 1;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control input::-webkit-input-placeholder {
+  color: #a5a6aa;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control input:-ms-input-placeholder {
+  color: #a5a6aa;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control input::placeholder {
+  color: #a5a6aa;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha input.ip-captcha {
+  width: 66%;
+  float: left;
+  background: url(../images/inp-pen.png) no-repeat;
+  background-position: 20px center;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha {
+  width: 34%;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+  height: 54px;
+  line-height: 54px;
+  border-radius: 50px;
+  border: 1px solid #e0e1e8;
+  padding: 0 0;
+  overflow: hidden;
+  text-align: center;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha img.codecaptcha {
+  padding: 10px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha a.btn-refresh {
+  float: right;
+  padding: 2px 20px;
+  border-left: 1px solid #ddd;
+  background-color: #f9f9fb;
+  cursor: pointer;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 40px;
+  padding: 0 15px 0 175px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount li {
+  margin: 0 13px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method {
+  display: flex;
+  display: -webkit-flex;
+  max-width: 740px;
+  margin: 0 auto 40px;
+  padding: 0 15px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group {
+  flex: 1;
+  width: 100%;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel {
+  margin-bottom: 20px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel.panel-lastchild {
+  margin-bottom: 0;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment {
+  margin: 0 -10px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li {
+  width: 33%;
+  margin: 0;
+  padding: 0 10px;
+  float: left;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable {
+  pointer-events: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 1;
+  background: url('../images/commingson.png') no-repeat;
+  background-position: center;
+  background-size: 55%;
+  z-index: 1;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable span.checkmark {
+  position: relative;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable span.checkmark:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-checked {
+  margin-top: 40px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-checked .inp-checked {
+  padding: 14px 24px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms {
+  width: 800px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #FFF;
+  text-align: left;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-header {
+  background-color: #ec1c24;
+  color: #fff;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-header p {
+  margin: 0 10px;
+  font-size: 16px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-header .close {
+  width: 22px;
+  height: 22px;
+  line-height: 0;
+  font-size: 20px;
+  background-color: #ec1c24;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  margin: 0 10px;
+  padding: 0;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body {
+  padding: 30px 15px;
+  color: #333;
+  line-height: 28px;
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #ccc;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body .el {
+  margin-bottom: 20px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body ul {
+  padding-left: 15px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-footer {
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  padding: 15px 20px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-footer a.btn {
+  background-color: #ec1c24;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+  padding: 5px 20px 7px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+@media only screen and (min-width: 992px) {
+  #mainmenu-mobile {
+    display: none;
+  }
+}
+@media only screen and (max-width: 991px) {
+  header #top #language {
+    font-weight: normal;
+  }
+  header #top #language .list-lang li a {
+    font-weight: normal;
+  }
+  header #top #language img {
+    display: none;
+  }
+  #mainmenu-desktop {
+    display: none;
+  }
+  #mainmenu-mobile {
+    display: inline-block;
+    vertical-align: top;
+  }
+  #mainmenu-mobile #btn-mainmenu {
+    line-height: 0;
+    font-size: 14px;
+  }
+  #mainmenu-mobile #btn-mainmenu img {
+    margin-right: 5px;
+    vertical-align: text-bottom;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .pc {
+    display: block;
+  }
+  .sp {
+    display: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .pc {
+    display: none;
+  }
+  .sp {
+    display: block;
+  }
+  header #top a img {
+    width: 140px;
+  }
+  header #top #language .flag-first {
+    padding: 5px 30px 5px 10px;
+  }
+  header #top #language .flag-first:after {
+    top: 16px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li label .checkmark {
+    width: 60px;
+    height: 60px;
+    line-height: 58px;
+  }
+  footer .footer-inner {
+    display: flex;
+    display: -webkit-flex;
+    flex-direction: column-reverse;
+    -webkit-flex-direction: column-reverse;
+  }
+  footer .footer-inner .ft-elements {
+    margin: 10px 0;
+    width: 100%;
+    float: none;
+    text-align: center;
+  }
+  .maincontent .amount-refill {
+    padding: 30px 0;
+  }
+  .maincontent .amount-refill .wp-btn {
+    margin-bottom: 20px;
+  }
+  .maincontent .amount-refill .refill-top h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .maincontent .amount-refill .refill-top .item-price {
+    font-size: 36px;
+    line-height: 34px;
+  }
+  .maincontent .amount-refill .form-payment .wp-number {
+    margin-bottom: 30px;
+  }
+  .maincontent .amount-refill .form-payment .wp-number .number-card {
+    font-size: 18px;
+  }
+  .maincontent .amount-refill .form-payment .wp-number .number-card .number {
+    font-size: 30px;
+  }
+  .maincontent .amount-refill .form-payment h3 {
+    font-size: 18px;
+  }
+  .panel-group .panel .list-payment {
+    /*display: flex;*/
+    /*display: -webkit-flex;*/
+    justify-content: space-between;
+    -webkit-justify-content: space-between;
+  }
+  .panel-group .panel .list-payment li label .checkmark {
+    min-width: auto;
+    padding: 10px;
+    height: 60px;
+    min-height: initial;
+  }
+  .panel-group .panel .list-payment li:last-child {
+    margin-right: 0;
+  }
+  .maincontent .transaction-summary .form-transaction .box-amount .el {
+    width: 100%;
+  }
+  .maincontent .transaction-summary .form-transaction .box-amount .el:first-child {
+    border-right: 0;
+    border-bottom: 2px solid #ddd;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser {
+    display: block;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card,
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank {
+    width: 100%;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control .inner-input.success:after {
+    right: -16px;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control .inner-input.require:after {
+    right: -13px;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank {
+    text-align: center;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col .inp-control.el-date {
+    width: 150px;
+  }
+  .maincontent .box-verified-error .form-verified .box-info,
+  .maincontent .box-verified .form-verified .box-info {
+    padding: 0 15px 50px;
+  }
+  .maincontent .box-verified-error .form-verified .box-info .warning-transaction {
+    font-size: 18px;
+  }
+  .panel-group .panel .list-payment li {
+    width: 33.33%;
+  }
+  .panel-group .panel .list-payment li label[for="jcb"] .checkmark img {
+    width: 52px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control {
+    display: block;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method label.title {
+    margin-bottom: 5px;
+    display: block;
+    width: auto;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount {
+    padding: 0 15px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount li {
+    margin: 0 5px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount li label .checkmark {
+    width: 46px;
+    height: 46px;
+    line-height: 44px;
+    font-size: 16px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha,
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method {
+    display: block;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha input.ip-captcha {
+    width: 100%;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha {
+    width: 100%;
+    margin: 20px 0 0;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col .inp-control.el-date {
+    width: 130px;
+  }
+  .wp-recaptcha {
+    overflow: hidden;
+  }
+  .wp-recaptcha .g-recaptcha {
+    transform: scale(0.84);
+    -webkit-transform: scale(0.84);
+    transform-origin: 0;
+    -webkit-transform-origin: 0;
+  }
+}
+
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control { position: relative; }
+
+.item_aba{
+  width: 24% !important;
+}
+
+.checkmark_aba_item{
+  min-width: 120px !important;
+  /*min-height: 76px !important;*/
+
+}
+
+.checkmark_just_aba_item{
+  background-color: #055E7C !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .checkmark_aba_item{
+    min-width: auto !important;;
+    padding: 10px !important;
+    height: 60px !important;
+    min-height: initial !important;
+
+  }
+
+  .checkmark_just_aba_item{
+    background-color: #fff !important;
+  }
+
+  .li_aba_item{
+    width: 33% !important;
+    padding: 0 2px !important;
+  }
+
+  .img_acleda{
+    max-width: 68%;
+  }
+
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .li_aba_item {
+    width: 24% !important;
+  }
+
+  .img_acleda{
+    max-width: 50%;
+  }
+}
+
+/* Sylte modal invoice */
+#popup-invoice {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#popup-invoice .modal-dialog {
+  width: 495px;
+  max-width: 100%;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transition: all .5s;
+}
+
+#popup-invoice.open {
+  z-index: 1040;
+  opacity: 1;
+  visibility: visible;
+}
+
+#popup-invoice.open .modal-dialog {
+  transform: translateY(-50%);
+  transition: all .5s;
+}
+
+.moda-invoice {
+  position: relative;
+  width: auto;
+  margin: 20px auto;
+  pointer-events: none;
+}
+
+.modal__content {
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  pointer-events: auto;
+}
+
+.modal__header {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.modal__body {
+  padding: 52px 55px 30px;
+  text-align: center;
+}
+
+.modal__images {
+  margin-bottom: 30px;
+}
+
+.modal__close {
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 0;
+  padding: 0;
+}
+
+.modal__sub {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: -0.03em;
+  color: #000;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+
+.modal__des {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.03em;
+  color: #000;
+  opacity: 0.7;
+}
+
+.modal__txt {
+  color: #eb2227;
+  font-weight: 500;
+  margin: 0 5px;
+}
+
+@media only screen and (min-width: 390px) and (max-width: 720px) {
+  .img_acleda{
+    max-width: 59%;
+  }
+}
+
+.footer {
+  background-color: #ec1c24;
+  color: #fff;
+  padding: 25px 0;
+}
+.footer__inner {
+  align-items: center;
+  display: flex;
+}
+.footer__info {
+  margin-right: 10%;
+  width: 55%;
+}
+.footer__payment {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 35%;
+}
+.footer__logo {
+  width: 180px;
+}
+.footer__logo img{
+  object-fit: cover;
+  width: 100%;
+}
+.footer__list {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+.footer__list-item {
+  align-items: center;
+  display: flex;
+}
+.footer__list-item img {
+  margin-right: 10px;
+}
+.footer__list-text {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 19px;
+}
+.social {
+  align-items: center;
+  display: flex;
+  margin: 0 5px 0 -2px;
+}
+.social img {
+  margin-right: 0;
+}
+.social__item {
+  background-color: #fff;
+  border-radius: 6px;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  margin: 0 2px;
+  width: 24px;
+}
+.footer__sub {
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -.03em;
+  line-height: 19px;
+  margin-bottom: 15px;
+}
+.payment-list {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+}
+.payment-list__item {
+  height: 52px;
+  margin: 0 2px 5px;
+  width: 75px;
+}
+.payment-list__link {
+  display: block;
+  height: 100%;
+}
+.payment-list__item img {
+  border-radius: 6px;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+@media (max-width: 767.98px) {
+  .footer__inner {
+    flex-direction: column;
+  }
+  .footer__info {
+    margin-right: 0;
+    width: 100%;
+  }
+  .footer__logo {
+    width: 140px;
+  }
+  .footer__list {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .footer__list-item {
+    margin-bottom: 15px;
+  }
+  .social__item {
+    margin: 0 5px;
+  }
+  .footer__payment {
+    margin-top: 15px;
+    width: 100%;
+  }
+}
+.wrap-menu-mobile {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 15px;
+  background-color: #ec1c24;
+  z-index: 12;
+  transform: translateY(-100%);
+  -moz-transform: translateY(-100%);
+  -ms-transform: translateY(-100%);
+  -o-transform: translateY(-100%);
+  -webkit-transform: translateY(-100%);
+  visibility: hidden;
+  opacity: 0;
+  font-size: 14px;
+  color: #fff;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.wrap-menu-mobile a {
+  color: #fff;
+}
+.wrap-menu-mobile.openmenu {
+  transform: translateY(0);
+  -moz-transform: translateY(0);
+  -ms-transform: translateY(0);
+  -o-transform: translateY(0);
+  -webkit-transform: translateY(0);
+  visibility: visible;
+  opacity: 1;
+  transition: all .5s;
+  -moz-transition: all .5s;
+  -ms-transition: all .5s;
+  -o-transition: all .5s;
+  -webkit-transition: all .5s;
+}
+.wrap-menu-mobile .inner-menu {
+  position: relative;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile #closemenu {
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Arial";
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .logo {
+  text-align: center;
+  padding: 10px 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li {
+  float: left;
+  padding: 0 5px;
+  border-right: 1px solid #ffffff;
+  line-height: 14px;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li:first-child {
+  padding-left: 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li:last-child {
+  border-right: 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li:last-child {
+  padding-right: 0;
+}
+.wrap-menu-mobile .inner-menu .top-menumobile .list-lang-sub li a {
+  display: block;
+}
+.wrap-menu-mobile .list-mainmenu {
+  font-weight: bold;
+  padding: 0 15px;
+}
+.wrap-menu-mobile .list-mainmenu li {
+  padding: 10px 0;
+  border-bottom: 1px solid #ffffff;
+}
+.wrap-menu-mobile .list-mainmenu li a {
+  display: block;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method {
+  text-align: left;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method label.title {
+  width: 160px;
+  font-size: 18px;
+  font-weight: bold;
+  overflow-wrap: break-word;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method .span_error_input_index {
+  display: block;
+  color: #ec1c24;
+  padding-left: 5px;
+  padding-top: 5px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp {
+  max-width: 740px;
+  margin: 0 auto;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+  margin-bottom: 20px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control {
+  flex: 1;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control input::-webkit-input-placeholder {
+  color: #a5a6aa;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control input:-ms-input-placeholder {
+  color: #a5a6aa;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control input::placeholder {
+  color: #a5a6aa;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha input.ip-captcha {
+  width: 66%;
+  float: left;
+  background: url(../images/inp-pen.png) no-repeat;
+  background-position: 20px center;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha {
+  width: 34%;
+  margin-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+  height: 54px;
+  line-height: 54px;
+  border-radius: 50px;
+  border: 1px solid #e0e1e8;
+  padding: 0 0;
+  overflow: hidden;
+  text-align: center;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha img.codecaptcha {
+  padding: 10px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha a.btn-refresh {
+  float: right;
+  padding: 2px 20px;
+  border-left: 1px solid #ddd;
+  background-color: #f9f9fb;
+  cursor: pointer;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount {
+  text-align: center;
+  max-width: 740px;
+  margin: 0 auto 40px;
+  padding: 0 15px 0 175px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount li {
+  margin: 0 13px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method {
+  display: flex;
+  display: -webkit-flex;
+  max-width: 740px;
+  margin: 0 auto 40px;
+  padding: 0 15px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group {
+  flex: 1;
+  width: 100%;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel {
+  margin-bottom: 20px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel.panel-lastchild {
+  margin-bottom: 0;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment {
+  margin: 0 -10px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li {
+  width: 33%;
+  margin: 0;
+  padding: 0 10px;
+  float: left;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable {
+  pointer-events: none;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  opacity: 1;
+  background: url('../images/commingson.png') no-repeat;
+  background-position: center;
+  background-size: 55%;
+  z-index: 1;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable span.checkmark {
+  position: relative;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment li.disable span.checkmark:before {
+  position: absolute;
+  content: "";
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  border-radius: 10px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method .panel-group .panel .list-payment:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-checked {
+  margin-top: 40px;
+}
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-checked .inp-checked {
+  padding: 14px 24px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms {
+  width: 800px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content {
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #FFF;
+  text-align: left;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-header {
+  background-color: #ec1c24;
+  color: #fff;
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 15px 10px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-header p {
+  margin: 0 10px;
+  font-size: 16px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-header .close {
+  width: 22px;
+  height: 22px;
+  line-height: 0;
+  font-size: 20px;
+  background-color: #ec1c24;
+  border: 2px solid #fff;
+  border-radius: 100%;
+  margin: 0 10px;
+  padding: 0;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body {
+  padding: 30px 15px;
+  color: #333;
+  line-height: 28px;
+  height: 400px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body::-webkit-scrollbar {
+  width: 10px;
+  background-color: #F5F5F5;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #ccc;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body .el {
+  margin-bottom: 20px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-body ul {
+  padding-left: 15px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-footer {
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  padding: 15px 20px;
+}
+#popup-wechat .modal-dialog.modal-credit-terms .modal-content .modal-footer a.btn {
+  background-color: #ec1c24;
+  display: inline-block;
+  vertical-align: top;
+  color: #fff;
+  padding: 5px 20px 7px;
+  border-radius: 4px;
+  font-size: 15px;
+}
+@media only screen and (min-width: 992px) {
+  #mainmenu-mobile {
+    display: none;
+  }
+}
+@media only screen and (max-width: 991px) {
+  header #top #language {
+    font-weight: normal;
+  }
+  header #top #language .list-lang li a {
+    font-weight: normal;
+  }
+  header #top #language img {
+    display: none;
+  }
+  #mainmenu-desktop {
+    display: none;
+  }
+  #mainmenu-mobile {
+    display: inline-block;
+    vertical-align: top;
+  }
+  #mainmenu-mobile #btn-mainmenu {
+    line-height: 0;
+    font-size: 14px;
+  }
+  #mainmenu-mobile #btn-mainmenu img {
+    margin-right: 5px;
+    vertical-align: text-bottom;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .pc {
+    display: block;
+  }
+  .sp {
+    display: none;
+  }
+}
+@media only screen and (max-width: 767px) {
+  .pc {
+    display: none;
+  }
+  .sp {
+    display: block;
+  }
+  header #top a img {
+    width: 140px;
+  }
+  header #top #language .flag-first {
+    padding: 5px 30px 5px 10px;
+  }
+  header #top #language .flag-first:after {
+    top: 16px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit form .wp-amount .list-amount li label .checkmark {
+    width: 60px;
+    height: 60px;
+    line-height: 58px;
+  }
+  .maincontent .amount-refill {
+    padding: 30px 0;
+  }
+  .maincontent .amount-refill .wp-btn {
+    margin-bottom: 20px;
+  }
+  .maincontent .amount-refill .refill-top h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .maincontent .amount-refill .refill-top .item-price {
+    font-size: 36px;
+    line-height: 34px;
+  }
+  .maincontent .amount-refill .form-payment .wp-number {
+    margin-bottom: 30px;
+  }
+  .maincontent .amount-refill .form-payment .wp-number .number-card {
+    font-size: 18px;
+  }
+  .maincontent .amount-refill .form-payment .wp-number .number-card .number {
+    font-size: 30px;
+  }
+  .maincontent .amount-refill .form-payment h3 {
+    font-size: 18px;
+  }
+  .panel-group .panel .list-payment li label .checkmark {
+    min-width: auto;
+    padding: 10px;
+    height: 60px;
+    min-height: initial;
+  }
+  .panel-group .panel .list-payment li:last-child {
+    margin-right: 0;
+  }
+  .maincontent .transaction-summary .form-transaction .box-amount .el {
+    width: 100%;
+  }
+  .maincontent .transaction-summary .form-transaction .box-amount .el:first-child {
+    border-right: 0;
+    border-bottom: 2px solid #ddd;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser {
+    display: block;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card,
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank {
+    width: 100%;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control .inner-input.success:after {
+    right: -16px;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-control .inner-input.require:after {
+    right: -13px;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-tagbank {
+    text-align: center;
+  }
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col .inp-control.el-date {
+    width: 150px;
+  }
+  .maincontent .box-verified-error .form-verified .box-info,
+  .maincontent .box-verified .form-verified .box-info {
+    padding: 0 15px 50px;
+  }
+  .maincontent .box-verified-error .form-verified .box-info .warning-transaction {
+    font-size: 18px;
+  }
+  .panel-group .panel .list-payment li {
+    width: 33.33%;
+  }
+  .panel-group .panel .list-payment li label[for="jcb"] .checkmark img {
+    width: 52px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control {
+    display: block;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method label.title {
+    margin-bottom: 5px;
+    display: block;
+    width: auto;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount {
+    padding: 0 15px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount li {
+    margin: 0 5px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-amount .list-amount li label .checkmark {
+    width: 46px;
+    height: 46px;
+    line-height: 44px;
+    font-size: 16px;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha,
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .payment-method {
+    display: block;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha input.ip-captcha {
+    width: 100%;
+  }
+  .maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control div.control .control-recaptcha .txt-recaptcha {
+    width: 100%;
+    margin: 20px 0 0;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .maincontent .transaction-summary .form-transaction .box-info-carduser .info-card .inp-2col .inp-control.el-date {
+    width: 130px;
+  }
+  .wp-recaptcha {
+    overflow: hidden;
+  }
+  .wp-recaptcha .g-recaptcha {
+    transform: scale(0.84);
+    -webkit-transform: scale(0.84);
+    transform-origin: 0;
+    -webkit-transform-origin: 0;
+  }
+}
+
+.maincontent .amount-deposit.box-content .form-deposit.wp-payment-method form .wp-inp .inp-control { position: relative; }
+
+/* Sylte modal invoice */
+#popup-invoice {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#popup-invoice .modal-dialog {
+  width: 495px;
+  max-width: 100%;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transition: all .5s;
+}
+
+#popup-invoice.open {
+  z-index: 1040;
+  opacity: 1;
+  visibility: visible;
+}
+
+#popup-invoice.open .modal-dialog {
+  transform: translateY(-50%);
+  transition: all .5s;
+}
+
+.moda-invoice {
+  position: relative;
+  width: auto;
+  margin: 20px auto;
+  pointer-events: none;
+}
+
+.modal__content {
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 14px;
+  pointer-events: auto;
+}
+
+.modal__header {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.modal__body {
+  padding: 52px 55px 30px;
+  text-align: center;
+}
+
+.modal__images {
+  margin-bottom: 30px;
+}
+
+.modal__close {
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 0;
+  padding: 0;
+}
+
+.modal__sub {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: -0.03em;
+  color: #000;
+  opacity: 0.7;
+  margin-bottom: 15px;
+}
+
+.modal__des {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  line-height: 22px;
+  letter-spacing: -0.03em;
+  color: #000;
+  opacity: 0.7;
+}
+
+.modal__txt {
+  color: #eb2227;
+  font-weight: 500;
+  margin: 0 5px;
+}

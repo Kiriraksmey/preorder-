@@ -1,0 +1,388 @@
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .overlay {
+            z-index: 10000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: 0.5;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #ec1c23;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            z-index: 10001;
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 90px;
+            height: 90px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media only screen and (min-width: 992px) {
+            #loader {
+                left: 50%;
+            }
+
+            /*#span_error_txt_topamount {*/
+            /*    padding-left: 60px !important;*/
+            /*}*/
+
+            /*#span_error_txt_phone {*/
+            /*    padding-left: 60px !important;*/
+            /*}*/
+        }
+
+        @media only screen and (max-width: 991px) {
+            #loader {
+                left: 40%;
+            }
+
+            /*#span_error_txt_phone {*/
+            /*    padding-left: 0 !important;*/
+            /*}*/
+
+            /*#span_error_txt_topamount {*/
+            /*    padding-left: 0 !important;*/
+            /*}*/
+        }
+    </style>
+</head>
+<body onload="onloadIndex();" onpageshow="pageShow(this)">
+<div class="container" layout:fragment="content">
+    <div class="overlay" id="overlay" style="visibility: hidden;">
+        <div class="loader" id="loader"></div>
+    </div>
+    <div class="amount-deposit box-content">
+        <h2 th:text="#{page.one.heading}"></h2>
+        <div class="form-deposit wp-payment-method">
+            <form action="#" th:action="@{/topup}" th:object="${mobileDeposit}" method="post"
+                  onsubmit="return showOverlaySubmit();">
+                <div class="wp-inp">
+                    <div class="inp-control" id="div_deposit_phone" style="text-align: left;">
+                        <label class="title" th:text="#{phone.number.label}"></label>
+                        <div class="control">
+                            <input class="phone" th:attr="placeholder=#{page.one.phonenumber}" name="txt_phonenumber"
+                                   id="txt_phonenumber" maxlength="10"
+                                   onkeypress="onKeypressPhoneNumber();"
+                                   onfocusout="onFocusoutPhoneNumber();" th:field="*{phoneNumber}" type="tel"
+                                   pattern="[0-9]*" inputmode="numeric">
+                            <span style="" class="span_error_input_index" id="span_error_txt_phone"
+                                  th:text="${errorPhoneNumber}"></span>
+                        </div>
+
+<!--                        <span style="" class="span_error_input_index" id="">Phone must be number</span>-->
+                    </div>
+                    <div class="inp-control" id="div_deposit_amout" style="text-align: left;">
+                        <label class="title" th:text="#{topup.amount.label}"></label>
+                        <div class="control">
+                            <input class="topup" th:attr="placeholder=#{page.one.topupamount}" name="txt_topamount"
+                                   id="txt_topupamount"
+                                   onkeyup="onKeyUpTopupAmount()" onkeypress="onKeypressTopupAmount();" onfocusout="checkISDN()"
+                                   th:field="*{topupAmount}" maxlength="3" type="tel" pattern="[0-9]*" inputmode="numeric">
+                            <span style="" class="span_error_input_index"
+                                  id="span_error_txt_topamount" th:text="${errorTopupAmount}"></span>
+                        </div>
+<!--                        <span style="" class="span_error_input_index">Topup must be number</span>-->
+                    </div>
+                </div>
+                <div class="wp-amount">
+                    <ul class="list-amount">
+                        <li>
+                            <label for="radio2">
+                                <input id="radio2" type="radio" name="radio" onclick="selectAmout(2);">
+                                <span class="checkmark">2$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="radio5">
+                                <input id="radio5" type="radio" name="radio" onclick="selectAmout(5);">
+                                <span class="checkmark">5$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="radio10">
+                                <input id="radio10" type="radio" name="radio" onclick="selectAmout(10);">
+                                <span class="checkmark">10$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="radio20">
+                                <input id="radio20" type="radio" name="radio" onclick="selectAmout(20);">
+                                <span class="checkmark">20$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="radio50">
+                                <input id="radio50" type="radio" name="radio" onclick="selectAmout(50);">
+                                <span class="checkmark">50$</span>
+                            </label>
+                        </li>
+                        <li>
+                            <label for="radio100">
+                                <input id="radio100" type="radio" name="radio" onclick="selectAmout(100);">
+                                <span class="checkmark">100$</span>
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+                <div class="payment-method">
+                    <label class="title" th:text="#{payment.method.label}"></label>
+                    <div class="panel-group">
+                        <span style="padding-top: 0px;" class="span_error_input_index"
+                              id="span_error_payment_type" th:text="${errorPaymentType}"></span>
+                        <div class="panel">
+                            <div class="panel-heading head-creadit open">
+                                <span style="" th:text="#{label.page1.creditcard}"></span>
+<!--                                Credit Card-->
+                            </div>
+                            <div class="panel-body">
+                                <div class="wp-creditcard">
+                                    <ul class="list-payment">
+
+                                        <li id="li_mastercard" >
+                                            <label for="mastercard">
+                                                <input checked id="mastercard" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="Master" onclick="checkISDNPayment();">
+                                                <span class="checkmark " ><img src="images/bank_mastercard.png"></span>
+                                            </label>
+                                        </li>
+                                        <li id="li_visa" >
+                                            <label for="visa">
+                                                <input id="visa" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="Visa" onclick="checkISDNPayment();">
+                                                <span class="checkmark " ><img src="images/bank_visa.png?v1.0"></span>
+                                            </label>
+                                        </li>
+                                        <li id="li_jcb" >
+                                            <label for="jcb">
+                                                <input id="jcb" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="JCB" onclick="checkISDNPayment();">
+                                                <span class="checkmark " style=""><img src="images/bank_jcb.png"></span>
+                                            </label>
+                                        </li>
+                                        <li id="li_union" style="margin-top: 15px;">
+                                            <label for="union">
+                                                <input id="union" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="Union" onclick="checkISDNPayment();">
+                                                <span class="checkmark" style="/*cursor: auto; background-color: #c5c3c3;*/"><img src="images/bank_union.png"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel">
+                            <div class="panel-heading head-ewallet open">
+                                <span style="" th:text="#{label.international.ewallet}"></span>
+<!--                                International eWallet-->
+                            </div>
+                            <div class="panel-body">
+                                <div class="wp-ewallet">
+                                    <ul class="list-payment">
+                                        <li id="li_alipay">
+                                            <label for="ali">
+                                                <input id="ali" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="Alipay" onclick="checkISDNPayment();">
+                                                <span class="checkmark"><img src="images/bank_ali.png"></span>
+                                            </label>
+                                        </li>
+                                        <li id="li_wechat">
+                                            <label for="wechat">
+                                                <input id="wechat" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="Wechat" onclick="checkISDNPayment();">
+                                                <span class="checkmark"><img src="images/bank_wechat.png"></span>
+                                            </label>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel ">
+                            <div class="panel-heading head-ewallet open" >
+                                <span style="" th:text="#{label.local.ewallet}"></span>
+<!--                                Local eWallet-->
+                            </div>
+                            <div class="panel-body">
+                                <div class="wp-local-ewallet">
+                                    <ul class="list-payment">
+                                        <li id="li_emoney">
+                                            <label for="emoney">
+                                                <input checked id="emoney" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="eMoney" onclick="checkISDNPayment();">
+                                                <span class="checkmark"><img src="images/bank_emoney.png"></span>
+                                            </label>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-lastchild">
+                            <div class="panel-heading head-ewallet open">
+<!--                                style="background: none; padding-left: 22px;"-->
+                                <span style="" th:text="#{payment.method.other.label}"></span>
+                            </div>
+                            <div class="panel-body">
+                                <div class="wp-ewallet" >
+                                    <ul class="list-payment" style="-webkit-justify-content: flex-start;">
+                                        <li id="li_abapay">
+                                            <label for="abapay">
+                                                <input checked id="abapay" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="AbaPay" onclick="checkISDNPayment();">
+                                                <span class="checkmark checkmark_just_aba_item" style="" ><img src="images/bank_abapay.png"></span>
+                                            </label>
+                                        </li>
+                                        <li id="li_acleda_bank">
+                                            <label for="acleda">
+                                                <input checked id="acleda" type="radio" name="radioPaymentType" th:field="*{paymentMethod}" value="Acleda" onclick="checkISDNPayment();">
+                                                <span class="checkmark">
+                                                    <img class="img_acleda" src="images/acleda_bank.png" style="max-width: 100%;">
+                                                </span>
+                                            </label>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="wp-inp" id="div_AccountEmoney" style="display: none;">
+                    <div class="inp-control" id="div_account_emoney" style="text-align: left;">
+                        <label class="title" th:text="#{account.emoney.label}"></label>
+                        <div class="control">
+                            <input class="phone" th:attr="placeholder=#{page.one.emoney}" name="account_emoney"
+                                   id="account_emoney" maxlength="16"
+                                   onkeypress="onKeypressAccountMoney();"
+                                   onfocusout="onFocusoutAccountMoney();"
+                                   th:field="*{accountEmoney}" type="tel"
+                                   pattern="[0-9]*" inputmode="numeric">
+                            <span style="" class="span_error_input_index" id="span_error_account_emoney"
+                                  th:text="${errorAccountEmoney}"></span>
+                        </div>
+
+                        <!--                        <span style="" class="span_error_input_index" id="">Phone must be number</span>-->
+                    </div>
+                </div>
+                <div class="wp-inp">
+                    <div class="inp-control" style="text-align: left;">
+                        <label class="title" th:text="#{payment.amount.label}"></label>
+                        <div class="control">
+                            <input class="payment" type="text" th:attr="placeholder=#{label.payment}"
+                                   name="txt_paymentamount" id="txt_paymentamount" disabled
+                                   th:value="${mobileDeposit.paymentAmount} > 0 ? ${mobileDeposit.paymentAmount} : ''"
+                                   style="color: black !important;">
+                            <input type="hidden" id="txt_hidden_paymentAmount" th:field="*{paymentAmount}">
+                            <span style="" class="span_error_input_index"
+                                  id="span_error_txt_paymentamount" th:text="${errorPaymentAmount}"></span>
+                        </div>
+                    </div>
+                    <div class="inp-control" style="text-align: left;">
+                        <label class="title" th:text="#{captcha.label}"></label>
+
+                        <div class="control">
+                            <div class="control-recaptcha">
+                                <input class="captcha ip-captcha" th:attr="placeholder=#{page.one.captcha}" name="captcha"
+                                       id="captcha"
+                                       th:field="*{captcha}" onkeyup="validateCaptcha(event);" style="" maxlength="3">
+
+                                <div class="txt-recaptcha">
+                                    <img id="captchaImg" class="codecaptcha" src="captcha" style="padding-top: 0;"/>
+                                    <a href="javascript:renewCaptcha();"
+                                       class="btn-refresh">
+                                        <!--                                <img  class="text-md-right" src="images/refresh.png"-->
+                                        <!--                                     style="max-width: 90% !important;"/>-->
+                                        <img id="refreshCaptcha" src="images/inp-around.png">
+                                    </a>
+                                </div>
+                            </div>
+                            <span style="" class="span_error_input_index"
+                                  id="span_error_captcha" th:text="${errorCaptchaUpdate}"></span>
+                        </div>
+
+
+<!--                        <span style="" class="span_error_input_index">Captcha is invalid</span>-->
+
+                    </div>
+                </div>
+                <div class="wp-checked text-center">
+                    <div class="inp-checked">
+                        <label class="check_agree" for="check_agree">
+                            <input id="check_agree" type="checkbox" name="" th:field="*{termAgreed}">
+                            <span style="position: absolute;padding-left: 0;padding-top: 33px;"
+                                  class="span_error_input_index" id="span_error_checkagree"
+                                  th:text="${errorTermAgreed}"></span>
+                            <span class="checkmark"></span>
+                            <span th:text="#{page.one.agreeterm}"></span><span><a href="javascript:openPopupTerm();" th:text="#{page.one.termandcon}">terms and conditions</a></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="inp-button">
+                    <button class="btn-submit" id="btnsubmit"><span th:text="#{labelContinue}"></span></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function ($) {
+        setInputFilter(document.getElementById("txt_phonenumber"), function (value) {
+            return /^\d*$/.test(value);
+        });
+        setInputFilter(document.getElementById("txt_topupamount"), function (value) {
+            return /^\d*$/.test(value);
+        });
+        setInputFilter(document.getElementById("account_emoney"), function (value) {
+            return /^\d*$/.test(value);
+        });
+        if(atLeastOnePaymentType()) {
+            var paymentMethod = $('input[name=paymentMethod]:checked').val();
+            //Xử lý tiếp chỗ này cho emoney
+            if(!paymentMethod && paymentMethod === CONFIG.emoney) {
+                $('#account_emoney').focus();
+                document.getElementById('account_emoney').disabled=false;
+            }
+        }
+
+
+    });
+
+</script>
+
+<th:block layout:fragment="script">
+    <link rel="stylesheet" href="https://payway.ababank.com/checkout-popup.html?file=css"/>
+    <script src="https://payway.ababank.com/checkout-popup.html?file=js"></script>
+
+</th:block>
+
+<th:block layout:fragment="script_ready">
+    <script>
+    $(document).ready(function ($) {
+        getListPayment();
+    });
+    </script>
+
+</th:block>
+</body>
+
+</html>

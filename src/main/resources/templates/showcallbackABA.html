@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .overlay {
+            z-index: 10000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: 0.5;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #ec1c23;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            z-index: 10001;
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 90px;
+            height: 90px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media only screen and (min-width: 992px) {
+            #loader {
+                left: 50%;
+            }
+        }
+
+        @media only screen and (max-width: 991px) {
+            #loader {
+                left: 40%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container" layout:fragment="content">
+
+    <div class="amount-deposit box-content">
+    </div>
+
+    <div id="popup-invoice" class="modal">
+        <div class="modal-dialog modal-create-invoice">
+            <div class="modal__content">
+                <div class="modal__body">
+                    <div class="modal__images">
+                        <img src="./images/img-invoice.svg" alt="img" />
+                    </div>
+                    <div class="modal__info">
+                        <h3 class="modal__sub" th:text="#{creating_invoice}"></h3>
+                        <p class="modal__des">
+                            <span th:text="#{invoice_des}"></span>
+                            <span class="modal__txt"><span id="invoice_timing">90</span>s ...</span>
+                        </p>
+<!--                        <p class="modal__des">click here to go invoice page!</p>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            var countTime = CONFIG.total_time_aba;
+            var tranIdABA = $.cookie("transIdAba");
+            openPopupInvoice();
+
+            var data = {
+                "isdn": "",
+                "nttrefid": tranIdABA,
+                "txnid": tranIdABA
+            };
+
+            if(!tranIdABA) {
+                $.ajax({
+                    url: CONFIG.url + "/checkQRScan",
+                    contentType: "application/json",
+                    type: "POST",
+                    dataType: "json",
+                    data: JSON.stringify(data),
+                    success:
+                        function(d){
+                        },
+                    error: function (e) {
+                        alert(CONFIG_LANG['error.isdn.system']);
+                    }
+                });
+                redirectHomepage();
+                return;
+            }
+
+            setTimeout(function(){
+                sendRequest();
+            }, 2000);
+            var countDownInterval = setInterval(function() {
+                countTime--;
+                countDownFunc();
+            }, 1000);
+
+
+
+            function sendRequest(){
+                var data = {
+                    "isdn": "",
+                    "nttrefid": tranIdABA,
+                    "txnid": tranIdABA
+                };
+
+                var ifConnected = window.navigator.onLine;
+                if (ifConnected) {
+                    $.ajax({
+                        url: CONFIG.url + "/checkQRScan",
+                        contentType: "application/json",
+                        type: "POST",
+                        dataType: "json",
+                        data: JSON.stringify(data),
+                        success:
+                            function(data){
+                                if(data.respcode !== '02'){
+                                    var dataForm = {
+                                        'login' : '',
+                                        'respcode' : data.respcode,
+                                        'respdesc' : data.respdesc,
+                                        'txncurr' : data.txncurr,
+                                        'amt' : data.amt,
+                                        'txnid' : data.txnid,
+                                        'proc_code' : data.proc_code,
+                                        'nttrefid' : data.nttrefid,
+                                        'signature' : data.signature,
+                                        'udf1' : data.udf1,
+                                        'udf2' : data.udf2,
+                                        'udf3' : data.udf3,
+                                        'udf4' : data.udf4,
+                                        'udf5' : data.udf5,
+                                        'date' : data.date
+                                    };
+                                    var form = document.createElement('form');
+                                    document.body.appendChild(form);
+                                    form.method = 'post';
+                                    form.action = CONFIG.url+ '/webhook';
+                                    for (var name in dataForm) {
+                                        var input = document.createElement('input');
+                                        input.type = 'hidden';
+                                        input.name = name;
+                                        input.value = dataForm[name];
+                                        form.appendChild(input);
+                                    }
+                                    clearInterval(countDownInterval);
+                                    form.submit();
+                                    return;
+                                }else {
+                                    if(countTime < 0) {
+                                        var dataForm = {
+                                            'login' : '',
+                                            'respcode' : '01',
+                                            'respdesc' : 'error.payment.timeout',
+                                            'txncurr' : data.txncurr,
+                                            'amt' : data.amt,
+                                            'txnid' : data.txnid,
+                                            'proc_code' : data.proc_code,
+                                            'nttrefid' : data.nttrefid,
+                                            'signature' : data.signature,
+                                            'udf1' : data.udf1,
+                                            'udf2' : data.udf2,
+                                            'udf3' : data.udf3,
+                                            'udf4' : data.udf4,
+                                            'udf5' : data.udf5,
+                                            'date' : data.date
+                                        };
+                                        var form = document.createElement('form');
+                                        document.body.appendChild(form);
+                                        form.method = 'post';
+                                        form.action = CONFIG.url+ '/webhook';
+                                        for (var name in dataForm) {
+                                            var input = document.createElement('input');
+                                            input.type = 'hidden';
+                                            input.name = name;
+                                            input.value = dataForm[name];
+                                            form.appendChild(input);
+                                        }
+                                        clearInterval(countDownInterval);
+                                        form.submit();
+                                        return;
+                                    }
+                                }
+
+                            },
+                        error: function (e) {
+                            alert(CONFIG_LANG['error.isdn.system']);
+                            clearInterval(countDownInterval);
+                            return;
+                            var dataForm = {
+                                'login' : '',
+                                'respcode' : '01',
+                                'respdesc' : 'error.isdn.system',
+                                'txncurr' : data.txncurr,
+                                'amt' : data.amt,
+                                'txnid' : data.txnid,
+                                'proc_code' : data.proc_code,
+                                'nttrefid' : data.nttrefid,
+                                'signature' : data.signature,
+                                'udf1' : data.udf1,
+                                'udf2' : data.udf2,
+                                'udf3' : data.udf3,
+                                'udf4' : data.udf4,
+                                'udf5' : data.udf5,
+                                'date' : data.date
+                            };
+                            var form = document.createElement('form');
+                            document.body.appendChild(form);
+                            form.method = 'post';
+                            form.action = CONFIG.url+ '/webhook';
+                            for (var name in dataForm) {
+                                var input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = name;
+                                input.value = dataForm[name];
+                                form.appendChild(input);
+                            }
+                            clearInterval(countDownInterval);
+                            form.submit();
+                            return;
+                        }
+                    });
+                } else {
+                    alert(CONFIG_LANG['error.isdn.system']);
+                    clearInterval(countDownInterval);
+                    return;
+                }
+
+            };
+
+            function countDownFunc(){
+                if(countTime % CONFIG.time_wait_aba === 0){
+                    sendRequest();
+                }
+                if(countTime < 0){
+                    sendRequest();
+                    clearInterval(countDownInterval);
+                }else{
+                    $('#invoice_timing').text(countTime);
+                }
+            }
+
+        });
+    </script>
+</div>
+</body>
+</html>

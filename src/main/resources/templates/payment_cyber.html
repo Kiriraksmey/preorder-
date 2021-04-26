@@ -1,0 +1,179 @@
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .overlay {
+            z-index: 10000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: 0.5;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #ec1c23;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            z-index: 10001;
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 90px;
+            height: 90px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media only screen and (min-width: 992px) {
+            #loader {
+                left: 50%;
+            }
+        }
+
+        @media only screen and (max-width: 991px) {
+            #loader {
+                left: 40%;
+            }
+        }
+    </style>
+</head>
+<body onload="onloadPaymentCyber();">
+
+<div class="container" layout:fragment="content">
+    <div class="overlay" id="overlay" style="visibility: hidden;">
+        <div class="loader" id="loader"></div>
+    </div>
+    <div class="transaction-summary box-content">
+        <div class="text-left">
+            <div class="wp-btn sp">
+                <a href="javascript:redirectTopup();" class="btn-back">&laquo; <span th:text="#{page.one.back}"></span></a>
+            </div>
+        </div>
+        <div class="form-transaction">
+            <h2 class="box-title" th:text="#{page.three.heading}"></h2>
+            <form th:action="@{/cardCyberPayment}" th:object="${cyberPaymentTransaction}" method="post"
+                  onsubmit="return checkFormCyberCard();">
+                <input type="hidden" id="orderId" th:field="*{orderId}">
+                <input type="hidden" id="isdn" th:field="*{isdn}">
+                <input type="hidden" id="paymentAmount" th:field="*{paymentAmount}">
+                <input type="hidden" id="topupAmount" th:field="*{topupAmount}">
+                <input type="hidden" id="paymentType" th:field="*{paymentType}">
+
+                <div class="el-order" style="display: none">
+                    <label th:text="#{page.three.orderId}"></label>
+                    <span class="code" th:text="${cyberPaymentTransaction.orderId}"></span>
+                </div>
+                <div class="box-amount">
+                    <div class="el">
+                        <div class="title" th:text="#{page.three.subcriber}"></div>
+                        <div class="cardnumber" th:text="${cyberPaymentTransaction.isdn}"></div>
+                    </div>
+                    <div class="el">
+                        <div class="title" th:text="#{page.three.amount}"></div>
+                        <div class="price"><span th:text="${cyberPaymentTransaction.paymentAmount}"></span> USD</div>
+                    </div>
+                </div>
+
+                <div>
+                    <span style="padding-left: 0;" class="span_error_input_index" id="span_error_submit" th:text="${errorSubmitForm}"></span>
+                </div>
+
+                <div class="box-info-carduser">
+                    <div class="info-card">
+                        <div class="inp-control">
+                            <label th:text="#{page.three.cardnumber}"></label>
+                            <div class="inner-input" id="div_card_number">
+                                <input class="number" name="" id="cardNumber" th:field="*{cardNumber}"
+                                       maxlength="30" type="tel" pattern="[0-9]*" inputmode="numeric">
+                                <span style="padding-left: 0;" class="span_error_input_index"
+                                      id="span_error_card_number" th:text="${errorCardNumber}"></span>
+                            </div>
+                        </div>
+                        <div class="inp-control">
+                            <label th:text="#{page.three.cardholder}"></label>
+                            <div class="inner-input" id="div_card_name">
+                                <input class="name" type="text" placeholder="" name="" onkeyup="toUpperName();"
+                                       id="cardHolderName" th:field="*{cardHolderName}" maxlength="50">
+                                <span style="padding-left: 0;" class="span_error_input_index" id="span_error_card_name"
+                                      th:text="${errorCardName}"></span>
+
+                            </div>
+                        </div>
+                        <div class="inp-2col">
+                            <div class="inp-control el-date">
+                                <label th:text="#{page.three.expDate}"></label>
+                                <div class="inner-input" id="div_card_date">
+                                    <input class="date" type="text" maxlength="5" placeholder="MM/YY" id="expirationDate" name=""
+                                           th:field="*{expirationDate}" onkeyup="validateExpiration(event);">
+                                    <span style="padding-left: 0;" class="span_error_input_index"
+                                          id="span_error_expiration_date" th:text="${errorExpiration}"></span>
+                                </div>
+                            </div>
+                            <div class="inp-control el-pass">
+                                <label th:text="#{page.three.ccv}"></label>
+                                <div class="inner-input" id="div_card_cvv">
+                                    <input class="pass" placeholder="" name="" onkeyup="validateCVV();"
+                                           maxlength="3" id="ccvNumber" th:field="*{ccvNumber}" type="tel" pattern="[0-9]*" inputmode="numeric">
+                                    <span style="padding-left: 0;" class="span_error_input_index"
+                                          id="span_error_cvv_number" th:text="${errorCcvNumber}"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="info-tagbank" th:switch="${cyberPaymentTransaction.paymentType}">
+                        <ul class="list-bank" th:case="'visa'">
+                            <li><img src="images/bank_mastercard.png"></li>
+                            <li class="active"><img src="images/bank_visa.png"></li>
+                            <li><img src="images/bank_jcb.png"></li>
+                        </ul>
+                        <ul class="list-bank" th:case="'mastercard'">
+                            <li class="active"><img src="images/bank_mastercard.png"></li>
+                            <li><img src="images/bank_visa.png"></li>
+                            <li><img src="images/bank_jcb.png"></li>
+                        </ul>
+                        <ul class="list-bank" th:case="'jcb'">
+                            <li><img src="images/bank_mastercard.png"></li>
+                            <li><img src="images/bank_visa.png"></li>
+                            <li class="active"><img src="images/bank_jcb.png"></li>
+                        </ul>
+                        <!--
+                        <div class="show-tagbank active">
+                            <img src="images/visa_bank.png">
+                        </div>
+                        -->
+                        <!--
+                        <div class="show-tagbank active" th:switch="${cyberPaymentTransaction.paymentType}">
+                            <img th:case="'visa'" src="images/visa_bank.png">
+                            <img th:case="'mastercard'" src="images/bank_mastercard.png">
+                            <img th:case="'jcb'" src="images/bank_jcb.png">
+                        </div>
+                        -->
+                    </div>
+                </div>
+                <div class="inp-button">
+                    <button class="btn-submit" id="btnsubmit" th:text="#{page.three.labelConfirm}"></button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script>
+    $(document).ready(function ($) {
+        setInputFilter(document.getElementById("cardNumber"), function (value) {
+            return /^\d*$/.test(value);
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://thymeleaf.org" th:lang="${#locale.language}">
+<head>
+    <title>Metfone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="images/metfone.ico" />
+    <link rel="stylesheet" type="text/css" href="css/style.css?v=1.0.0">
+    <link rel="stylesheet" type="text/css" href="css/custom.css?v=1.0.0">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+    <script type="text/javascript" src="js/jquery.min.js" ></script>
+    <script type="text/javascript" src="js/jquery.cookie.js" ></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js" ></script>
+    <script type="text/javascript" src="js/main.js" ></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-145651657-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-145651657-1');
+    </script>
+
+</head>
+
+<body>
+<div id="aba_main_modal" class="aba-modal">
+    <div class="aba-modal-content">
+
+        <form method="POST" target="aba_webservice" action="" id="aba_merchant_request">
+            <input type="hidden" name="hash" value="" id="aba_hash"/>
+            <input type="hidden" name="tran_id" value="" id="aba_tran_id"/>
+            <input type="hidden" name="amount" value="" id="aba_amount"/>
+            <input type="hidden" name="firstname" value="" id="aba_firstname"/>
+            <input type="hidden" name="lastname" value="" id="aba_lastname"/>
+            <input type="hidden" name="phone" value="" id="aba_phone"/>
+            <input type="hidden" name="email" value="" id="aba_email"/>
+            <input type="hidden" name="payment_option" value="abapay">
+        </form>
+    </div>
+</div>
+<div class="wrapper">
+    <div th:replace="fragments/header :: header"></div>
+    <div class="maincontent">
+        <div class="col" layout:fragment="content">
+        </div>
+    </div>
+
+    <footer th:insert="fragments/footer :: div">
+    </footer>
+
+    <div class="wrap-menu-mobile">
+        <div class="inner-menu">
+            <div class="top-menumobile">
+                <div id="closemenu">X</div>
+                <div class="logo"><a href="javascript:redirectHomepage();"><img width="130" src="images/logo.svg"></a></div>
+                <ul class="list-lang-sub">
+                    <li><a href="?lang=cn">CH</a></li>
+                    <li><a href="?lang=en">EN</a></li>
+                    <li><a href="?lang=kh">KH</a></li>
+                </ul>
+            </div>
+            <ul class="list-mainmenu">
+                <li class="active"><a href="javascript:redirectHomepage();" th:text="#{menu.home}"></a></li>
+                <li><a href="#" th:text="#{menu.about}"></a></li>
+                <li><a href="#" th:text="#{menu.register}"></a></li>
+                <li><a href="#" th:text="#{menu.signin}"></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div id="popup-term" class="modal">
+    <div class="modal-dialog modal-credit-terms">
+        <div class="modal-content">
+            <div class="modal-header">
+                <p th:text="#{term.header}"></p>
+                <div class="text-right">
+                    <button type="button" class="close" data-dismiss="modal" onclick="javascript:closePopupTerm();">×</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="el">
+                    <b th:text="#{term.number1}"></b> <span th:text="#{term.term1}"></span><br>
+                    <ul>
+                        <li th:text="#{term.term1.1}"></li>
+                        <li th:text="#{term.term1.2}"></li>
+                        <li th:text="#{term.term1.3}"></li>
+                        <li th:text="#{term.term1.4}"></li>
+                        <li th:text="#{term.term1.5}"></li>
+                        <li th:text="#{term.term1.6}"></li>
+                        <li th:text="#{term.term1.7}"></li>
+                    </ul>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number2}"></b><span th:text="#{term.term2}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number3}"></b><span th:text="#{term.term3}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number4}"></b><span th:text="#{term.term4}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number5}"></b><span th:text="#{term.term5}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number6}"></b><span th:text="#{term.term6}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number7}"></b><span th:text="#{term.term7}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number8}"></b><span th:text="#{term.term8}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number9}"></b><span th:text="#{term.term9}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number10}"></b><span th:text="#{term.term10}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number11}"></b><span th:text="#{term.term11}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number12}"></b><span th:text="#{term.term12}"></span>
+                </div>
+                <div class="el">
+                    <b th:text="#{term.number13}"></b><span th:text="#{term.term13}"></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right"><a class="btn" href="javascript:agreeTerm();" th:text="#{term.agree}"></a></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script th:inline="javascript">
+    var LANGUAGE = [[#{locale.language}]];
+    console.log(LANGUAGE);
+</script>
+<th:block layout:fragment="script"></th:block>
+
+<script type="text/javascript" src="js/config.js?v=2.0.2" ></script>
+<script type="text/javascript" src="js/function.js?v=2.0.2" ></script>
+<script type="text/javascript" src="js/qrious/qrious.min.js" ></script>
+<script type="text/javascript" src="js/qrious/jquery.printPage.js" ></script>
+
+<th:block layout:fragment="script_ready"></th:block>
+
+</body>
+</html>

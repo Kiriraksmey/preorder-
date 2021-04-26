@@ -1,0 +1,174 @@
+﻿<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Scan Wechat QR Code</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+    <div id="popup-wechat" class="modal open">
+        <input id="payCode" type="hidden" th:value="${payCode}">
+        <input id="isdn" type="hidden" th:value="${isdn}">
+        <input id="nttrefid" type="hidden" th:value="${nttrefid}">
+        <input id="txnid" type="hidden" th:value="${txnid}">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+<!--                    <div class="text-right">-->
+<!--                        <button type="button" class="close" data-dismiss="modal">×</button>-->
+<!--                    </div>-->
+                    <div class="logo-title">
+                        <div class="logo-title"><img src="images/logo-wechat.png"></div>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <canvas id="qr"></canvas>
+                </div>
+                <div class="modal-footer">
+                    <p class="text-center" th:text="#{welcome.wechat.pay}">Welcome to use WeChat Pay</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function($) {
+        var qr = new QRious({
+            element: document.getElementById('qr'),
+            size: 250,
+            value: document.getElementById("payCode").value
+        });
+
+        sendRequest();
+
+        var totalRequestCount = CONFIG.total_time_wait/CONFIG.time_wait;
+        var i = 0;
+
+        function sendRequest(){
+            var data = {
+                "isdn": $("#isdn").val(),
+                "nttrefid": $("#nttrefid").val(),
+                "txnid": $("#txnid").val()
+            };
+            $.ajax({
+                url: CONFIG.url + "/checkQRScan",
+                contentType: "application/json",
+                type: "POST",
+                dataType: "json",
+                data: JSON.stringify(data),
+                success:
+                    function(data){
+
+                        if(data.respcode !== '02'){
+                            var dataForm = {
+                                'login' : '',
+                                'respcode' : data.respcode,
+                                'respdesc' : data.respdesc,
+                                'txncurr' : data.txncurr,
+                                'amt' : data.amt,
+                                'txnid' : data.txnid,
+                                'proc_code' : data.proc_code,
+                                'nttrefid' : data.nttrefid,
+                                'signature' : data.signature,
+                                'udf1' : data.udf1,
+                                'udf2' : data.udf2,
+                                'udf3' : data.udf3,
+                                'udf4' : data.udf4,
+                                'udf5' : data.udf5,
+                                'date' : data.date
+                            };
+                            var form = document.createElement('form');
+                            document.body.appendChild(form);
+                            form.method = 'post';
+                            form.action = CONFIG.url+ '/webhook';
+                            for (var name in dataForm) {
+                                var input = document.createElement('input');
+                                input.type = 'hidden';
+                                input.name = name;
+                                input.value = dataForm[name];
+                                form.appendChild(input);
+                            }
+                            form.submit();
+                            return;
+                        }else if(data.respcode === '02') {
+                            if(i >= totalRequestCount) {
+                                var dataForm = {
+                                    'login' : '',
+                                    'respcode' : '01',
+                                    'respdesc' : 'error.payment.timeout',
+                                    'txncurr' : data.txncurr,
+                                    'amt' : data.amt,
+                                    'txnid' : data.txnid,
+                                    'proc_code' : data.proc_code,
+                                    'nttrefid' : data.nttrefid,
+                                    'signature' : data.signature,
+                                    'udf1' : data.udf1,
+                                    'udf2' : data.udf2,
+                                    'udf3' : data.udf3,
+                                    'udf4' : data.udf4,
+                                    'udf5' : data.udf5,
+                                    'date' : data.date
+                                };
+                                var form = document.createElement('form');
+                                document.body.appendChild(form);
+                                form.method = 'post';
+                                form.action = CONFIG.url+ '/webhook';
+                                for (var name in dataForm) {
+                                    var input = document.createElement('input');
+                                    input.type = 'hidden';
+                                    input.name = name;
+                                    input.value = dataForm[name];
+                                    form.appendChild(input);
+                                }
+                                form.submit();
+                                return;
+                            }else{
+                                setTimeout(function () {
+                                    i++;
+                                    sendRequest();
+                                }, CONFIG.time_wait);
+                                return;
+                            }
+
+                        }
+
+                    },
+                fail: function (e) {
+                    var dataForm = {
+                        'login' : '',
+                        'respcode' : '01',
+                        'respdesc' : 'error.isdn.system',
+                        'txncurr' : data.txncurr,
+                        'amt' : data.amt,
+                        'txnid' : data.txnid,
+                        'proc_code' : data.proc_code,
+                        'nttrefid' : data.nttrefid,
+                        'signature' : data.signature,
+                        'udf1' : data.udf1,
+                        'udf2' : data.udf2,
+                        'udf3' : data.udf3,
+                        'udf4' : data.udf4,
+                        'udf5' : data.udf5,
+                        'date' : data.date
+                    };
+                    var form = document.createElement('form');
+                    document.body.appendChild(form);
+                    form.method = 'post';
+                    form.action = CONFIG.url+ '/webhook';
+                    for (var name in dataForm) {
+                        var input = document.createElement('input');
+                        input.type = 'hidden';
+                        input.name = name;
+                        input.value = dataForm[name];
+                        form.appendChild(input);
+                    }
+                    form.submit();
+                    return;
+                }
+            });
+        };
+    });
+</script>
+</div>
+</body>
+</html>
