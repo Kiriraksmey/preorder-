@@ -116,10 +116,10 @@ public class TopUpController {
         if (phoneNumber != null && !phoneNumber.isEmpty()) {
             mobileDeposit.setPhoneNumber(phoneNumber);
         }
-        if(paymentType != null && !paymentType.isEmpty()) {
+        if (paymentType != null && !paymentType.isEmpty()) {
             mobileDeposit.setPaymentMethod(paymentType);
         }
-        if(accountEmoney != null && !accountEmoney.isEmpty()) {
+        if (accountEmoney != null && !accountEmoney.isEmpty()) {
             mobileDeposit.setAccountEmoney(accountEmoney);
         }
 
@@ -153,7 +153,7 @@ public class TopUpController {
             return new ModelAndView("index", model);
         }
         if (mobileDeposit.getPaymentAmount() > 0) {
-            paymentTopup.setRefillAmount(mobileDeposit.getPaymentAmount());
+                paymentTopup.setRefillAmount(mobileDeposit.getPaymentAmount());
         }
         if (mobileDeposit.getPhoneNumber() != null && !mobileDeposit.getPhoneNumber().isEmpty()) {
             paymentTopup.setRefillIsdn(mobileDeposit.getPhoneNumber());
@@ -161,12 +161,12 @@ public class TopUpController {
         if (mobileDeposit.getPaymentMethod() != null && !mobileDeposit.getPaymentMethod().isEmpty()) {
             paymentTopup.setPaymentMethod(mobileDeposit.getPaymentMethod());
         }
-        if (mobileDeposit.getAccountEmoney() !=null && !mobileDeposit.getAccountEmoney().isEmpty()) {
+        if (mobileDeposit.getAccountEmoney() != null && !mobileDeposit.getAccountEmoney().isEmpty()) {
             paymentTopup.setAccountEmoney(mobileDeposit.getAccountEmoney());
         }
 
-        if(paymentTopup.getRefillIsdn() != null) {
-            if(!paymentTopup.getRefillIsdn().startsWith("071") &&
+        if (paymentTopup.getRefillIsdn() != null) {
+            if (!paymentTopup.getRefillIsdn().startsWith("071") &&
                     !paymentTopup.getRefillIsdn().startsWith("097") &&
                     !paymentTopup.getRefillIsdn().startsWith("088") &&
                     !paymentTopup.getRefillIsdn().startsWith("068") &&
@@ -183,7 +183,7 @@ public class TopUpController {
                     !paymentTopup.getRefillIsdn().startsWith("67") &&
                     !paymentTopup.getRefillIsdn().startsWith("60") &&
                     !paymentTopup.getRefillIsdn().startsWith("31") &&
-                    !paymentTopup.getRefillIsdn().startsWith("66")){
+                    !paymentTopup.getRefillIsdn().startsWith("66")) {
                 mobileDeposit.setCaptcha("");
                 model.addAttribute("mobileDeposit", mobileDeposit);
                 model.addAttribute("errorPhoneNumber",
@@ -304,25 +304,25 @@ public class TopUpController {
                                 .equalsIgnoreCase(eMoneyPaymentResponse.getResponseCode())) {
                             mobileDeposit.setCaptcha("");
                             model.addAttribute("mobileDeposit", mobileDeposit);
-                            if(eMoneyPaymentResponse.getResponseMessage() != null){
-                                if(eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_COMMON")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MISSING_PARAMETERS")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_EMONEY_ACCOUNT_INVALID")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MERCHANT_NOT_FOUND")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MERCHANT_SERVICE_NOT_FOUND")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_HAVE_REQUIRED_PARAMETER_INVALID")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_TOTAL_AMOUNT_USD_KHR_NOT_MATCHES")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_TX_PAYMENT_TOKEN_ID_INVALID")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_INVOICE_NOT_FOUND")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_INVOICE_ALREADY_PAID_OR_CANCELLED")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_PHONE_NUMBER_INVALID")){
+                            if (eMoneyPaymentResponse.getResponseMessage() != null) {
+                                if (eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_COMMON")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MISSING_PARAMETERS")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_EMONEY_ACCOUNT_INVALID")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MERCHANT_NOT_FOUND")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MERCHANT_SERVICE_NOT_FOUND")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_HAVE_REQUIRED_PARAMETER_INVALID")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_TOTAL_AMOUNT_USD_KHR_NOT_MATCHES")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_TX_PAYMENT_TOKEN_ID_INVALID")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_INVOICE_NOT_FOUND")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_INVOICE_ALREADY_PAID_OR_CANCELLED")
+                                        || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_PHONE_NUMBER_INVALID")) {
                                     model.addAttribute("errorAccountEmoney",
                                             utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
-                                }else{
+                                } else {
                                     model.addAttribute("errorPhoneNumber",
                                             utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                                 }
-                            }else{
+                            } else {
                                 model.addAttribute("errorPhoneNumber",
                                         utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                             }
@@ -382,7 +382,7 @@ public class TopUpController {
         Cookie[] cookies = request.getCookies();
         if (cookies != null && cookies.length > 0) {
             for (Cookie cookie : cookies) {
-                if(!"transIdAba".equalsIgnoreCase(cookie.getName())){
+                if (!"transIdAba".equalsIgnoreCase(cookie.getName())) {
                     cookie.setMaxAge(0);
                     cookie.setValue(null);
                     cookie.setPath("/" + SOURCE_PATH);
@@ -438,35 +438,35 @@ public class TopUpController {
 
     @GetMapping("/showCallBackABA")
     public String showCallBackABA(
-                                  HttpServletRequest request,
-                                  HttpServletResponse response) {
+            HttpServletRequest request,
+            HttpServletResponse response) {
         return "showcallbackABA";
     }
 
     @GetMapping("/showCallBackAcleda")
     public ModelAndView showCallBackAcleda(
-            @RequestParam(value = "_arNo", required=false) String arNo,
-            @RequestParam(value = "_transactionid", required=false) String transId,
-            @RequestParam(value = "_paymentresult", required=false) String paymentResult,
-            @RequestParam(value = "_paymenttokenid", required=false) String paymentTokenId,
-            @RequestParam(value = "_resultCode", required=false) String resultCode,
+            @RequestParam(value = "_arNo", required = false) String arNo,
+            @RequestParam(value = "_transactionid", required = false) String transId,
+            @RequestParam(value = "_paymentresult", required = false) String paymentResult,
+            @RequestParam(value = "_paymenttokenid", required = false) String paymentTokenId,
+            @RequestParam(value = "_resultCode", required = false) String resultCode,
             HttpServletRequest request, HttpServletResponse response) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         System.out.println(dtf.format(now) + " : paymentTokenId: " + paymentTokenId + " _resultCode: " + resultCode);
         RequestCallbackAcleda requestCallbackAcleda = new RequestCallbackAcleda();
-        try{
+        try {
             requestCallbackAcleda.setStatus(Integer.valueOf(resultCode));
-        }catch (Exception e){
+        } catch (Exception e) {
             requestCallbackAcleda.setStatus(9999);
         }
 
         requestCallbackAcleda.setTran_id(paymentTokenId);
 
         System.out.println(dtf.format(now) + " : Request callback from Acleda: " + requestCallbackAcleda.toString());
-        try{
+        try {
             topUpService.callbackAcleda(requestCallbackAcleda);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(dtf.format(now) + " : Exception when callback Acleda: " + e.getMessage());
         }
         ModelMap model = new ModelMap();
@@ -481,7 +481,7 @@ public class TopUpController {
                               @RequestParam String amtString, @RequestParam String firstName,
                               @RequestParam String lastName, @RequestParam String phone,
                               @RequestParam String email, @RequestParam String paymentType,
-                              @RequestParam String urlABA){
+                              @RequestParam String urlABA) {
         model.addAttribute("hash", hash);
         model.addAttribute("tnxid", tnxid);
         model.addAttribute("amtString", amtString);
@@ -497,8 +497,8 @@ public class TopUpController {
     @RequestMapping(value = "/transWechatMobile",
             method = RequestMethod.GET)
     public String transWechatMobile(Model model,
-                              @RequestParam String isdn, @RequestParam String payCode,
-                              @RequestParam String nttrefid, @RequestParam String txnid){
+                                    @RequestParam String isdn, @RequestParam String payCode,
+                                    @RequestParam String nttrefid, @RequestParam String txnid) {
         model.addAttribute("isdn", isdn);
         model.addAttribute("payCode", payCode);
         model.addAttribute("nttrefid", nttrefid);
