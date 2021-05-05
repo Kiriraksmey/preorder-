@@ -130,13 +130,13 @@ function hideOverlayIndex() {
 }
 
 
-
 function showOverlaySubmit() {
 
-    if($.cookie("paymentAmount")){
+    if ($.cookie("paymentAmount")) {
         $('#txt_paymentamount').val($.cookie("paymentAmount"));
     }
     var topupAmout = $('#txt_topupamount').val();
+
     var isdn = $('#txt_phonenumber').val();
     var captcha = $('#captcha').val();
     var paymentAmount = $('#txt_paymentamount').val();
@@ -154,6 +154,7 @@ function showOverlaySubmit() {
         $('#span_error_txt_phone').show();
         return false;
     }
+
     if (!topupAmout || 0 === topupAmout.length) {
         $('#span_error_txt_topamount').html(CONFIG_LANG['error.topup.amount.empty']);
         $('#span_error_txt_topamount').show();
@@ -184,7 +185,6 @@ function showOverlaySubmit() {
         window.scrollTo(0, 1400);
         return false;
     }
-
 
 
     var paymentMethod = $('input[name=paymentMethod]:checked').val();
@@ -222,8 +222,8 @@ function showOverlaySubmit() {
             data: JSON.stringify(data),
             dataType: "json"
         }).done(function (result) {
-            if(result.status === true) {
-                if(paymentMethodUpper === CONFIG.abapay.toUpperCase()){
+            if (result.status === true) {
+                if (paymentMethodUpper === CONFIG.abapay.toUpperCase()) {
                     $('#aba_merchant_request').attr('action', result.urlABA);
                     $('#aba_hash').val(result.hash);
                     $('#aba_tran_id').val(result.txnid);
@@ -244,7 +244,7 @@ function showOverlaySubmit() {
                         "txnid": tranIdABA
                     };
 
-                    if(!tranIdABA) {
+                    if (!tranIdABA) {
                         $.ajax({
                             url: CONFIG.url + "/checkQRScan",
                             contentType: "application/json",
@@ -252,7 +252,7 @@ function showOverlaySubmit() {
                             dataType: "json",
                             data: JSON.stringify(data),
                             success:
-                                function(d){
+                                function (d) {
                                 },
                             error: function (e) {
                                 alert(CONFIG_LANG['error.isdn.system']);
@@ -262,17 +262,16 @@ function showOverlaySubmit() {
                         return;
                     }
 
-                    setTimeout(function(){
+                    setTimeout(function () {
                         sendRequest();
                     }, 2000);
-                    var countDownInterval = setInterval(function() {
+                    var countDownInterval = setInterval(function () {
                         countTime--;
                         countDownFunc();
                     }, 1000);
 
 
-
-                    function sendRequest(){
+                    function sendRequest() {
                         var data = {
                             "isdn": "",
                             "nttrefid": tranIdABA,
@@ -288,29 +287,29 @@ function showOverlaySubmit() {
                                 dataType: "json",
                                 data: JSON.stringify(data),
                                 success:
-                                    function(data){
-                                        if(data.respcode !== '02'){
+                                    function (data) {
+                                        if (data.respcode !== '02') {
                                             var dataForm = {
-                                                'login' : '',
-                                                'respcode' : data.respcode,
-                                                'respdesc' : data.respdesc,
-                                                'txncurr' : data.txncurr,
-                                                'amt' : data.amt,
-                                                'txnid' : data.txnid,
-                                                'proc_code' : data.proc_code,
-                                                'nttrefid' : data.nttrefid,
-                                                'signature' : data.signature,
-                                                'udf1' : data.udf1,
-                                                'udf2' : data.udf2,
-                                                'udf3' : data.udf3,
-                                                'udf4' : data.udf4,
-                                                'udf5' : data.udf5,
-                                                'date' : data.date
+                                                'login': '',
+                                                'respcode': data.respcode,
+                                                'respdesc': data.respdesc,
+                                                'txncurr': data.txncurr,
+                                                'amt': data.amt,
+                                                'txnid': data.txnid,
+                                                'proc_code': data.proc_code,
+                                                'nttrefid': data.nttrefid,
+                                                'signature': data.signature,
+                                                'udf1': data.udf1,
+                                                'udf2': data.udf2,
+                                                'udf3': data.udf3,
+                                                'udf4': data.udf4,
+                                                'udf5': data.udf5,
+                                                'date': data.date
                                             };
                                             var form = document.createElement('form');
                                             document.body.appendChild(form);
                                             form.method = 'post';
-                                            form.action = CONFIG.url+ '/webhook';
+                                            form.action = CONFIG.url + '/webhook';
                                             for (var name in dataForm) {
                                                 var input = document.createElement('input');
                                                 input.type = 'hidden';
@@ -321,29 +320,29 @@ function showOverlaySubmit() {
                                             clearInterval(countDownInterval);
                                             form.submit();
                                             return;
-                                        }else {
-                                            if(countTime < 0) {
+                                        } else {
+                                            if (countTime < 0) {
                                                 var dataForm = {
-                                                    'login' : '',
-                                                    'respcode' : '01',
-                                                    'respdesc' : 'error.payment.timeout',
-                                                    'txncurr' : data.txncurr,
-                                                    'amt' : data.amt,
-                                                    'txnid' : data.txnid,
-                                                    'proc_code' : data.proc_code,
-                                                    'nttrefid' : data.nttrefid,
-                                                    'signature' : data.signature,
-                                                    'udf1' : data.udf1,
-                                                    'udf2' : data.udf2,
-                                                    'udf3' : data.udf3,
-                                                    'udf4' : data.udf4,
-                                                    'udf5' : data.udf5,
-                                                    'date' : data.date
+                                                    'login': '',
+                                                    'respcode': '01',
+                                                    'respdesc': 'error.payment.timeout',
+                                                    'txncurr': data.txncurr,
+                                                    'amt': data.amt,
+                                                    'txnid': data.txnid,
+                                                    'proc_code': data.proc_code,
+                                                    'nttrefid': data.nttrefid,
+                                                    'signature': data.signature,
+                                                    'udf1': data.udf1,
+                                                    'udf2': data.udf2,
+                                                    'udf3': data.udf3,
+                                                    'udf4': data.udf4,
+                                                    'udf5': data.udf5,
+                                                    'date': data.date
                                                 };
                                                 var form = document.createElement('form');
                                                 document.body.appendChild(form);
                                                 form.method = 'post';
-                                                form.action = CONFIG.url+ '/webhook';
+                                                form.action = CONFIG.url + '/webhook';
                                                 for (var name in dataForm) {
                                                     var input = document.createElement('input');
                                                     input.type = 'hidden';
@@ -363,26 +362,26 @@ function showOverlaySubmit() {
                                     clearInterval(countDownInterval);
                                     return;
                                     var dataForm = {
-                                        'login' : '',
-                                        'respcode' : '01',
-                                        'respdesc' : 'error.isdn.system',
-                                        'txncurr' : data.txncurr,
-                                        'amt' : data.amt,
-                                        'txnid' : data.txnid,
-                                        'proc_code' : data.proc_code,
-                                        'nttrefid' : data.nttrefid,
-                                        'signature' : data.signature,
-                                        'udf1' : data.udf1,
-                                        'udf2' : data.udf2,
-                                        'udf3' : data.udf3,
-                                        'udf4' : data.udf4,
-                                        'udf5' : data.udf5,
-                                        'date' : data.date
+                                        'login': '',
+                                        'respcode': '01',
+                                        'respdesc': 'error.isdn.system',
+                                        'txncurr': data.txncurr,
+                                        'amt': data.amt,
+                                        'txnid': data.txnid,
+                                        'proc_code': data.proc_code,
+                                        'nttrefid': data.nttrefid,
+                                        'signature': data.signature,
+                                        'udf1': data.udf1,
+                                        'udf2': data.udf2,
+                                        'udf3': data.udf3,
+                                        'udf4': data.udf4,
+                                        'udf5': data.udf5,
+                                        'date': data.date
                                     };
                                     var form = document.createElement('form');
                                     document.body.appendChild(form);
                                     form.method = 'post';
-                                    form.action = CONFIG.url+ '/webhook';
+                                    form.action = CONFIG.url + '/webhook';
                                     for (var name in dataForm) {
                                         var input = document.createElement('input');
                                         input.type = 'hidden';
@@ -403,19 +402,19 @@ function showOverlaySubmit() {
 
                     };
 
-                    function countDownFunc(){
-                        if(countTime % CONFIG.time_wait_aba === 0){
+                    function countDownFunc() {
+                        if (countTime % CONFIG.time_wait_aba === 0) {
                             sendRequest();
                         }
-                        if(countTime < 0){
+                        if (countTime < 0) {
                             sendRequest();
                             clearInterval(countDownInterval);
-                        }else{
+                        } else {
                             $('#invoice_timing').text(countTime);
                         }
                     }
 
-                }else{
+                } else {
                     //submit form
 
                     var form = document.createElement('form');
@@ -475,7 +474,7 @@ function showOverlaySubmit() {
                     form.submit();
                 }
 
-            }else{
+            } else {
                 renewCaptcha();
                 switch (result.error_field) {
                     case CONFIG.isdn_error_field:
@@ -535,7 +534,7 @@ function showOverlaySubmit() {
             data: JSON.stringify(data),
             dataType: "json"
         }).done(function (result) {
-            if(result.status === true) {
+            if (result.status === true) {
                 //submit form
 
                 var form = document.createElement('form');
@@ -623,7 +622,7 @@ function showOverlaySubmit() {
 
                 form.submit();
 
-            }else{
+            } else {
                 renewCaptcha();
                 switch (result.error_field) {
                     case CONFIG.isdn_error_field:
@@ -835,6 +834,13 @@ function getListPayment() {
                         $('#li_acleda_bank').removeClass().addClass('disable');
                     }
                 }
+                if (item.paramValue === CONFIG.wing) {
+                    if (item.status === 1) {
+                        $('#li_wing').removeClass();
+                    } else {
+                        $('#li_wing').removeClass().addClass('disable');
+                    }
+                }
             }
         } else {
             $('#li_visa').removeClass().addClass('disable');
@@ -846,6 +852,7 @@ function getListPayment() {
             $('#li_emoney').removeClass().addClass('disable');
             $('#li_abapay').removeClass().addClass('disable');
             $('#li_acleda_bank').removeClass().addClass('disable');
+            $('#li_wing').removeClass().addClass('disable');
         }
     }).fail(function (error) {
         $('#li_visa').removeClass().addClass('disable');
@@ -857,6 +864,7 @@ function getListPayment() {
         $('#li_emoney').removeClass().addClass('disable');
         $('#li_abapay').removeClass().addClass('disable');
         $('#li_acleda_bank').removeClass().addClass('disable');
+        $('#li_wing').removeClass().addClass('disable');
     });
 }
 
@@ -1065,11 +1073,11 @@ function callCheckIsdnService(isdn, amount, paymentMethod) {
                         $('#span_error_txt_phone').show();
                     }
                     if (result.responseMessage === 'error.payment.invalid') {
-                        if (paymentMethod === CONFIG.emoney){
+                        if (paymentMethod === CONFIG.emoney) {
                             $('#account_emoney').focus();
                             window.scrollTo(0, 800);
                             $('#span_error_account_emoney').html(CONFIG_LANG['error.account.emoney']);
-                        }else{
+                        } else {
                             $('#txt_topupamount').focus();
                             $('#span_error_txt_topamount').html(CONFIG_LANG['error.amount.invalid']);
                             $('#span_error_txt_topamount').show();
@@ -1143,6 +1151,7 @@ function onFocusoutPhoneNumber() {
     }
     if (!topupAmout || 0 === topupAmout.length) {
         $('#txt_topupamount').focus();
+        $('#span_error_txt_topamount').html(CONFIG_LANG['error.amount.invalid']);
         return;
     }
     checkISDN();
@@ -1172,7 +1181,7 @@ function onKeypressAccountMoney() {
     hideAllValidateError();
 }
 
-function hideKeyboadMobile(){
+function hideKeyboadMobile() {
     $(document.activeElement).filter(':input:focus').blur();
 }
 
@@ -1197,9 +1206,9 @@ function selectAmout(amount) {
     }
     var paymentMethod = $('input[name=paymentMethod]:checked').val();
 
-    if(paymentMethod === CONFIG.emoney){
+    if (paymentMethod === CONFIG.emoney) {
         var eMoneyAcc = $('#account_emoney').val();
-        if(!eMoneyAcc){
+        if (!eMoneyAcc) {
             $('#account_emoney').focus();
             window.scrollTo(0, 800);
             $('#span_error_account_emoney').html(CONFIG_LANG['error.account.emoney.invalid']);
@@ -1231,7 +1240,7 @@ function checkISDNPayment() {
     }
 
     if (!topupAmout || 0 === topupAmout.length) {
-        console.log(topupAmout);
+
         $('#span_error_txt_topamount').html(CONFIG_LANG['error.amount.invalid']);
         $('#txt_topupamount').focus();
         return;
@@ -1255,31 +1264,31 @@ function checkISDNPayment() {
     }
 
     var paymentMethod = $('input[name=paymentMethod]:checked').val();
+
     //Xử lý tiếp chỗ này cho emoney
-    if (paymentMethod && paymentMethod === CONFIG.emoney) {
+    if ((paymentMethod && paymentMethod === CONFIG.emoney) || (paymentMethod && paymentMethod === CONFIG.wing)) {
         $('#div_AccountEmoney').show();
     } else {
         $('#div_AccountEmoney').hide();
     }
 
-
-    if(paymentMethod === CONFIG.emoney){
-        var eMoneyAcc = $('#account_emoney').val();
-        if(!eMoneyAcc){
-            $('#account_emoney').focus();
-            window.scrollTo(0, 800);
-            $('#span_error_account_emoney').html(CONFIG_LANG['error.account.emoney.invalid']);
-            $('#span_error_account_emoney').show();
-            return false;
-        }else{
-            $('#span_error_account_emoney').html('');
-        }
+    if (paymentMethod === CONFIG.emoney) {
+        $('#account_emoney').val(isdn.substring(1, isdn.length));
+        document.getElementById("labelEmoney").style.display = "grid";
+        document.getElementById("labelWing").style.display = "none";
+        $("#account_emoney").attr("placeholder", CONFIG_LANG['enter_account_emoney']);
+    }
+    if (paymentMethod === CONFIG.wing) {
+        $('#account_emoney').val(isdn.substring(1, isdn.length));
+        document.getElementById("labelEmoney").style.display = "none";
+        document.getElementById("labelWing").style.display = "grid";
+        $("#account_emoney").attr("placeholder", CONFIG_LANG['enter_account_wing']);
     }
 
     callCheckIsdnServicePayment(isdn, topupAmout, paymentMethod);
 }
 
-function checkISDNFocusOutEmoney(){
+function checkISDNFocusOutEmoney() {
     var isdn = $('#txt_phonenumber').val();
     var topupAmout = $('#txt_topupamount').val();
 
@@ -1416,14 +1425,14 @@ function onChangeRadioPaymentMethod() {
     });
 }
 
-function pageShow(event){
+function pageShow(event) {
     console.log('pageshow');
     var historyTraversal = event.persisted ||
-            ( typeof window.performance != "undefined" &&
-                window.performance.navigation.type === 2 );
-    if ( historyTraversal ) {
+        (typeof window.performance != "undefined" &&
+            window.performance.navigation.type === 2);
+    if (historyTraversal) {
         // Handle page restore.
-        window.location.reload( true );
+        window.location.reload(true);
     }
 }
 
@@ -1447,21 +1456,22 @@ function onloadIndex() {
     setInputFilter(document.getElementById("txt_topupamount"), function (value) {
         if ((!/^\d*$/.test(value) && parseInt(value) > 0) || (value === "")) {
             uncheckAllRadio();
-            $('#span_error_txt_topamount').html(CONFIG_LANG['error.topup.number.greater']);
-            $('#span_error_txt_topamount').show();
-            // if (checkIsdnEmpty()) {
-            //     $('#txt_phonenumber').focus();
-            // }
+            // $('#span_error_txt_topamount').html(CONFIG_LANG['error.topup.number.greater']);
         }
         return (/^\d*$/.test(value) && (parseInt(value) > 0)) || (value === "");
     });
     setInputFilter(document.getElementById("account_emoney"), function (value) {
         if ((!/^\d*$/.test(value) && parseInt(value) > 0) || (value === "")) {
-            uncheckAllRadio();
+            var paymentMethod = $('input[name=paymentMethod]:checked').val();
             $('#account_emoney').focus();
-            $('#span_error_account_emoney').html(CONFIG_LANG['error.account.emoney.invalid']);
+            if (paymentMethod === CONFIG.emoney) {
+                $('#span_error_account_emoney').html(CONFIG_LANG['error.account.emoney.notnull']);
+            }
+            if (paymentMethod === CONFIG.wing) {
+                $('#span_error_account_emoney').html(CONFIG_LANG['error.account.wing.notnull']);
+            }
             $('#span_error_account_emoney').show();
-            window.scrollTo(0, 800);
+            window.scrollTo(0, 1300);
         }
         return (/^\d*$/.test(value) && (parseInt(value) > 0)) || (value === "");
     });
@@ -1487,7 +1497,7 @@ function onloadPaymentCyber() {
                 $('#txt_phonenumber').focus();
             }
         }
-        return /^\d*$/.test(value);
+        // return /^\d*$/.test(value);
     });
 
     setInputFilter(document.getElementById("ccvNumber"), function (value) {

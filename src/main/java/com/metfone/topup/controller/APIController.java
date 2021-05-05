@@ -25,12 +25,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.imageio.ImageIO;
@@ -46,6 +46,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Random;
@@ -234,7 +235,6 @@ public class APIController {
     }
 
 
-
     @RequestMapping(value = "/createTransAba",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -274,12 +274,12 @@ public class APIController {
         if (mobileDeposit.getPaymentMethod() != null && !mobileDeposit.getPaymentMethod().isEmpty()) {
             paymentTopup.setPaymentMethod(mobileDeposit.getPaymentMethod());
         }
-        if (mobileDeposit.getAccountEmoney() !=null && !mobileDeposit.getAccountEmoney().isEmpty()) {
+        if (mobileDeposit.getAccountEmoney() != null && !mobileDeposit.getAccountEmoney().isEmpty()) {
             paymentTopup.setAccountEmoney(mobileDeposit.getAccountEmoney());
         }
 
-        if(paymentTopup.getRefillIsdn() != null) {
-            if(!paymentTopup.getRefillIsdn().startsWith("071") &&
+        if (paymentTopup.getRefillIsdn() != null) {
+            if (!paymentTopup.getRefillIsdn().startsWith("071") &&
                     !paymentTopup.getRefillIsdn().startsWith("097") &&
                     !paymentTopup.getRefillIsdn().startsWith("088") &&
                     !paymentTopup.getRefillIsdn().startsWith("068") &&
@@ -296,7 +296,7 @@ public class APIController {
                     !paymentTopup.getRefillIsdn().startsWith("67") &&
                     !paymentTopup.getRefillIsdn().startsWith("60") &&
                     !paymentTopup.getRefillIsdn().startsWith("31") &&
-                    !paymentTopup.getRefillIsdn().startsWith("66")){
+                    !paymentTopup.getRefillIsdn().startsWith("66")) {
                 responseJson.setError_field(ErrorFieldEnum.ISDN_FIELD);
                 responseJson.setError_description(utilHelper.convertErrorCodeToString("error.isdn.system"));
                 responseJson.setStatus(false);
@@ -316,7 +316,7 @@ public class APIController {
                     LocaleContextHolder.getLocaleContext().getLocale()));
             responseJson.setStatus(false);
             return responseJson;
-        }else {
+        } else {
             if (paymentTopup.getPaymentMethod() != null) {
                 String cardType = "";
                 switch (paymentTopup.getPaymentMethod()) {
@@ -359,16 +359,16 @@ public class APIController {
                     Cookie cookie = new Cookie("transIdAba", cyberCardPaymentResponse.getTxnid());
                     cookie.setPath("/" + SOURCE_PATH);
                     response.addCookie(cookie);
-                    try{
+                    try {
                         cyberCardPaymentResponse.setAmt_string(String.format("%.2f", cyberCardPaymentResponse.getAmt()));
-                    }catch(Exception e){
+                    } catch (Exception e) {
 
                     }
 
                     cyberCardPaymentResponse.setStatus(true);
                     return cyberCardPaymentResponse;
                 }
-            }else {
+            } else {
                 responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                 responseJson.setError_description(messageSource.getMessage("error.payment.type", null,
                         LocaleContextHolder.getLocaleContext().getLocale()));
@@ -421,12 +421,12 @@ public class APIController {
         if (mobileDeposit.getPaymentMethod() != null && !mobileDeposit.getPaymentMethod().isEmpty()) {
             paymentTopup.setPaymentMethod(mobileDeposit.getPaymentMethod());
         }
-        if (mobileDeposit.getAccountEmoney() !=null && !mobileDeposit.getAccountEmoney().isEmpty()) {
+        if (mobileDeposit.getAccountEmoney() != null && !mobileDeposit.getAccountEmoney().isEmpty()) {
             paymentTopup.setAccountEmoney(mobileDeposit.getAccountEmoney());
         }
 
-        if(paymentTopup.getRefillIsdn() != null) {
-            if(!paymentTopup.getRefillIsdn().startsWith("071") &&
+        if (paymentTopup.getRefillIsdn() != null) {
+            if (!paymentTopup.getRefillIsdn().startsWith("071") &&
                     !paymentTopup.getRefillIsdn().startsWith("097") &&
                     !paymentTopup.getRefillIsdn().startsWith("088") &&
                     !paymentTopup.getRefillIsdn().startsWith("068") &&
@@ -443,7 +443,7 @@ public class APIController {
                     !paymentTopup.getRefillIsdn().startsWith("67") &&
                     !paymentTopup.getRefillIsdn().startsWith("60") &&
                     !paymentTopup.getRefillIsdn().startsWith("31") &&
-                    !paymentTopup.getRefillIsdn().startsWith("66")){
+                    !paymentTopup.getRefillIsdn().startsWith("66")) {
                 responseJson.setError_field(ErrorFieldEnum.ISDN_FIELD);
                 responseJson.setError_description(utilHelper.convertErrorCodeToString("error.isdn.system"));
                 responseJson.setStatus(false);
@@ -463,7 +463,7 @@ public class APIController {
                     LocaleContextHolder.getLocaleContext().getLocale()));
             responseJson.setStatus(false);
             return responseJson;
-        }else {
+        } else {
             if (paymentTopup.getPaymentMethod() != null) {
                 String cardType = CyberCardTypeEnum.ACLEDA.value;
 
@@ -493,9 +493,9 @@ public class APIController {
                     Cookie cookie = new Cookie("transIdAcleda", acledaPaymentResponse.getTxnid());
                     cookie.setPath("/" + SOURCE_PATH);
                     response.addCookie(cookie);
-                    try{
+                    try {
                         acledaPaymentResponse.setAmt_string(String.format("%.2f", acledaPaymentResponse.getAmt()));
-                    }catch(Exception e){
+                    } catch (Exception e) {
                         System.out.println(dtf.format(now) + " : Exception format amt createAcleda transaction: " +
                                 acledaPaymentResponse.toString());
                     }
@@ -503,7 +503,7 @@ public class APIController {
                     acledaPaymentResponse.setStatus(true);
                     return acledaPaymentResponse;
                 }
-            }else {
+            } else {
                 responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                 responseJson.setError_description(messageSource.getMessage("error.payment.type", null,
                         LocaleContextHolder.getLocaleContext().getLocale()));
@@ -656,17 +656,16 @@ public class APIController {
                             "&tnxid=" + utilHelper.encodeValue(cyberCardPaymentResponse.getTxnid()) + "&amtString=" +
                             utilHelper.encodeValue(cyberCardPaymentResponse.getAmt_string()) + "&firstName=" +
                             utilHelper.encodeValue(cyberCardPaymentResponse.getFirstname()) + "&lastName=" +
-                            utilHelper.encodeValue(cyberCardPaymentResponse.getLastname()) + "&phone="+
+                            utilHelper.encodeValue(cyberCardPaymentResponse.getLastname()) + "&phone=" +
                             utilHelper.encodeValue(cyberCardPaymentResponse.getPhone()) + "&email=" +
                             utilHelper.encodeValue(cyberCardPaymentResponse.getEmail()) + "&urlABA=" +
-                            utilHelper.encodeValue(cyberCardPaymentResponse.getUrlABA()) + "&paymentType=" +  utilHelper.encodeValue(cardTypeResp);
+                            utilHelper.encodeValue(cyberCardPaymentResponse.getUrlABA()) + "&paymentType=" + utilHelper.encodeValue(cardTypeResp);
                     System.out.println(dtf.format(now) + " : Log urlForMobile cybercardpayment " + urlForMobile);
                     responseJson.setRedirectUrl(urlForMobile);
                     responseJson.setStatus(true);
                     return responseJson;
                 }
-            }
-            else if(paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.UNION)){
+            } else if (paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.UNION)) {
                 UnionPaymentResponse unionPaymentResponse = unionPaymentService.initPayment(Transformer.transform(paymentTopup, strDate));
                 System.out.println("unionPaymentResponse : " + unionPaymentResponse.toString());
                 if (unionPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
@@ -688,7 +687,7 @@ public class APIController {
                     responseJson.setRedirectUrl(unionPaymentResponse.getRedirectUrl());
                     return responseJson;
                 }
-            }else if(paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.ALIPAY)){
+            } else if (paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.ALIPAY)) {
 
                 AlipayPaymentResponse alipayPaymentResponse = aliPaymentService.initPayment(Transformer.transform(paymentTopup, strDate));
                 System.out.println("alipayPaymentResponse : " + alipayPaymentResponse.toString());
@@ -712,12 +711,12 @@ public class APIController {
                     return responseJson;
                 }
 
-            }else if(paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.EMONEY)){
+            } else if (paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.EMONEY)) {
                 EmoneyPaymentResponse eMoneyPaymentResponse = eMoneyPaymentService.initPayment(Transformer.transformEmoney(paymentTopup, strDate));
                 if (eMoneyPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
                         .equalsIgnoreCase(eMoneyPaymentResponse.getResponseCode())) {
-                    if(eMoneyPaymentResponse.getResponseMessage() != null){
-                        if(eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_COMMON")
+                    if (eMoneyPaymentResponse.getResponseMessage() != null) {
+                        if (eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_COMMON")
                                 || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MISSING_PARAMETERS")
                                 || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_EMONEY_ACCOUNT_INVALID")
                                 || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_MERCHANT_NOT_FOUND")
@@ -727,18 +726,18 @@ public class APIController {
                                 || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_TX_PAYMENT_TOKEN_ID_INVALID")
                                 || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_INVOICE_NOT_FOUND")
                                 || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_INVOICE_ALREADY_PAID_OR_CANCELLED")
-                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_PHONE_NUMBER_INVALID")){
+                                || eMoneyPaymentResponse.getResponseMessage().equalsIgnoreCase("ERR_PHONE_NUMBER_INVALID")) {
                             responseJson.setError_field(ErrorFieldEnum.EMONEY_FIELD);
                             responseJson.setError_description(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                             responseJson.setStatus(false);
                             return responseJson;
-                        }else{
+                        } else {
                             responseJson.setError_field(ErrorFieldEnum.EMONEY_FIELD);
                             responseJson.setError_description(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                             responseJson.setStatus(false);
                             return responseJson;
                         }
-                    }else{
+                    } else {
                         responseJson.setError_field(ErrorFieldEnum.EMONEY_FIELD);
                         responseJson.setError_description(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                         responseJson.setStatus(false);
@@ -757,22 +756,22 @@ public class APIController {
                     responseJson.setRedirectUrl(eMoneyPaymentResponse.getRedirectUrl());
                     return responseJson;
                 }
-            }else if(paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.WECHAT)){
+            } else if (paymentTopup.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.WECHAT)) {
                 WechatPaymentResponse wechatPaymentResponse = wechatPaymentService.initPayment(Transformer.transform(paymentTopup, strDate));
                 wechatPaymentResponse.setIsdn(paymentTopup.getRefillIsdn());
-                if(wechatPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
-                        .equalsIgnoreCase(wechatPaymentResponse.getResponseCode())){
+                if (wechatPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
+                        .equalsIgnoreCase(wechatPaymentResponse.getResponseCode())) {
                     responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
                     return responseJson;
                 }
-                if(wechatPaymentResponse.getRespcode()!= null && !ResponseCodeEnum.TRANSACTION_PENDING.value
-                        .equalsIgnoreCase(wechatPaymentResponse.getRespcode())){
+                if (wechatPaymentResponse.getRespcode() != null && !ResponseCodeEnum.TRANSACTION_PENDING.value
+                        .equalsIgnoreCase(wechatPaymentResponse.getRespcode())) {
                     responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
-                }else{
+                } else {
                     String urlForMobile = URL_API_MOBILE + "/transWechatMobile?isdn=" + utilHelper.encodeValue(wechatPaymentResponse.getIsdn()) +
                             "&payCode=" + utilHelper.encodeValue(wechatPaymentResponse.getPayCode()) + "&nttrefid=" +
                             utilHelper.encodeValue(wechatPaymentResponse.getNttrefid()) + "&txnid=" +
@@ -782,7 +781,7 @@ public class APIController {
                     responseJson.setStatus(true);
                 }
                 return responseJson;
-            } else{
+            } else {
                 responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                 responseJson.setError_description(messageSource.getMessage("error.payment.type", null,
                         LocaleContextHolder.getLocaleContext().getLocale()));
@@ -797,5 +796,20 @@ public class APIController {
             responseJson.setStatus(false);
             return responseJson;
         }
+    }
+
+    @RequestMapping(value = "/paymentWing",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String sendRest(HttpServletRequest request) {
+        RestTemplate rest = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+//        headers.set("Referer", request.getRequestURL().toString());
+        headers.set("Referer", "http://103.27.237.84:8686/");
+        HttpEntity<String> entity = new HttpEntity<String>("{\"username\":\"online.metfone\",\"rest_api_key\":\"afde53a3f27ae00637f508766463cd90e68e6d6d5ec20a202e94c52824f66aed\",\"bill_till_rbtn\":\"0\",\"bill_till_number\":\"5201\",\"sandbox\":\"1\",\"return_url\":\"url/test\",\"remark\":\"test\",\"amount\":10}", headers);
+        return rest.exchange("https://stageonline.wingmoney.com/wingonlinesdk/", HttpMethod.POST, entity, String.class).getBody();
     }
 }

@@ -107,7 +107,7 @@ public class PaymentController {
                         model.addAttribute("errorPaymentType",
                                 utilHelper.convertErrorCodeToString(cyberCardPaymentResponse.getRespcode()));
                         return new ModelAndView("payment", model);
-                    }else {
+                    } else {
                         System.out.println("Log payment ABA " + cyberCardPaymentResponse.toString());
                         model.addAttribute("hash", cyberCardPaymentResponse.getHash());
                         model.addAttribute("tran_id", cyberCardPaymentResponse.getTxnid());
@@ -122,8 +122,8 @@ public class PaymentController {
                     }
                 case PaymentTypeEnum.ALIPAY:
                     AlipayPaymentResponse alipayPaymentResponse = aliPaymentService.initPayment(Transformer.transform(paymentTopup, strDate));
-                    if(alipayPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
-                        .equalsIgnoreCase(alipayPaymentResponse.getResponseCode())){
+                    if (alipayPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
+                            .equalsIgnoreCase(alipayPaymentResponse.getResponseCode())) {
                         model.addAttribute("paymentTopup", paymentTopup);
                         model.addAttribute("errorPaymentType",
                                 utilHelper.convertErrorCodeToString(alipayPaymentResponse.getRespcode()));
@@ -135,13 +135,13 @@ public class PaymentController {
                         model.addAttribute("errorPaymentType",
                                 utilHelper.convertErrorCodeToString(alipayPaymentResponse.getRespcode()));
                         return new ModelAndView("payment", model);
-                    }else {
+                    } else {
                         return new ModelAndView(aliPaymentService.setupPayment(alipayPaymentResponse));
                     }
                 case PaymentTypeEnum.UNION:
                     UnionPaymentResponse unionPaymentResponse = unionPaymentService.initPayment(Transformer.transform(paymentTopup, strDate));
-                    if(unionPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
-                            .equalsIgnoreCase(unionPaymentResponse.getResponseCode())){
+                    if (unionPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
+                            .equalsIgnoreCase(unionPaymentResponse.getResponseCode())) {
                         model.addAttribute("paymentTopup", paymentTopup);
                         model.addAttribute("errorPaymentType",
                                 utilHelper.convertErrorCodeToString(unionPaymentResponse.getRespcode()));
@@ -153,27 +153,27 @@ public class PaymentController {
                         model.addAttribute("errorPaymentType",
                                 utilHelper.convertErrorCodeToString(unionPaymentResponse.getRespcode()));
                         return new ModelAndView("payment", model);
-                    }else {
+                    } else {
                         return new ModelAndView(unionPaymentService.setupPayment(unionPaymentResponse));
                     }
 
                 case PaymentTypeEnum.WECHAT:
                     WechatPaymentResponse wechatPaymentResponse = wechatPaymentService.initPayment(Transformer.transform(paymentTopup, strDate));
                     wechatPaymentResponse.setIsdn(paymentTopup.getRefillIsdn());
-                    if(wechatPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
-                            .equalsIgnoreCase(wechatPaymentResponse.getResponseCode())){
+                    if (wechatPaymentResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
+                            .equalsIgnoreCase(wechatPaymentResponse.getResponseCode())) {
                         model.addAttribute("paymentTopup", paymentTopup);
                         model.addAttribute("errorPaymentType",
                                 utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
                         return new ModelAndView("payment", model);
                     }
-                    if(wechatPaymentResponse.getRespcode()!= null && !ResponseCodeEnum.TRANSACTION_PENDING.value
-                            .equalsIgnoreCase(wechatPaymentResponse.getRespcode())){
+                    if (wechatPaymentResponse.getRespcode() != null && !ResponseCodeEnum.TRANSACTION_PENDING.value
+                            .equalsIgnoreCase(wechatPaymentResponse.getRespcode())) {
                         model.addAttribute("paymentTopup", paymentTopup);
                         model.addAttribute("errorPaymentType",
                                 utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
                         return new ModelAndView("payment", model);
-                    }else{
+                    } else {
                         return new ModelAndView("wechat_payment", wechatPaymentService.setupPayment(wechatPaymentResponse));
                     }
 
@@ -199,11 +199,11 @@ public class PaymentController {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
 
-        if(payment.getRespdesc() == null) {
+        if (payment.getRespdesc() == null) {
             payment.setRespdesc("error.isdn.system");
         }
 
-        if("error.isdn.system".equalsIgnoreCase(payment.getRespdesc()) || "error.payment.timeout".equalsIgnoreCase(payment.getRespdesc())){
+        if ("error.isdn.system".equalsIgnoreCase(payment.getRespdesc()) || "error.payment.timeout".equalsIgnoreCase(payment.getRespdesc())) {
             payment.setRespdesc(utilHelper.convertErrorCodeToString(payment.getRespdesc()));
         }
 
@@ -211,9 +211,9 @@ public class PaymentController {
         modelMap.addAttribute("payee", payment.getUdf2());
         modelMap.addAttribute("subtotal", payment.getUdf1());
         modelMap.addAttribute("subscriber", payment.getUdf3());
-        try{
+        try {
             modelMap.addAttribute("total", Double.valueOf(payment.getAmt()) / 100);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(dtf.format(now) + " : Exception parse Total value: " + payment.getAmt() + ", invoice: " + payment.getNttrefid());
             modelMap.addAttribute("total", 0);
         }
@@ -223,10 +223,10 @@ public class PaymentController {
 
         final SimpleDateFormat DATE_TIME_FORMAT_1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         final SimpleDateFormat DATE_TIME_FORMAT_2 = new SimpleDateFormat("dd/MM/YYYY hh:mm:ss a");
-        try{
+        try {
             Date tnxDate = DATE_TIME_FORMAT_1.parse(payment.getUdf4());
             modelMap.addAttribute("txnDate", DATE_TIME_FORMAT_2.format(tnxDate));
-        }catch(Exception e) {
+        } catch (Exception e) {
 
             System.out.println(dtf.format(now) + " : Exception parse txnDate value: " + payment.getAmt() + ", invoice: " + payment.getNttrefid());
             modelMap.addAttribute("txnDate", "");
