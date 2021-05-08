@@ -11,4 +11,5 @@ public class PaymentTypeEnum {
     public static final String WECHAT = "Wechat";
     public static final String EMONEY = "eMoney";
     public static final String ACLEDA = "Acleda";
+    public static final String WING = "Wing";
 }
