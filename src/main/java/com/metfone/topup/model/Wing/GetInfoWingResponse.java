@@ -20,4 +20,5 @@ public class GetInfoWingResponse {
     private String returnUrl;
     private String URL_WS_Wing;
     private float amount;
+    private String requetsID;
 }

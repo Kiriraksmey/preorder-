@@ -70,6 +70,8 @@
     <span style="display: none;" id="return_url" th:text="${return_url}"/>
     <span style="display: none;" id="bill_till_rbtn" th:text="${bill_till_rbtn}"/>
     <span style="display: none;" id="bill_till_number" th:text="${bill_till_number}"/>
+    <span style="display: none;" id="remark" th:text="${remark}"/>
+    <span style="display: none;" id="is_inquiry" th:text="${is_inquiry}"/>
 
     <script>
 
@@ -118,6 +120,18 @@
             input.type = 'hidden';
             input.name = 'bill_till_number';
             input.value = $('#bill_till_number').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'remark';
+            input.value = $('#remark').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'is_inquiry';
+            input.value = $('#is_inquiry').text();
             form.appendChild(input);
 
             form.submit();

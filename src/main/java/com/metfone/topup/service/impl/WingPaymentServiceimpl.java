@@ -60,6 +60,8 @@ public class WingPaymentServiceimpl implements IPaymentService<PaymentRequestEmo
         model.addAttribute("bill_till_number", payment.getBill_till_number());
         model.addAttribute("urlWing", payment.getURL_WS_Wing());
         model.addAttribute("username", payment.getUsername());
+        model.addAttribute("remark", payment.getRemark());
+        model.addAttribute("is_inquiry", payment.getIs_inquiry());
 
         return model;
     }

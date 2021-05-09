@@ -798,6 +798,7 @@ public class APIController {
         }
     }
 
+    //test
     @RequestMapping(value = "/paymentWing",
             method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_VALUE,
@@ -807,9 +808,22 @@ public class APIController {
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
         headers.setContentType(MediaType.APPLICATION_JSON);
-//        headers.set("Referer", request.getRequestURL().toString());
         headers.set("Referer", "http://103.27.237.84:8686/");
-        HttpEntity<String> entity = new HttpEntity<String>("{\"username\":\"online.metfone\",\"rest_api_key\":\"afde53a3f27ae00637f508766463cd90e68e6d6d5ec20a202e94c52824f66aed\",\"bill_till_rbtn\":\"0\",\"bill_till_number\":\"5201\",\"sandbox\":\"1\",\"return_url\":\"url/test\",\"remark\":\"test\",\"amount\":10}", headers);
+        HttpEntity<String> entity = new HttpEntity<String>("{\"username\":\"online.metfone\",\"rest_api_key\":\"afde53a3f27ae00637f508766463cd90e68e6d6d5ec20a202e94c52824f66aed\",\"bill_till_rbtn\":\"0\",\"bill_till_number\":\"5201\",\"sandbox\":\"1\",\"return_url\":\"http://localhost:8080\",\"is_inquiry\":\"1\",\"remark\":\"test978\",\"amount\":10}", headers);
         return rest.exchange("https://stageonline.wingmoney.com/wingonlinesdk/", HttpMethod.POST, entity, String.class).getBody();
+    }
+
+    @RequestMapping(value = "/paymentWing/inquiry",
+            method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public String sendRestInquiry(HttpServletRequest request) {
+        RestTemplate rest = new RestTemplate();
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("Referer", "http://103.27.237.84:8686/");
+        HttpEntity<String> entity = new HttpEntity<String>("{\"username\":\"online.metfone\",\"rest_api_key\":\"afde53a3f27ae00637f508766463cd90e68e6d6d5ec20a202e94c52824f66aed\",\"sandbox\":\"1\",\"remark\":\"202105082331027\"}", headers);
+        return rest.exchange("https://stageonline.wingmoney.com/wingonlinesdk/inquiry", HttpMethod.POST, entity, String.class).getBody();
     }
 }
