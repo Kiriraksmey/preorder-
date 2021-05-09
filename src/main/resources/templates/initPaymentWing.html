@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <style>
+        .overlay {
+            z-index: 10000;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: 0.5;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid #ec1c23;
+            border-radius: 50%;
+            animation: spin 2s linear infinite;
+            z-index: 10001;
+            position: fixed;
+            top: 40%;
+            left: 50%;
+            width: 90px;
+            height: 90px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @media only screen and (min-width: 992px) {
+            #loader {
+                left: 50%;
+            }
+        }
+
+        @media only screen and (max-width: 991px) {
+            #loader {
+                left: 40%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container" layout:fragment="content">
+    <div class="overlay" id="overlay">
+        <div class="loader" id="loader"></div>
+    </div>
+    <div class="amount-deposit box-content">
+    </div>
+    <span style="display: none;" id="urlWing" th:text="${urlWing}"/>
+    <span style="display: none;" id="sandbox" th:text="${sandbox}"/>
+    <span style="display: none;" id="amount" th:text="${amount}"/>
+    <span style="display: none;" id="username" th:text="${username}"/>
+    <span style="display: none;" id="rest_api_key" th:text="${rest_api_key}"/>
+    <span style="display: none;" id="return_url" th:text="${return_url}"/>
+    <span style="display: none;" id="bill_till_rbtn" th:text="${bill_till_rbtn}"/>
+    <span style="display: none;" id="bill_till_number" th:text="${bill_till_number}"/>
+    <span style="display: none;" id="remark" th:text="${remark}"/>
+    <span style="display: none;" id="is_inquiry" th:text="${is_inquiry}"/>
+
+    <script>
+
+        $(document).ready(function () {
+            var form = document.createElement('form');
+            document.body.appendChild(form);
+            form.method = 'post';
+            form.action = $('#urlWing').text();
+
+            var input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'sandbox';
+            input.value = $('#sandbox').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'amount';
+            input.value = $('#amount').text();
+            form.appendChild(input);
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'username';
+            input.value = $('#username').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'rest_api_key';
+            input.value = $('#rest_api_key').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'return_url';
+            input.value = $('#return_url').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'bill_till_rbtn';
+            input.value = $('#bill_till_rbtn').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'bill_till_number';
+            input.value = $('#bill_till_number').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'remark';
+            input.value = $('#remark').text();
+            form.appendChild(input);
+
+            input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'is_inquiry';
+            input.value = $('#is_inquiry').text();
+            form.appendChild(input);
+
+            form.submit();
+        });
+    </script>
+</div>
+</body>
+</html>

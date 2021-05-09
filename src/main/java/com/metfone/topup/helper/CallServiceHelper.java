@@ -47,12 +47,15 @@ public class CallServiceHelper {
     @Value("${service.getinfo.customer}")
     private String PATH_GETINFO_CUSTOMER;
 
+    @Value("${service.callBack.wing}")
+    private String PATH_CallBack_Wing;
+
     public CheckIsdnResponse checkIsdn(CheckIsdn checkIsdn) {
         CheckIsdnResponse result = new CheckIsdnResponse();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
         System.out.println(dtf.format(now) + " : Check isdn request to " + URL_SERVICE + PATH_CHECK_ISDN + " : " + checkIsdn.toString());
-        try{
+        try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -61,7 +64,7 @@ public class CallServiceHelper {
                     = restTemplate.postForEntity(URL_SERVICE + PATH_CHECK_ISDN, requestBody, CheckIsdnResponse.class);
             result = response.getBody();
             return result;
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println(dtf.format(now) + " : Exception get list payment: " + ex.getMessage());
             result.setResponseCode("01");
             result.setResponseMessage("Server internal error. Please try again later!");
@@ -71,7 +74,7 @@ public class CallServiceHelper {
 
     public GetInfoCustomerResponse getInfoCustomer(GetInfoCustomerRequest getInfoCustomerRequest) {
         GetInfoCustomerResponse result = new GetInfoCustomerResponse();
-        try{
+        try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -80,7 +83,7 @@ public class CallServiceHelper {
                     = restTemplate.postForEntity(URL_SERVICE + PATH_GETINFO_CUSTOMER, requestBody, GetInfoCustomerResponse.class);
             result = response.getBody();
             return result;
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             result.setResponseCode("01");
             result.setResponseMessage("Server internal error. Please try again later!");
             return result;
@@ -91,7 +94,7 @@ public class CallServiceHelper {
         GetListPaymentResponse result = new GetListPaymentResponse();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        try{
+        try {
             GetListPaymentRequest request = new GetListPaymentRequest();
             request.setIp(ip);
             RestTemplate restTemplate = new RestTemplate();
@@ -103,7 +106,7 @@ public class CallServiceHelper {
                     = restTemplate.postForEntity(URL_SERVICE + PATH_GET_LIST_PAYMENT, requestBody, GetListPaymentResponse.class);
             result = response.getBody();
             return result;
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println(dtf.format(now) + " : Exception get list payment: " + ex.getMessage());
             result.setResponseCode("01");
             result.setResponseMessage("Server internal error. Please try again later!");
@@ -115,11 +118,11 @@ public class CallServiceHelper {
         WechatCheckResponse wechatCheckResponse = new WechatCheckResponse();
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
         LocalDateTime now = LocalDateTime.now();
-        if(qrScanCheck.getCardType() == null || qrScanCheck.getCardType().isEmpty()){
+        if (qrScanCheck.getCardType() == null || qrScanCheck.getCardType().isEmpty()) {
             qrScanCheck.setCardType("");
         }
         System.out.println(dtf.format(now) + " : Log payment " + qrScanCheck.toString());
-        try{
+        try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -128,12 +131,12 @@ public class CallServiceHelper {
                     = restTemplate.postForEntity(URL_SERVICE + PATH_QR_SCAN_CHECK, requestBody, WechatCheckResponse.class);
             wechatCheckResponse = response.getBody();
 
-            if(qrScanCheck.getTxnid()== null){
+            if (qrScanCheck.getTxnid() == null) {
                 System.out.println(dtf.format(now) + " : Log payment check TransID is null!");
             }
             System.out.println(dtf.format(now) + " : Log payment " + wechatCheckResponse.toString());
             return wechatCheckResponse;
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             System.out.println(dtf.format(now) + " : Exception check Transaction " + ex.getMessage());
             wechatCheckResponse.setRespcode("99");
             wechatCheckResponse.setRespdesc("Server internal error. Please try again later!");
@@ -194,6 +197,28 @@ public class CallServiceHelper {
         ResponseEntity<Object> response
                 = restTemplate.postForEntity(URL_SERVICE + PATH_CALLBACK_ACLEDA, requestBody, Object.class);
         System.out.println("Response OK");
+    }
+
+    public ResponseCallbackNTT callbacktWing(RequestCallbackNTT request) {
+        ResponseCallbackNTT responseWing = new ResponseCallbackNTT();
+        try {
+            RestTemplate restTemplate = new RestTemplate();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            System.out.println(dtf.format(now) + " : Request callback wing to backend: " + request.toString());
+            HttpEntity<RequestCallbackNTT> requestBody = new HttpEntity<>(request, headers);
+            ResponseEntity<ResponseCallbackNTT> response
+                    = restTemplate.postForEntity(URL_SERVICE + PATH_CallBack_Wing, requestBody, ResponseCallbackNTT.class);
+            responseWing = response.getBody();
+            return responseWing;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            responseWing.setResponseCode("01");
+            responseWing.setResponseMessage("error.system");
+        }
+        return responseWing;
     }
 
 }

@@ -1,15 +1,14 @@
 var CONFIG = {
-    //'url': 'http://localhost:8080',
-    // 'url' : 'http://192.168.0.126:8080',
+    // 'url': 'http://localhost:8080',
+    // 'url' :  'http://192.168.0.126:8080',
     //'url' : 'https://pay.metfone.com.kh/metfone-topup',
     // 'url' : 'https://pay.metfone.com.kh',
     // 'url' : 'http://123.31.38.148:8856/metfone-topup',
     // 'url' : 'http://metfone.kabarplus.online/metfone-topup/',
     // 'url' : 'https://pay.metfone.com.kh',
-    'url': 'http://localhost:8080/',
-    'time_wait_aba': 15
-
-    ,
+    // 'url': 'http://103.27.237.84:8585/',
+    'url': 'http://103.27.237.84:8555/metfone-topup-portal_war',
+    'time_wait_aba': 15,
     'total_time_aba': 90,
     'total_time_acleda': 90,
     'total_time_aba_pay': 120,

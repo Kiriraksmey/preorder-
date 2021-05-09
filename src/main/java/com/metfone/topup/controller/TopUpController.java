@@ -4,10 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.metfone.topup.helper.CallServiceHelper;
 import com.metfone.topup.helper.Transformer;
 import com.metfone.topup.helper.UtilHelper;
-import com.metfone.topup.model.MobileDeposit;
-import com.metfone.topup.model.PaymentTopup;
-import com.metfone.topup.model.RequestCallbackAcleda;
-import com.metfone.topup.model.ResponseCallbackNTT;
+import com.metfone.topup.model.*;
+import com.metfone.topup.model.Wing.GetInfoWingResponse;
 import com.metfone.topup.model.alipay.AlipayPaymentResponse;
 import com.metfone.topup.model.cybercard.CyberCardPaymentResponse;
 import com.metfone.topup.model.cybercard.PaymentRequestCyber;
@@ -16,7 +14,6 @@ import com.metfone.topup.model.emoney.GetInfoCustomerRequest;
 import com.metfone.topup.model.emoney.GetInfoCustomerResponse;
 import com.metfone.topup.model.emoney.ReturnDataEmoney;
 import com.metfone.topup.model.payment.CyberCardTypeEnum;
-import com.metfone.topup.model.payment.NTTPaymentResponse;
 import com.metfone.topup.model.payment.PaymentTypeEnum;
 import com.metfone.topup.model.payment.ResponseCodeEnum;
 import com.metfone.topup.model.union.UnionPaymentResponse;
@@ -26,9 +23,9 @@ import com.metfone.topup.service.impl.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.context.annotation.Scope;
 import org.springframework.context.i18n.LocaleContextHolder;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.repository.query.Param;
+import org.springframework.http.*;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,13 +33,11 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -84,6 +79,9 @@ public class TopUpController {
     @Autowired
     UtilHelper utilHelper;
 
+    @Autowired
+    WingPaymentServiceimpl wingPaymentService;
+
     @GetMapping("/")
     public String greeting(Model model, HttpServletRequest request, HttpServletResponse response) {
         model.addAttribute("mobileDeposit", new MobileDeposit());
@@ -98,7 +96,6 @@ public class TopUpController {
                                 @CookieValue(value = "paymentType") @Nullable String paymentType,
                                 @CookieValue(value = "accountEmoney") @Nullable String accountEmoney,
                                 ModelMap model) {
-
         if (phoneNumber == null || phoneNumber.isEmpty() ||
                 topupAmount == null || topupAmount.isEmpty() ||
                 paymentAmount == null || paymentAmount.isEmpty()) {
@@ -153,7 +150,7 @@ public class TopUpController {
             return new ModelAndView("index", model);
         }
         if (mobileDeposit.getPaymentAmount() > 0) {
-                paymentTopup.setRefillAmount(mobileDeposit.getPaymentAmount());
+            paymentTopup.setRefillAmount(mobileDeposit.getPaymentAmount());
         }
         if (mobileDeposit.getPhoneNumber() != null && !mobileDeposit.getPhoneNumber().isEmpty()) {
             paymentTopup.setRefillIsdn(mobileDeposit.getPhoneNumber());
@@ -362,7 +359,24 @@ public class TopUpController {
                             return new ModelAndView("wechat_payment", wechatPaymentService.setupPayment(wechatPaymentResponse));
                         }
 
-
+                    case PaymentTypeEnum.WING:
+                        GetInfoWingResponse getInfoWingResponse = wingPaymentService.initPayment(Transformer.transformEmoney(paymentTopup, strDate));
+                        if (getInfoWingResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
+                                .equalsIgnoreCase(getInfoWingResponse.getResponseCode())) {
+                            mobileDeposit.setCaptcha("");
+                            model.addAttribute("mobileDeposit", mobileDeposit);
+                            model.addAttribute("errorPhoneNumber",
+                                    utilHelper.convertErrorCodeToString(getInfoWingResponse.getResponseMessage()));
+                            return new ModelAndView("index", model);
+                        } else {
+                            Cookie cookie = new Cookie("invoiceID", getInfoWingResponse.getRemark());
+                            cookie.setPath("/" + SOURCE_PATH);
+                            response.addCookie(cookie);
+                            cookie = new Cookie("requetsID", getInfoWingResponse.getRequetsID());
+                            cookie.setPath("/" + SOURCE_PATH);
+                            response.addCookie(cookie);
+                            return new ModelAndView("initPaymentWing", wingPaymentService.setupPayment(getInfoWingResponse));
+                        }
                     default:
                         model.addAttribute("mobileDeposit", new MobileDeposit());
                         return new ModelAndView("index", model);
@@ -506,4 +520,62 @@ public class TopUpController {
         return "wechat_payment";
     }
 
+
+    @RequestMapping(value = "/resultWing",
+            method = RequestMethod.GET)
+    public String resultWing(@Param("status") @Nullable String status,
+                             @CookieValue(value = "phoneNumber") @Nullable String phoneNumber,
+                             @CookieValue(value = "topupAmount") @Nullable String topupAmount,
+                             @CookieValue(value = "paymentAmount") @Nullable String paymentAmount,
+                             @CookieValue(value = "paymentType") @Nullable String paymentType,
+                             @CookieValue(value = "invoiceID") @Nullable String invoiceID,
+                             @CookieValue(value = "requetsID") @Nullable String requetsID,
+                             ModelMap model) {
+        if (status.equals("success")) {
+            RequestCallbackNTT requets = new RequestCallbackNTT();
+            requets.setNttrefid(invoiceID);
+            requets.setTxnid(requetsID);
+            requets.setAmt(paymentAmount);
+            ResponseCallbackNTT response = callServiceHelper.callbacktWing(requets);
+            if (response.getResponseCode().equals("00")) {
+                return "redirect:/payment_success";
+            }
+        }
+        return "redirect:/payment_fail";
+
+    }
+
+    @RequestMapping(value = "/payment_success",
+            method = RequestMethod.GET)
+    public String resultWingSucces(
+            @CookieValue(value = "phoneNumber") @Nullable String phoneNumber,
+            @CookieValue(value = "topupAmount") @Nullable String topupAmount,
+            @CookieValue(value = "paymentAmount") @Nullable String paymentAmount,
+            @CookieValue(value = "invoiceID") @Nullable String invoiceID,
+            ModelMap model) {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+
+        model.addAttribute("txnDate", format.format(date));
+        model.addAttribute("subscriber", phoneNumber);
+        model.addAttribute("total", paymentAmount);
+        model.addAttribute("subtotal", topupAmount);
+        model.addAttribute("invoiceID", invoiceID);
+
+        return "payment_success";
+    }
+
+    @RequestMapping(value = "/payment_fail",
+            method = RequestMethod.GET)
+    public String paymentFail(@Param("status") @Nullable String status,
+                              @CookieValue(value = "invoiceID") @Nullable String invoiceID,
+                              @CookieValue(value = "topupAmount") @Nullable String topupAmount,
+                              @CookieValue(value = "paymentAmount") @Nullable String paymentAmount,
+                              ModelMap model) {
+        model.addAttribute("total", paymentAmount);
+        model.addAttribute("subtotal", topupAmount);
+        model.addAttribute("invoiceID", invoiceID);
+
+        return "payment_fail";
+    }
 }
