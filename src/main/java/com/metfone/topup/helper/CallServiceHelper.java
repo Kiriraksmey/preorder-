@@ -1,6 +1,7 @@
 package com.metfone.topup.helper;
 
 import com.metfone.topup.model.*;
+import com.metfone.topup.model.Wing.ResponseCallbackWing;
 import com.metfone.topup.model.emoney.GetInfoCustomerRequest;
 import com.metfone.topup.model.emoney.GetInfoCustomerResponse;
 import com.metfone.topup.model.topup.GetListPaymentRequest;
@@ -199,8 +200,8 @@ public class CallServiceHelper {
         System.out.println("Response OK");
     }
 
-    public ResponseCallbackNTT callbacktWing(RequestCallbackNTT request) {
-        ResponseCallbackNTT responseWing = new ResponseCallbackNTT();
+    public ResponseCallbackWing callbacktWing(RequestCallbackNTT request) {
+        ResponseCallbackWing responseWing = new ResponseCallbackWing();
         try {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
@@ -209,8 +210,8 @@ public class CallServiceHelper {
             LocalDateTime now = LocalDateTime.now();
             System.out.println(dtf.format(now) + " : Request callback wing to backend: " + request.toString());
             HttpEntity<RequestCallbackNTT> requestBody = new HttpEntity<>(request, headers);
-            ResponseEntity<ResponseCallbackNTT> response
-                    = restTemplate.postForEntity(URL_SERVICE + PATH_CallBack_Wing, requestBody, ResponseCallbackNTT.class);
+            ResponseEntity<ResponseCallbackWing> response
+                    = restTemplate.postForEntity(URL_SERVICE + PATH_CallBack_Wing, requestBody, ResponseCallbackWing.class);
             responseWing = response.getBody();
             return responseWing;
         } catch (Exception ex) {

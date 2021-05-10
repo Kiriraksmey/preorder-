@@ -6,6 +6,7 @@ import com.metfone.topup.helper.Transformer;
 import com.metfone.topup.helper.UtilHelper;
 import com.metfone.topup.model.*;
 import com.metfone.topup.model.Wing.GetInfoWingResponse;
+import com.metfone.topup.model.Wing.ResponseCallbackWing;
 import com.metfone.topup.model.alipay.AlipayPaymentResponse;
 import com.metfone.topup.model.cybercard.CyberCardPaymentResponse;
 import com.metfone.topup.model.cybercard.PaymentRequestCyber;
@@ -530,14 +531,17 @@ public class TopUpController {
                              @CookieValue(value = "paymentType") @Nullable String paymentType,
                              @CookieValue(value = "invoiceID") @Nullable String invoiceID,
                              @CookieValue(value = "requetsID") @Nullable String requetsID,
-                             ModelMap model) {
+                             ModelMap model, HttpServletResponse httpServletResponse) {
         if (status.equals("success")) {
             RequestCallbackNTT requets = new RequestCallbackNTT();
             requets.setNttrefid(invoiceID);
             requets.setTxnid(requetsID);
             requets.setAmt(paymentAmount);
-            ResponseCallbackNTT response = callServiceHelper.callbacktWing(requets);
+            ResponseCallbackWing response = callServiceHelper.callbacktWing(requets);
             if (response.getResponseCode().equals("00")) {
+                Cookie cookie = new Cookie("payee", response.getCustomerName());
+                cookie.setPath(SOURCE_PATH);
+                httpServletResponse.addCookie(cookie);
                 return "redirect:/payment_success";
             }
         }
@@ -552,15 +556,19 @@ public class TopUpController {
             @CookieValue(value = "topupAmount") @Nullable String topupAmount,
             @CookieValue(value = "paymentAmount") @Nullable String paymentAmount,
             @CookieValue(value = "invoiceID") @Nullable String invoiceID,
+            @CookieValue(value = "payee") @Nullable String payee,
             ModelMap model) {
         Date date = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-
+        final SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY hh:mm:ss a");
         model.addAttribute("txnDate", format.format(date));
         model.addAttribute("subscriber", phoneNumber);
-        model.addAttribute("total", paymentAmount);
-        model.addAttribute("subtotal", topupAmount);
+        model.addAttribute("total", Double.valueOf(paymentAmount));
+        model.addAttribute("subtotal", Double.valueOf(topupAmount));
         model.addAttribute("invoiceID", invoiceID);
+        model.addAttribute("curr", "USD");
+        if (payee != null) {
+            model.addAttribute("payee", payee);
+        }
 
         return "payment_success";
     }
@@ -572,9 +580,10 @@ public class TopUpController {
                               @CookieValue(value = "topupAmount") @Nullable String topupAmount,
                               @CookieValue(value = "paymentAmount") @Nullable String paymentAmount,
                               ModelMap model) {
-        model.addAttribute("total", paymentAmount);
-        model.addAttribute("subtotal", topupAmount);
+        model.addAttribute("total", Double.valueOf(paymentAmount));
+        model.addAttribute("subtotal", Double.valueOf(topupAmount));
         model.addAttribute("invoiceID", invoiceID);
+        model.addAttribute("curr", "USD");
 
         return "payment_fail";
     }
