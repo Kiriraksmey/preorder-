@@ -1266,7 +1266,8 @@ function checkISDNPayment() {
     var paymentMethod = $('input[name=paymentMethod]:checked').val();
 
     //Xử lý tiếp chỗ này cho emoney
-    if ((paymentMethod && paymentMethod === CONFIG.emoney) || (paymentMethod && paymentMethod === CONFIG.wing)) {
+    // if ((paymentMethod && paymentMethod === CONFIG.emoney) || (paymentMethod && paymentMethod === CONFIG.wing)) {
+    if (paymentMethod && paymentMethod === CONFIG.emoney) {
         $('#div_AccountEmoney').show();
     } else {
         $('#div_AccountEmoney').hide();
@@ -1275,15 +1276,15 @@ function checkISDNPayment() {
     if (paymentMethod === CONFIG.emoney) {
         $('#account_emoney').val(isdn.substring(1, isdn.length));
         document.getElementById("labelEmoney").style.display = "grid";
-        document.getElementById("labelWing").style.display = "none";
+        // document.getElementById("labelWing").style.display = "none";
         $("#account_emoney").attr("placeholder", CONFIG_LANG['enter_account_emoney']);
     }
-    if (paymentMethod === CONFIG.wing) {
-        $('#account_emoney').val(isdn.substring(1, isdn.length));
-        document.getElementById("labelEmoney").style.display = "none";
-        document.getElementById("labelWing").style.display = "grid";
-        $("#account_emoney").attr("placeholder", CONFIG_LANG['enter_account_wing']);
-    }
+    // if (paymentMethod === CONFIG.wing) {
+    //     $('#account_emoney').val(isdn.substring(1, isdn.length));
+    //     document.getElementById("labelEmoney").style.display = "none";
+    //     document.getElementById("labelWing").style.display = "grid";
+    //     $("#account_emoney").attr("placeholder", CONFIG_LANG['enter_account_wing']);
+    // }
 
     callCheckIsdnServicePayment(isdn, topupAmout, paymentMethod);
 }
@@ -1467,9 +1468,9 @@ function onloadIndex() {
             if (paymentMethod === CONFIG.emoney) {
                 $('#span_error_account_emoney').html(CONFIG_LANG['error.account.emoney.notnull']);
             }
-            if (paymentMethod === CONFIG.wing) {
-                $('#span_error_account_emoney').html(CONFIG_LANG['error.account.wing.notnull']);
-            }
+            // if (paymentMethod === CONFIG.wing) {
+            //     $('#span_error_account_emoney').html(CONFIG_LANG['error.account.wing.notnull']);
+            // }
             $('#span_error_account_emoney').show();
             window.scrollTo(0, 1300);
         }
