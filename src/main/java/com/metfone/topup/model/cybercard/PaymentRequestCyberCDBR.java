@@ -16,7 +16,6 @@ public class PaymentRequestCyberCDBR implements Serializable {
     private Double topupAmount;
     private String cardType;
     private String ftthAccount;
-    private String idBill;
     private Double paymentAmount;
     private String channelType;// alipay
     private String accountEmoney;

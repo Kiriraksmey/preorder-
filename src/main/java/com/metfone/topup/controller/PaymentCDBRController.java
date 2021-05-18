@@ -107,13 +107,6 @@ public class PaymentCDBRController {
             responseJson.setStatus(false);
             return responseJson;
         }
-        if (mobileDeposit.getIdBill() != null && !mobileDeposit.getIdBill().isEmpty()) {
-            paymentRequest.setIdBill(mobileDeposit.getIdBill());
-        } else {
-            responseJson.setError_description("error.idBill.invalid");
-            responseJson.setStatus(false);
-            return responseJson;
-        }
         if (mobileDeposit.getFtthAccount() != null && !mobileDeposit.getFtthAccount().isEmpty()) {
             paymentRequest.setFtthAccount(mobileDeposit.getFtthAccount());
         } else {
