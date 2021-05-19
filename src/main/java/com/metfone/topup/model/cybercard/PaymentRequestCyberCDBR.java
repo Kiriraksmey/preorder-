@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class PaymentRequestCyberCDBR implements Serializable {
     private String isdn;
-    private Double topupAmount;
+    private Double totalAmount;
     private String cardType;
     private String ftthAccount;
     private Double paymentAmount;

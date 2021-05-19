@@ -70,12 +70,14 @@ public class PaymentCDBRController {
         DateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmsss");
         String strDate = dateFormat.format(date);
         CyberCardpaymentResponseMobile responseJson = new CyberCardpaymentResponseMobile();
-        if (mobileDeposit.getTopupAmount() != null && !mobileDeposit.getTopupAmount().isEmpty()
+        if (mobileDeposit.getTotalAmount() != null && !mobileDeposit.getTotalAmount().isEmpty()
         ) {
-            paymentRequest.setTopupAmount(Double.parseDouble(mobileDeposit.getTopupAmount()));
+            paymentRequest.setTotalAmount(Double.parseDouble(mobileDeposit.getTotalAmount()));
         } else {
-            responseJson.setError_description("error.amount.invalid");
+            responseJson.setError_description("error.totalAmount.invalid");
             responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.totalAmount.invalid");
             return responseJson;
         }
         if (mobileDeposit.getPaymentAmount() != null && !mobileDeposit.getPaymentAmount().isEmpty()
@@ -84,6 +86,8 @@ public class PaymentCDBRController {
         } else {
             responseJson.setError_description("error.payment.amount.invalid");
             responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.payment.amount.invalid");
             return responseJson;
         }
         if (mobileDeposit.getPhoneNumber() != null && !mobileDeposit.getPhoneNumber().isEmpty()) {
@@ -91,6 +95,8 @@ public class PaymentCDBRController {
         } else {
             responseJson.setError_description("error.phoneNumber.invalid");
             responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.phoneNumber.invalid");
             return responseJson;
         }
         if (mobileDeposit.getFtthName() != null && !mobileDeposit.getFtthName().isEmpty()) {
@@ -98,6 +104,8 @@ public class PaymentCDBRController {
         } else {
             responseJson.setError_description("error.ftthName.invalid");
             responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.ftthName.invalid");
             return responseJson;
         }
         if (mobileDeposit.getPaymentMethod() != null && !mobileDeposit.getPaymentMethod().isEmpty()) {
@@ -105,6 +113,8 @@ public class PaymentCDBRController {
         } else {
             responseJson.setError_description("error.paymentMethod.invalid");
             responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.paymentMethod.invalid");
             return responseJson;
         }
         if (mobileDeposit.getFtthAccount() != null && !mobileDeposit.getFtthAccount().isEmpty()) {
@@ -112,6 +122,8 @@ public class PaymentCDBRController {
         } else {
             responseJson.setError_description("error.ftthAccount.invalid");
             responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.ftthAccount.invalid");
             return responseJson;
         }
         if (mobileDeposit.getAccountEmoney() != null && !mobileDeposit.getAccountEmoney().isEmpty()) {
@@ -122,6 +134,8 @@ public class PaymentCDBRController {
         } else {
             responseJson.setError_description("error.ftthType.invalid");
             responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.ftthType.invalid");
             return responseJson;
         }
 
@@ -160,6 +174,8 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.ISDN_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(cyberCardPaymentResponse.getResponseMessage()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(cyberCardPaymentResponse.getResponseMessage()));
                     return responseJson;
 
                 }
@@ -168,12 +184,16 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(cyberCardPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(cyberCardPaymentResponse.getRespcode()));
                     return responseJson;
                 } else {
                     Cookie cookie = new Cookie("transIdAba", cyberCardPaymentResponse.getTxnid());
                     cookie.setPath("/" + SOURCE_PATH);
                     response.addCookie(cookie);
                     responseJson.setStatus(true);
+                    responseJson.setResponseMessage(cyberCardPaymentResponse.getResponseMessage());
+                    responseJson.setResponseCode(cyberCardPaymentResponse.getResponseCode());
 
                     try {
                         cyberCardPaymentResponse.setAmt_string(String.format("%.2f", cyberCardPaymentResponse.getAmt()));
@@ -201,6 +221,8 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.ISDN_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(unionPaymentResponse.getResponseMessage()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(unionPaymentResponse.getResponseMessage()));
                     return responseJson;
                 }
                 if (unionPaymentResponse.getRespcode() != null && !ResponseCodeEnum.TRANSACTION_PENDING.value
@@ -208,8 +230,12 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.ISDN_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(unionPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(unionPaymentResponse.getRespcode()));
                     return responseJson;
                 } else {
+                    responseJson.setResponseMessage(unionPaymentResponse.getResponseMessage());
+                    responseJson.setResponseCode(unionPaymentResponse.getResponseCode());
                     responseJson.setStatus(true);
                     System.out.println(dtf.format(now) + " : Log union payment " + unionPaymentResponse.toString());
                     responseJson.setRedirectUrl(unionPaymentResponse.getRedirectUrl());
@@ -224,6 +250,8 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.ISDN_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(alipayPaymentResponse.getResponseMessage()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(alipayPaymentResponse.getResponseMessage()));
                     return responseJson;
                 }
                 if (alipayPaymentResponse.getRespcode() != null && !ResponseCodeEnum.TRANSACTION_PENDING.value
@@ -231,8 +259,12 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(alipayPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(alipayPaymentResponse.getRespcode()));
                     return responseJson;
                 } else {
+                    responseJson.setResponseMessage(alipayPaymentResponse.getResponseMessage());
+                    responseJson.setResponseCode(alipayPaymentResponse.getResponseCode());
                     responseJson.setStatus(true);
                     System.out.println(dtf.format(now) + " : Log alipay payment " + alipayPaymentResponse.toString());
                     responseJson.setRedirectUrl(alipayPaymentResponse.getRedirectUrl());
@@ -258,17 +290,23 @@ public class PaymentCDBRController {
                             responseJson.setError_field(ErrorFieldEnum.EMONEY_FIELD);
                             responseJson.setError_description(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                             responseJson.setStatus(false);
+                            responseJson.setResponseCode("01");
+                            responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                             return responseJson;
                         } else {
                             responseJson.setError_field(ErrorFieldEnum.EMONEY_FIELD);
                             responseJson.setError_description(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                             responseJson.setStatus(false);
+                            responseJson.setResponseCode("01");
+                            responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                             return responseJson;
                         }
                     } else {
                         responseJson.setError_field(ErrorFieldEnum.EMONEY_FIELD);
                         responseJson.setError_description(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                         responseJson.setStatus(false);
+                        responseJson.setResponseCode("01");
+                        responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getResponseMessage()));
                         return responseJson;
                     }
                 }
@@ -277,10 +315,14 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.EMONEY_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(eMoneyPaymentResponse.getRespcode()));
                     return responseJson;
                 } else {
                     System.out.println(dtf.format(now) + " : Log emoney payment " + eMoneyPaymentResponse.toString());
                     responseJson.setStatus(true);
+                    responseJson.setResponseMessage(eMoneyPaymentResponse.getResponseMessage());
+                    responseJson.setResponseCode(eMoneyPaymentResponse.getResponseCode());
                     responseJson.setRedirectUrl(eMoneyPaymentResponse.getRedirectUrl());
                     return responseJson;
                 }
@@ -293,12 +335,16 @@ public class PaymentCDBRController {
                     responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
                     return responseJson;
                 }
                 if (wechatPaymentResponse.getRespcode() != null && !ResponseCodeEnum.TRANSACTION_PENDING.value
                         .equalsIgnoreCase(wechatPaymentResponse.getRespcode())) {
                     responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                     responseJson.setError_description(utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(wechatPaymentResponse.getRespcode()));
                     responseJson.setStatus(false);
                 } else {
                     String urlForMobile = URL_API_MOBILE + "/transWechatMobile?isdn=" + utilHelper.encodeValue(wechatPaymentResponse.getIsdn()) +
@@ -306,11 +352,16 @@ public class PaymentCDBRController {
                             utilHelper.encodeValue(wechatPaymentResponse.getNttrefid()) + "&txnid=" +
                             utilHelper.encodeValue(wechatPaymentResponse.getTxnid());
                     System.out.println(dtf.format(now) + " : Log urlForMobile WechatPay " + urlForMobile);
+                    responseJson.setResponseMessage(wechatPaymentResponse.getResponseMessage());
+                    responseJson.setResponseCode(wechatPaymentResponse.getResponseCode());
                     responseJson.setRedirectUrl(urlForMobile);
                     responseJson.setStatus(true);
                 }
                 return responseJson;
             } else {
+                responseJson.setResponseCode("01");
+                responseJson.setResponseMessage(messageSource.getMessage("error.payment.type", null,
+                        LocaleContextHolder.getLocaleContext().getLocale()));
                 responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
                 responseJson.setError_description(messageSource.getMessage("error.payment.type", null,
                         LocaleContextHolder.getLocaleContext().getLocale()));

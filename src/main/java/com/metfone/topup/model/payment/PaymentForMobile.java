@@ -13,7 +13,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 public class PaymentForMobile implements Serializable {
     private String phoneNumber;
-    private String topupAmount;
+    private String totalAmount;
     private String paymentMethod;
     private String accountEmoney;
     private String ftthAccount;
