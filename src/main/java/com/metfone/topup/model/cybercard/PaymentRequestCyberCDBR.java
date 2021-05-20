@@ -22,6 +22,6 @@ public class PaymentRequestCyberCDBR implements Serializable {
     private String paymentMethod;
     private String ftthType;
     private String ftthName;
-
+    private String contractIdInfo;
 
 }

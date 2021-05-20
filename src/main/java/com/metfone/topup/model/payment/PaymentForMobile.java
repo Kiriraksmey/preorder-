@@ -20,4 +20,5 @@ public class PaymentForMobile implements Serializable {
     private String paymentAmount;
     private String ftthType;
     private String ftthName;
+    private String contractIdInfo;
 }

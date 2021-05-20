@@ -138,6 +138,15 @@ public class PaymentCDBRController {
             responseJson.setResponseMessage("error.ftthType.invalid");
             return responseJson;
         }
+        if (mobileDeposit.getContractIdInfo() != null && !mobileDeposit.getContractIdInfo().isEmpty()) {
+            paymentRequest.setContractIdInfo(mobileDeposit.getContractIdInfo());
+        } else {
+            responseJson.setError_description("error.contractIdInfo.invalid");
+            responseJson.setStatus(false);
+            responseJson.setResponseCode("01");
+            responseJson.setResponseMessage("error.contractIdInfo.invalid");
+            return responseJson;
+        }
 
         if (paymentRequest.getPaymentMethod() != null) {
             if (paymentRequest.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.MASTERCARD) ||

@@ -547,6 +547,7 @@ public class TopUpController {
                 }
                 Cookie cookie = new Cookie("wingAccountName", name);
                 cookie.setPath(SOURCE_PATH);
+                httpServletResponse.addCookie(cookie);
                 cookie = new Cookie("wingAccountNo", response.getWingAccountNo());
                 cookie.setPath(SOURCE_PATH);
                 httpServletResponse.addCookie(cookie);
@@ -564,7 +565,7 @@ public class TopUpController {
             @CookieValue(value = "topupAmount") @Nullable String topupAmount,
             @CookieValue(value = "paymentAmount") @Nullable String paymentAmount,
             @CookieValue(value = "invoiceID") @Nullable String invoiceID,
-            @CookieValue(value = "payee") @Nullable String wingAccountName,
+            @CookieValue(value = "wingAccountName") @Nullable String wingAccountName,
             @CookieValue(value = "wingAccountNo") @Nullable String wingAccountNo,
             ModelMap model) {
         Date date = new Date();
