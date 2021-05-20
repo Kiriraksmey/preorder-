@@ -255,4 +255,24 @@ public class PaymentController {
         return "receipt";
     }
 
+    @RequestMapping(
+            value = "/print-receiptWing",
+            method = RequestMethod.GET
+    )
+    public String printWing(@RequestParam(name = "date") String date,
+                            @RequestParam(name = "orderId") String orderId,
+                            @RequestParam(name = "subtotal") String subtotal,
+                            @RequestParam(name = "total") String total,
+                            @RequestParam(name = "wingAccountNo") String wingAccountNo,
+                            @RequestParam(name = "wingAccountName") String wingAccountName,
+                            Model model) {
+        model.addAttribute("date", date);
+        model.addAttribute("wingAccountNo", wingAccountNo);
+        model.addAttribute("wingAccountName", wingAccountName);
+        model.addAttribute("orderId", orderId);
+        model.addAttribute("subtotal", subtotal);
+        model.addAttribute("total", total);
+        return "receipt_wing";
+    }
+
 }

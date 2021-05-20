@@ -539,7 +539,15 @@ public class TopUpController {
             requets.setAmt(paymentAmount);
             ResponseCallbackWing response = callServiceHelper.callbacktWing(requets);
             if (response.getResponseCode().equals("00")) {
-                Cookie cookie = new Cookie("payee", response.getCustomerName());
+                String name = "";
+                if (response.getCustomerName() != null && response.getCustomerName().length() <= 3) {
+                    name = "****" + response.getCustomerName();
+                } else {
+                    name = "****" + response.getCustomerName().substring(response.getCustomerName().length() - 3);
+                }
+                Cookie cookie = new Cookie("wingAccountName", name);
+                cookie.setPath(SOURCE_PATH);
+                cookie = new Cookie("wingAccountNo", response.getWingAccountNo());
                 cookie.setPath(SOURCE_PATH);
                 httpServletResponse.addCookie(cookie);
                 return "redirect:/payment_success";
@@ -556,7 +564,8 @@ public class TopUpController {
             @CookieValue(value = "topupAmount") @Nullable String topupAmount,
             @CookieValue(value = "paymentAmount") @Nullable String paymentAmount,
             @CookieValue(value = "invoiceID") @Nullable String invoiceID,
-            @CookieValue(value = "payee") @Nullable String payee,
+            @CookieValue(value = "payee") @Nullable String wingAccountName,
+            @CookieValue(value = "wingAccountNo") @Nullable String wingAccountNo,
             ModelMap model) {
         Date date = new Date();
         final SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY hh:mm:ss a");
@@ -566,11 +575,12 @@ public class TopUpController {
         model.addAttribute("subtotal", Double.valueOf(topupAmount));
         model.addAttribute("invoiceID", invoiceID);
         model.addAttribute("curr", "USD");
-        if (payee != null) {
-            model.addAttribute("payee", payee);
+        model.addAttribute("wingAccountName", wingAccountName);
+        if (wingAccountNo != null) {
+            model.addAttribute("wingAccountNo", wingAccountNo);
         }
 
-        return "payment_success";
+        return "payment_success_wing";
     }
 
     @RequestMapping(value = "/payment_fail",

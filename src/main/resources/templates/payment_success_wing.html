@@ -1,0 +1,124 @@
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}">
+<head>
+    <title>Home Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+</head>
+<body>
+
+<div class="container" layout:fragment="content">
+    <div class="box-verified box-content">
+        <div class="form-verified">
+            <form>
+                <div class="box-title">
+                    <div class="icon-verified"><img src="images/verified.png"></div>
+                    <h3 th:text="#{page.four.heading}"></h3>
+                    <h2 th:text="${payee}"></h2>
+                    <p class="desc" th:text="#{page.four.successMgs}"></p>
+                </div>
+                <div class="box-info">
+                    <div class="logo"><img width="170" src="images/logo_sub.svg"></div>
+                    <div class="address" th:text="#{page.four.address}"></div>
+                    <div class="tel">
+                        <label th:text="#{page.four.tel}"></label>
+                        <span class="phone"><a style="color: #000000"
+                                               href="tel:+855979097097">(+855) 979097097</a></span>
+                    </div>
+                    <div class="hotline">
+                        <label th:text="#{page.four.hotline}"></label>
+                        <a style="color: #000000; font-family: 'DINRoundOT-Medium'"
+                           th:href="@{'tel:' + #{hotline.number}}" th:text="#{hotline.number}"></a>
+                    </div>
+                    <div class="date text-center">
+                        <label th:text="#{page.four.date}"
+                               style="color: #000000; font-family: 'DINRoundOT-Medium'"> </label> <span id="paymentDate"
+                                                                                                        th:text="${txnDate}"
+                                                                                                        style="color: #000000">
+									</span>
+                    </div>
+                    <div class="wp-elcontrol">
+                        <div class="el-control">
+                            <label th:text="#{wingAccountNo}"></label>
+                            <span id="wingAccountNo" class="codeid" th:text="${wingAccountNo}"></span>
+                        </div>
+                        <div class="el-control">
+                            <label th:text="#{wingAccountName}"></label>
+                            <span id="wingAccountName" class="codeid" th:text="${wingAccountName}"></span>
+                        </div>
+                        <div class="el-control">
+                            <label th:text="#{orderId}"></label>
+                            <span id="orderId" class="codeid" th:text="${invoiceID}"></span>
+                        </div>
+
+                        <div class="el-control">
+                            <label th:text="#{subscriber}"></label>
+                            <span id="subscriber" class="codeid" th:text="${subscriber}"></span>
+                        </div>
+                        <div class="el-control">
+                            <label th:text="#{subtotal}"></label>
+                            <span class="price"><span id="subtotal" th:text="${subtotal}"
+                                                      style="color: red"></span> <span th:text="${curr}"
+                                                                                       style="color: red"></span></span>
+                        </div>
+                        <div class="el-control">
+                            <label th:text="#{total}"></label>
+                            <span class="price"><span id="total" th:text="${total}" style="color: red"></span> <span
+                                    th:text="${curr}" style="color: red"></span></span>
+                        </div>
+                    </div>
+                    <div class="wp-btnprint">
+                        <a id="print-info" class="btnPrint">
+                            <img src="images/icon-print.png">
+                            <span th:text="#{labelPrint}"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="inp-button">
+                    <a href="javascript:redirectHomepage();" class="btn-submit" id="btnsubmit"
+                       th:text="#{labelContinueShopping}"></a>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script>
+
+
+        $(document).ready(function () {
+            var date = $("#paymentDate").text();
+            var orderId = $("#orderId").text();
+            var subtotal = $("#subtotal").text();
+            var wingAccountNo = $("#wingAccountNo").text();
+            var wingAccountName = $("#wingAccountName").text();
+            var total = $("#total").text();
+            var url = CONFIG.url + "/print-receiptWing?date=" + date + "&orderId=" + orderId + "&subtotal=" + subtotal + "&total=" + total + "&wingAccountNo=" + wingAccountNo + "&wingAccountName=" + wingAccountName;
+            $(".btnPrint").printPage({
+                url: encodeURI(url),
+                attr: "href",
+                message: "Your document is being created"
+            });
+        });
+
+        function callbackPayment(status) {
+            var message = {
+                status: status
+            };
+            console.log('status ' + status);
+            try {
+                // ios
+                window.webkit.messageHandlers.callbackPayment.postMessage(status);
+            } catch (e) {
+                console.log('err ' + e);
+            }
+            try {
+                // android
+                Android.callbackPayment(status);
+            } catch (e) {
+                console.log('err ' + e);
+            }
+        }
+
+        window.onload = callbackPayment(0);
+    </script>
+</div>
+</body>
+</html>
