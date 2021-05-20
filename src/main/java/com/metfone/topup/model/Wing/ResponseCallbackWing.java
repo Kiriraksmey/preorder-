@@ -16,5 +16,7 @@ public class ResponseCallbackWing {
     private String customerName;
     private String currencytype;
     private String wingAccountNo;
+    private String transactionIdWing;
+    private String billerName;
 
 }

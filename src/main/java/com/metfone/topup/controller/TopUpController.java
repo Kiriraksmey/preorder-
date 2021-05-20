@@ -551,6 +551,12 @@ public class TopUpController {
                 cookie = new Cookie("wingAccountNo", response.getWingAccountNo());
                 cookie.setPath(SOURCE_PATH);
                 httpServletResponse.addCookie(cookie);
+                cookie = new Cookie("transactionIdWing", response.getTransactionIdWing());
+                cookie.setPath(SOURCE_PATH);
+                httpServletResponse.addCookie(cookie);
+                cookie = new Cookie("billerName", response.getBillerName());
+                cookie.setPath(SOURCE_PATH);
+                httpServletResponse.addCookie(cookie);
                 return "redirect:/payment_success";
             }
         }
@@ -567,6 +573,8 @@ public class TopUpController {
             @CookieValue(value = "invoiceID") @Nullable String invoiceID,
             @CookieValue(value = "wingAccountName") @Nullable String wingAccountName,
             @CookieValue(value = "wingAccountNo") @Nullable String wingAccountNo,
+            @CookieValue(value = "transactionIdWing") @Nullable String transactionIdWing,
+            @CookieValue(value = "billerName") @Nullable String billerName,
             ModelMap model) {
         Date date = new Date();
         final SimpleDateFormat format = new SimpleDateFormat("dd/MM/YYYY hh:mm:ss a");
@@ -577,9 +585,9 @@ public class TopUpController {
         model.addAttribute("invoiceID", invoiceID);
         model.addAttribute("curr", "USD");
         model.addAttribute("wingAccountName", wingAccountName);
-        if (wingAccountNo != null) {
-            model.addAttribute("wingAccountNo", wingAccountNo);
-        }
+        model.addAttribute("transactionIdWing", transactionIdWing);
+        model.addAttribute("billerName", billerName);
+        model.addAttribute("wingAccountNo", wingAccountNo);
 
         return "payment_success_wing";
     }

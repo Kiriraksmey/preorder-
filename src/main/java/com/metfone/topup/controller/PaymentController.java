@@ -265,6 +265,8 @@ public class PaymentController {
                             @RequestParam(name = "total") String total,
                             @RequestParam(name = "wingAccountNo") String wingAccountNo,
                             @RequestParam(name = "wingAccountName") String wingAccountName,
+                            @RequestParam(name = "transactionIdWing") String transactionIdWing,
+                            @RequestParam(name = "billerName") String billerName,
                             Model model) {
         model.addAttribute("date", date);
         model.addAttribute("wingAccountNo", wingAccountNo);
@@ -272,6 +274,8 @@ public class PaymentController {
         model.addAttribute("orderId", orderId);
         model.addAttribute("subtotal", subtotal);
         model.addAttribute("total", total);
+        model.addAttribute("transactionIdWing", transactionIdWing);
+        model.addAttribute("billerName", billerName);
         return "receipt_wing";
     }
 

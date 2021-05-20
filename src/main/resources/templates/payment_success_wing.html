@@ -46,6 +46,15 @@
                             <span id="wingAccountName" class="codeid" th:text="${wingAccountName}"></span>
                         </div>
                         <div class="el-control">
+                            <label th:text="#{billerName}"></label>
+                            <span id="billerName" class="codeid" th:text="${billerName}"></span>
+                        </div>
+                        <div class="el-control">
+                            <label th:text="#{transactionIdWing}"></label>
+                            <span id="transactionIdWing" class="codeid" th:text="${transactionIdWing}"></span>
+                        </div>
+
+                        <div class="el-control">
                             <label th:text="#{orderId}"></label>
                             <span id="orderId" class="codeid" th:text="${invoiceID}"></span>
                         </div>
@@ -89,8 +98,10 @@
             var subtotal = $("#subtotal").text();
             var wingAccountNo = $("#wingAccountNo").text();
             var wingAccountName = $("#wingAccountName").text();
+            var transactionIdWing = $("#transactionIdWing").text();
+            var billerName = $("#billerName").text();
             var total = $("#total").text();
-            var url = CONFIG.url + "/print-receiptWing?date=" + date + "&orderId=" + orderId + "&subtotal=" + subtotal + "&total=" + total + "&wingAccountNo=" + wingAccountNo + "&wingAccountName=" + wingAccountName;
+            var url = CONFIG.url + "/print-receiptWing?date=" + date + "&orderId=" + orderId + "&subtotal=" + subtotal + "&total=" + total + "&wingAccountNo=" + wingAccountNo + "&wingAccountName=" + wingAccountName  +"&transactionIdWing=" + transactionIdWing + "&billerName=" + billerName;
             $(".btnPrint").printPage({
                 url: encodeURI(url),
                 attr: "href",
