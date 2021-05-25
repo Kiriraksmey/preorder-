@@ -1,6 +1,7 @@
 package com.metfone.topup.controller;
 
 import com.metfone.topup.helper.UtilHelper;
+import com.metfone.topup.model.Wing.GetInfoWingResponse;
 import com.metfone.topup.model.alipay.AlipayPaymentResponse;
 import com.metfone.topup.model.cybercard.CyberCardPaymentResponse;
 import com.metfone.topup.model.cybercard.CyberCardpaymentResponseMobile;
@@ -15,10 +16,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +40,8 @@ public class PaymentCDBRController {
     UnionPaymentServiceImplCDBR unionPaymentServiceImplCDBR;
     @Autowired
     WechatPaymentServiceImplCDBR wechatPaymentServiceImplCDBR;
+    @Autowired
+    WingPaymentServiceimplCDBR wingPaymentServiceimplCDBR;
 
     @Autowired
     MessageSource messageSource;
@@ -172,6 +172,12 @@ public class PaymentCDBRController {
                         cardType = CyberCardTypeEnum.ABAPAY.value;
                         cardTypeResp = "abapay";
                         break;
+                    default:
+                        responseJson.setError_description("error.paymentMethod.invalid");
+                        responseJson.setStatus(false);
+                        responseJson.setResponseCode("01");
+                        responseJson.setResponseMessage("error.paymentMethod.invalid");
+                        return responseJson;
                 }
                 paymentRequest.setCardType(cardType);
                 CyberCardPaymentResponse cyberCardPaymentResponse = cyberPaymentServiceCDBR.initPayment(paymentRequest);
@@ -363,6 +369,36 @@ public class PaymentCDBRController {
                     System.out.println(dtf.format(now) + " : Log urlForMobile WechatPay " + urlForMobile);
                     responseJson.setResponseMessage(wechatPaymentResponse.getResponseMessage());
                     responseJson.setResponseCode(wechatPaymentResponse.getResponseCode());
+                    responseJson.setRedirectUrl(urlForMobile);
+                    responseJson.setStatus(true);
+                }
+                return responseJson;
+            } else if (paymentRequest.getPaymentMethod().equalsIgnoreCase(PaymentTypeEnum.WING)) {
+
+                GetInfoWingResponse getInfoWingResponse = wingPaymentServiceimplCDBR.initPayment(paymentRequest);
+                if (getInfoWingResponse.getResponseCode() == null || !ResponseCodeEnum.TRANSACTION_COMPLETED.value
+                        .equalsIgnoreCase(getInfoWingResponse.getResponseCode())) {
+                    responseJson.setError_field(ErrorFieldEnum.PAYMENT_METHOD_FIELD);
+                    responseJson.setError_description(utilHelper.convertErrorCodeToString(getInfoWingResponse.getResponseCode()));
+                    responseJson.setStatus(false);
+                    responseJson.setResponseCode("01");
+                    responseJson.setResponseMessage(utilHelper.convertErrorCodeToString(getInfoWingResponse.getResponseCode()));
+                    return responseJson;
+                } else {
+                    String urlForMobile = URL_API_MOBILE + "/transWingMobile?" +
+                            "sandbox=" + utilHelper.encodeValue(getInfoWingResponse.getSandbox()) +
+                            "&amount=" + utilHelper.encodeValue(String.valueOf(getInfoWingResponse.getAmount())) +
+                            "&restApiKey=" + utilHelper.encodeValue(getInfoWingResponse.getRest_api_key()) +
+                            "&returnUrl=" + utilHelper.encodeValue(getInfoWingResponse.getReturnUrl()) +
+                            "&billTillRbtn=" + utilHelper.encodeValue(getInfoWingResponse.getBill_till_rbtn()) +
+                            "&billTillNumber=" + utilHelper.encodeValue(getInfoWingResponse.getBill_till_number()) +
+                            "&urlWing=" + utilHelper.encodeValue(getInfoWingResponse.getURL_WS_Wing()) +
+                            "&username=" + utilHelper.encodeValue(getInfoWingResponse.getUsername()) +
+                            "&remark=" + utilHelper.encodeValue(getInfoWingResponse.getRemark()) +
+                            "&isInquiry=" + utilHelper.encodeValue(getInfoWingResponse.getIs_inquiry());
+                    System.out.println(dtf.format(now) + " : Log urlForMobile Wing " + urlForMobile);
+                    responseJson.setResponseMessage(getInfoWingResponse.getResponseMessage());
+                    responseJson.setResponseCode(getInfoWingResponse.getResponseCode());
                     responseJson.setRedirectUrl(urlForMobile);
                     responseJson.setStatus(true);
                 }

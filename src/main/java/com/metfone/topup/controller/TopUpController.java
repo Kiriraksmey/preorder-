@@ -521,6 +521,29 @@ public class TopUpController {
         return "wechat_payment";
     }
 
+    @RequestMapping(value = "/transWingMobile",
+            method = RequestMethod.GET)
+    public String transWingMobile(Model model,
+                                  @RequestParam String sandbox, @RequestParam String amount,
+                                  @RequestParam String restApiKey, @RequestParam String returnUrl,
+                                  @RequestParam String billTillRbtn, @RequestParam String billTillNumber,
+                                  @RequestParam String urlWing, @RequestParam String username,
+                                  @RequestParam String remark, @RequestParam String isInquiry) {
+
+        model.addAttribute("sandbox", sandbox);
+        model.addAttribute("amount", amount);
+        model.addAttribute("rest_api_key", restApiKey);
+        model.addAttribute("return_url", returnUrl);
+        model.addAttribute("bill_till_rbtn", billTillRbtn);
+        model.addAttribute("bill_till_number", billTillNumber);
+        model.addAttribute("urlWing", urlWing);
+        model.addAttribute("username", username);
+        model.addAttribute("remark", remark);
+        model.addAttribute("is_inquiry", isInquiry);
+
+        return "initPaymentWing";
+    }
+
 
     @RequestMapping(value = "/resultWing",
             method = RequestMethod.GET)
