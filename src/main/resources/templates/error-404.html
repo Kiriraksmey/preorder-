@@ -1,13 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <title>Web Payment</title>
-
     <!-- Google font -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
 
@@ -139,5 +136,15 @@
 </div>
 
 </body>
-
+<script th:inline="javascript">
+    var LANGUAGE = [[#{locale.language}]];
+    console.log(LANGUAGE);
+</script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.cookie.js"></script>
+<script type="text/javascript" src="js/config.js"></script>
+<script>
+    var url = CONFIG.url;
+    document.getElementsByTagName("a")[0].setAttribute("href", url);
+</script>
 </html>
