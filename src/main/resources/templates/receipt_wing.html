@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <title>Metfone</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/owl.carousel.min.css">
+    <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+    <script type="text/javascript" src="js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
+
+
+</head>
+
+<body>
+<div class="wrapper">
+
+    <div class="maincontent">
+        <div class="container">
+            <div class="box-verified box-content">
+                <div class="form-verified">
+                    <form>
+
+                        <div class="box-info">
+                            <div class="logo"><img width="170" src="images/logo_sub.svg"></div>
+                            <div class="address" th:text="#{page.four.address}"></div>
+                            <div class="tel">
+                                <label th:text="#{page.four.tel}"></label>
+                                <span class="phone"><a href="tel:+855979097097"
+                                                       style="color: #000000">(+855) 979097097</a></span>
+                            </div>
+                            <div class="hotline">
+                                <label th:text="#{page.four.hotline}"></label>
+                                <a style="color: #000000; font-family: 'DINRoundOT-Medium'"
+                                   th:href="@{'tel:' + #{hotline.number}}" th:text="#{hotline.number}"></a>
+                            </div>
+                            <div class="date text-center">
+									<span>
+										<label th:text="#{page.four.date}"
+                                               style="color: #000000; font-family: 'DINRoundOT-Medium'"> </label><span
+                                            th:text="${date}"></span>
+									</span>
+                            </div>
+                            <div class="wp-elcontrol">
+                                <div class="el-control">
+                                    <label th:text="#{wingAccountNo}"></label>
+                                    <span class="codeid" th:text="${wingAccountNo}"></span>
+                                </div>
+                                <div class="el-control">
+                                    <label th:text="#{wingAccountName}"></label>
+                                    <span class="codeid" th:text="${wingAccountName}"></span>
+                                </div>
+                                <div class="el-control">
+                                    <label th:text="#{billerName}"></label>
+                                    <span class="codeid" th:text="${billerName}"></span>
+                                </div>
+                                <div class="el-control">
+                                    <label th:text="#{transactionIdWing}"></label>
+                                    <span class="codeid" th:text="${transactionIdWing}"></span>
+                                </div>
+                                <div class="el-control">
+                                    <label th:text="#{orderId}"></label>
+                                    <span class="codeid" th:text="${orderId}"></span>
+                                </div>
+                                <div class="el-control">
+                                    <label th:text="#{subtotal}"></label>
+                                    <span class="price" style="color: red"><span th:text="${subtotal}"
+                                                                                 style="color: red"></span> USD</span>
+                                </div>
+                                <div class="el-control">
+                                    <label th:text="#{total}"></label>
+                                    <span class="price" style="color: red"><span th:text="${total}"
+                                                                                 style="color: red"></span> USD</span>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+</html>
