@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
 </head>
-<body>
-$END$
+<body onload="onloadIndex();" onpageshow="pageShow(this)">
+<div class="container" layout:fragment="content">
+</div>
 </body>
 </html>

@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="metfone-topup-portal:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>metfone-topup-portal</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="metfone-topup-portal-0.1.0.war">
+      <element id="artifact" artifact-name="metfone-topup-portal:war exploded" />
+    </root>
+  </artifact>
+</component>
