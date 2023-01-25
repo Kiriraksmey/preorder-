@@ -14,5 +14,9 @@ public class PreorderController {
     public String preorder() {
         return "pre-order/index_pre-order";
     }
+    @GetMapping("/test")
+    public String test() {
+        return "pre-order/test";
+    }
 
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<body style="text-align: center;">
+<h2>GeeksForGeeks</h2>
+
+<h2>
+    Change input
+    borders after filling data
+</h2>
+
+<form name="myForm" onsubmit="return validateForm()" method="post">
+    <label> NAME</label>
+    <input type="text" id="myDiv"
+           name="fname" value="">
+
+    <input type="submit" value="submit">
+</form>
+
+<script>
+    function validateForm() {
+        let x = document.forms["myForm"]["fname"].value;
+        if (x == "") {
+            document.getElementById("myDiv").style.borderColor = "red";
+            return false;
+        }
+    }
+</script>
+</body>
+
+</html>

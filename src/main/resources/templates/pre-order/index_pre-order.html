@@ -1,12 +1,294 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="css/xzoom.css" />
+    <link rel="stylesheet" href="css/demo.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <script src="js/foundation.min.js"></script>
+    <script src="js/setup.js"></script>
+    <script src="js/onclickPhone.js"></script>
+
+    <!-- xzoom plugin here -->
+    <script type="text/javascript" src="../dist/xzoom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../dist/xzoom.css" media="all" />
+
+    <link rel="stylesheet"
+          href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+<!--    -->
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <style>
+
+        body{
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",
+            sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column1 {
+            float: left;
+            width: 43.12%;
+            padding: 10px;
+            height: 300px; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .img-box-category{
+            box-sizing: border-box;
+            width: 146px;
+            height: 94.67px;
+            background: #FFEAEA;
+            border: 1px solid #eb2227;
+            border-radius: 6px;
+            opacity: 1;
+            margin-top: 16px;
+            padding-left: 40px;
+        }
+
+
+        .fill-in{
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+        }
+        .form-control{height: 38px;
+            background-color: white !important;
+            border-radius: 5px;
+            border: 1px solid #AEAEAE;
+            margin-bottom: 12px;
+            margin-top: 8px;
+
+
+        }
+        .form-contro{height: 38px;
+
+            border-radius: 5px;
+
+
+
+        }
+        label{
+
+            font-style: normal;
+            font-weight:normal;
+            font-size: 17px;
+            line-height: 158.02%;
+            letter-spacing: -0.03em;
+
+        }
+        #po{
+            display: none;
+        }
+
+    </style>
 </head>
 <body onload="onloadIndex();" onpageshow="pageShow(this)">
 <div class="container" layout:fragment="content">
-    <div class="inp-button">
-        <button  style="width: 174px;height: 54px;padding-left: 30.5px;padding-right: 39px;padding-bottom: 16px;padding-top: 17px;font-size: 17px;font-weight: 500"><span >Track oder</span></button>
+    <div class="inp-button" style="position: relative;padding-top: 10px">
+        <button data-toggle="modal" data-target="#myModal" class="form-contro"  id="myBtn" style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;position: absolute;right: 0px;background: #eb2227;color: white;font-size: 1rem"><span >Track your order</span></button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+            <!-- Modal content -->
+            <div class="modal-content" style="width: 27%;border-radius: 5px">
+                <span class="close">&times;</span>
+                <p style="font-size: 25px;font-weight: bold">Track your order</p>
+                <label style="margin-right: 349px;">Verification Code</label>
+                <input type="text"  name="fname" value=""  placeholder="Enter your verification code" class="form-control" style="border-radius: 5px;border: 1px solid gray;width: 476px">
+                <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Search</span></button>
+            </div>
+
+
+        </div>
+<!--        &lt;!&ndash; Modal &ndash;&gt;-->
+<!--        <div class="modal fade" id="myModal" role="dialog">-->
+<!--            <div class="modal-dialog">-->
+
+<!--                &lt;!&ndash; Modal content&ndash;&gt;-->
+<!--                <div class="modal-content">-->
+<!--                    <div class="modal-header">-->
+<!--                        <button type="button" class="close" data-dismiss="modal">&times;</button>-->
+<!--                        <h4 class="modal-title">Track your order</h4>-->
+<!--                    </div>-->
+<!--                    <div class="modal-body">-->
+<!--                        <p>Verification Code</p>-->
+<!--                        <input placeholder="Enter your verification code" class="form-control" style="border-radius: 5px;border: 1px solid #AEAEAE">-->
+<!--                    </div>-->
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-default" data-dismiss="modal">Search</button>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--            </div>-->
+<!--        </div>-->
+
     </div>
+
+    <div class="row" style="margin-bottom: 80px ;padding-top: 45px">
+        <div class="large-5 column1" >
+            <div class="xzoom-container" >
+                <img class="xzoom" id="xzoom-default" src="images/product/iphone/iphone14promax.jpeg" xoriginal="images/product/iphone/iphone14promax.jpeg" />
+
+            </div>
+        </div>
+
+<!--        <figure class="image-holder column1" style="padding-left: 0px;padding-right: 0px">-->
+<!--            &lt;!&ndash;   <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" id="image"> &ndash;&gt;-->
+<!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image">-->
+<!--        </figure>-->
+<!--        <figure class="image-preview d-none">-->
+
+<!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
+<!--        </figure>-->
+        <div class="row " >
+            <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post" >
+            <div class="" style="display: flex;flex-direction: column;padding-left: 15px" onclick="setCurrentobj(this)">
+                <label >Choose product</label>
+                <select onchange="displayDivDemo('hideValuesOnSelect', this)" class="form-control" name="productCategory"   >
+                    <option value="0">select product</option>
+                    <option value="1">Iphone</option>
+                </select>
+                <div class="xzoom-container">
+                    <div id="categoryImg" class="xzoom-thumbs">
+                        <a id="zoomImg0" onclick="('images/product/iphone/iphone14promax.jpeg')"></a>
+                    </div>
+                    <div class="img-box-category" style="position: relative;display: none" id="hideValuesOnSelect">
+                        <img class="xzoomgallery" src="images/product/iphone/iphone14promax.jpeg" style="width: 66.62px;height:58.24px;position: absolute;right: 37px;top:5px">
+                        <p style="width: 144px;height: 15px;margin-left: 9px;position: absolute;top:68px">Iphone</p>
+                    </div>
+                </div>
+                <label>Choose your device</label>
+                <select id="deviceCategory" class="form-control" name="deviceCategory">
+                    <option>select device</option>
+                    <option>Iphone 14 series</option>
+                </select>
+                <label>Choose your capacity</label>
+                <select id="capacityCategory" class="form-control" name="capacityCategory">
+                    <option>select capacity</option>
+
+                </select>
+                <label>Choose your collor</label>
+                <select id="collorCategory" class="form-control" name="collorCategory">
+                    <option>select collor</option>
+
+                </select>
+                <label class="fill-in">
+                    Fill your information
+                </label>
+                <div style="display: flex;flex-direction: row">
+
+                    <select class="form-control"  style="width: 174px;height: 39.5px;margin-right: 20px">
+                        <option>Mr</option>
+                        <option>Miss</option>
+                        <option>Mrs</option>
+                    </select>
+                   <input type="text" placeholder="Customer's name" class="form-control" style="border-radius: 5px;border: 1px solid #AEAEAE">
+
+                </div>
+                <div style="display: flex;flex-direction: row">
+
+                    <select class=" form-control" style="width: 174px;height: 39.5px;margin-right: 20px" id="myDiv2" name="fname" type="text" >
+                        <option>097</option>
+                        <option>088</option>
+                        <option>071</option>
+                        <option>031</option>
+                        <option>090</option>
+                        <option>068</option>
+                        <option>060</option>
+                        <option>066</option>
+                        <option>067</option>
+                        <option>090</option>
+
+                    </select>
+                    <input type="text" id="myDiv" name="fname" value=""    placeholder="Phone number(8889894)" class="form-control " style="border-radius: 5px;border: 1px solid gray">
+
+                </div>
+                <input type="text" id="myDiv1" name="fname" value=""  placeholder="National ID card/passport" class="form-control" style="border-radius: 5px;border: 1px solid gray">
+                <select class="form-control" >
+                    <option>Select provice</option>
+                    <option>Phnom Penh</option>
+                    <option>Takeo</option>
+                    <option>Kompot</option>
+                    <option>Kep</option>
+                    <option>Sihanouk Ville</option>
+                    <option>Koh Kong</option>
+                    <option>Pursat</option>
+
+                </select>
+                <select class="form-control" >
+                    <option>Select pick up location</option>
+
+                </select>
+                <div style="text-align: center">
+                    <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
+                    <button type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+                </div>
+
+
+
+            </div>
+            </form>
+            <script>
+                // Get the modal
+                var modal = document.getElementById("myModal");
+
+                // Get the button that opens the modal
+                var btn = document.getElementById("myBtn");
+
+                // Get the <span> element that closes the modal
+                var span = document.getElementsByClassName("close")[0];
+
+                // When the user clicks the button, open the modal
+                btn.onclick = function() {
+                    modal.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span.onclick = function() {
+                    modal.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal) {
+                        modal.style.display = "none";
+                    }
+                }
+            </script>
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+
 </div>
 </body>
+
 </html>
+
+
+
+
+
+
+
+
