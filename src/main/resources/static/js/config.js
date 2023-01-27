@@ -6,6 +6,7 @@ var CONFIG = {
     // 'url' : 'http://123.31.38.148:8856/metfone-topup',
     // 'url' : 'http://metfone.kabarplus.online/metfone-topup/',
     'url' : 'https://pay.metfone.com.kh',
+    'url_pre_order' : 'http://127.0.0.1:9295',
     // 'url': 'http://103.27.237.84:8585/',
     // 'url': 'http://103.27.237.84:8555/metfone-topup-portal_war',
     'time_wait_aba': 15,

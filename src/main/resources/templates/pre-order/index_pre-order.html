@@ -54,7 +54,17 @@
             margin-top: 16px;
             padding-left: 40px;
         }
+        .img-iphone-category{
+            box-sizing: border-box;
+            width: 304px;
+            height: 83px;
 
+            border: 1px solid #AEAEAE;
+            border-radius: 6px;
+            opacity: 1;
+            margin-top: 16px;
+            padding-left: 40px;
+        }
 
         .fill-in{
             font-size: 30px;
@@ -153,10 +163,10 @@
 <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
 <!--        </figure>-->
         <div class="row " >
-            <form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post" >
+            <form name="myForm"onsubmit="return validateForm()" method="post" >
             <div class="" style="display: flex;flex-direction: column;padding-left: 15px" onclick="setCurrentobj(this)">
                 <label >Choose product</label>
-                <select onchange="displayDivDemo('hideValuesOnSelect', this)" class="form-control" name="productCategory"   >
+                <select onchange="displayDivDemo('hideValuesOnSelect', this)" class="form-control" name="productCategory"  id="myDiv3" >
                     <option value="0">select product</option>
                     <option value="1">Iphone</option>
                 </select>
@@ -170,17 +180,44 @@
                     </div>
                 </div>
                 <label>Choose your device</label>
-                <select id="deviceCategory" class="form-control" name="deviceCategory">
-                    <option>select device</option>
-                    <option>Iphone 14 series</option>
+                <select  class="form-control" name="deviceCategory" id="myDiv4" onchange="displayDivDemo('hideValuesOnSelect1', this)" >
+                    <option value="0">select device</option>
+                    <option value="1">Iphone 14 series</option>
                 </select>
+                <div class="xzoom-container">
+
+                    <div  style="position: relative;display: none;" id="hideValuesOnSelect1">
+                        <div style="display: flex;flex-direction: row;justify-content: space-between">
+                            <div class="img-iphone-category" onclick="myFunction()">
+                                <p>IPHONE14 PROMAX</p>
+
+                            </div>
+                            <div class="img-iphone-category">
+                                <p>IPHONE14 PROMAX</p>
+
+                            </div>
+
+                        </div>
+
+                        <div class="img-iphone-category">
+                            <p>IPHONE14 PROMAX</p>
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
                 <label>Choose your capacity</label>
-                <select id="capacityCategory" class="form-control" name="capacityCategory">
+                <select id="myDiv5" class="form-control" name="capacityCategory">
                     <option>select capacity</option>
 
                 </select>
                 <label>Choose your collor</label>
-                <select id="collorCategory" class="form-control" name="collorCategory">
+                <select id="myDiv6" class="form-control" name="collorCategory">
                     <option>select collor</option>
 
                 </select>
@@ -194,7 +231,7 @@
                         <option>Miss</option>
                         <option>Mrs</option>
                     </select>
-                   <input type="text" placeholder="Customer's name" class="form-control" style="border-radius: 5px;border: 1px solid #AEAEAE">
+                   <input name="name" id="myDiv8" type="text" placeholder="Customer's name" class="form-control" style="border-radius: 5px;border: 1px solid #AEAEAE">
 
                 </div>
                 <div style="display: flex;flex-direction: row">
