@@ -39,5 +39,57 @@ function validateForm() {
 };
 
 function myFunction() {
-    document.getElementById(id).style.borderColor= "red";
+    var element = document.getElementById("iphone14max");
+    console.log(element);
+    element.style.borderColor = "#AEAEAE";
+    element.style.color = "#000000";
+    element.style.backgroundColor = "#FFFFFF";
+
+    var element = document.getElementById("iphone14");
+    console.log(element);
+    element.style.borderColor = "#AEAEAE";
+    element.style.color = "#000000";
+    element.style.backgroundColor = "#FFFFFF";
+
+    // document.getElementById("iphone").style.borderColor = "none";
+    document.getElementById("iphone").style.borderColor = "red";
+    document.getElementById("iphone").style.color = "#EB2227";
+    document.getElementById("iphone").style.backgroundColor = "#FFEAEA";
+
+}
+function myFun() {
+    var element = document.getElementById("iphone");
+    console.log(element);
+    element.style.borderColor = "#AEAEAE";
+    element.style.color = "#000000";
+    element.style.backgroundColor = "#FFFFFF";
+
+    var element = document.getElementById("iphone14max");
+    console.log(element);
+    element.style.borderColor = "#AEAEAE";
+    element.style.color = "#000000";
+    element.style.backgroundColor = "#FFFFFF";
+
+    document.getElementById("iphone14").style.borderColor = "red";
+    document.getElementById("iphone14").style.color = "#EB2227";
+    document.getElementById("iphone14").style.backgroundColor = "#FFEAEA";
+
+}
+function myFunc() {
+    var element = document.getElementById("iphone");
+    console.log(element);
+    element.style.borderColor = "#AEAEAE";
+    element.style.color = "#000000";
+    element.style.backgroundColor = "#FFFFFF";
+
+    var element = document.getElementById("iphone14");
+    console.log(element);
+    element.style.borderColor = "#AEAEAE";
+    element.style.color = "#000000";
+    element.style.backgroundColor = "#FFFFFF";
+
+    document.getElementById("iphone14max").style.borderColor = "red";
+    document.getElementById("iphone14max").style.color = "#EB2227";
+    document.getElementById("iphone14max").style.backgroundColor = "#FFEAEA";
+
 }
