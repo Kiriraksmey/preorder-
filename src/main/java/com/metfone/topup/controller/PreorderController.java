@@ -18,5 +18,13 @@ public class PreorderController {
     public String test() {
         return "pre-order/test";
     }
+    @GetMapping("/review-product")
+    public String review() {
+        return "pre-order/review-preorder";
+    }
+    @GetMapping("/confirmation")
+    public String confrimation() {
+        return "pre-order/comfirmation";
+    }
 
 }

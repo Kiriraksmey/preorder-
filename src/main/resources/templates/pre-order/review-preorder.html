@@ -1,10 +1,219 @@
-<!DOCTYPE html>
-<html lang="en">
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/xzoom.css" />
+    <link rel="stylesheet" href="css/demo.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/pupup.css" />
+    <script src="js/foundation.min.js"></script>
+    <script src="js/setup.js"></script>
+    <script src="js/onclickPhone.js"></script>
 
+    <!-- xzoom plugin here -->
+    <script type="text/javascript" src="../dist/xzoom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../dist/xzoom.css" media="all" />
+
+    <link rel="stylesheet"
+          href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+    <!--    -->
+    <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+    <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+    <style>
+
+        body{
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",
+            sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column1 {
+            float: left;
+            width: 43.12%;
+            padding: 10px;
+            height: 300px; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .img-box-category{
+            box-sizing: border-box;
+            width: 146px;
+            height: 94.67px;
+            background: #FFEAEA;
+            border: 1px solid #eb2227;
+            border-radius: 6px;
+            opacity: 1;
+            margin-top: 16px;
+            padding-left: 40px;
+        }
+        .img-iphone-category{
+            box-sizing: border-box;
+            width: 304px;
+            height: 83px;
+
+            border: 1px solid #AEAEAE;
+            border-radius: 6px;
+            opacity: 1;
+            margin-top: 16px;
+            padding-left: 40px;
+        }
+
+        .fill-in{
+            font-size: 30px;
+            font-weight: bold;
+            color: red;
+        }
+        .form-control{height: 38px;
+            background-color: white !important;
+            border-radius: 5px;
+            border: 1px solid #AEAEAE;
+            margin-bottom: 12px;
+            margin-top: 8px;
+
+
+        }
+        .form-contro{height: 38px;
+
+            border-radius: 5px;
+
+
+
+        }
+        label{
+
+            font-style: normal;
+            font-weight:normal;
+            font-size: 17px;
+            line-height: 158.02%;
+            letter-spacing: -0.03em;
+
+        }
+        #po{
+            display: none;
+        }
+
+
+
+        /* The Modal (background) */
+        .modal1 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal1-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+
+        /* The Close Button */
+        .close1 {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close1:hover,
+        .close1:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+    </style>
+</head>
+<body onload="onloadIndex();" onpageshow="pageShow(this)">
+<div class="container" layout:fragment="content">
+
+
+
+    <div class="row" style="margin-bottom: 80px ;padding-top: 45px;">
+        <div class="large-5 column1" style="margin-right: 30px" >
+            <div class="" >
+                <img style="width: 485px;height: 339px" src="images/product/iphone/iphone14promax.jpeg" xoriginal="images/product/iphone/iphone14promax.jpeg" />
+
+            </div>
+        </div>
+
+        <!--        <figure class="image-holder column1" style="padding-left: 0px;padding-right: 0px">-->
+        <!--            &lt;!&ndash;   <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" id="image"> &ndash;&gt;-->
+        <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image">-->
+        <!--        </figure>-->
+        <!--        <figure class="image-preview d-none">-->
+
+        <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
+        <!--        </figure>-->
+        <div class="row " style="padding-top: 34px" >
+            <form name="myForm"onsubmit="return validateForm()" method="post" >
+                <div >
+
+                    <h2>Please review and confirm your pre-order</h2>
+
+                    <ul style="border:1px solid #eb2227;padding-left: 573px">
+                        <li style=" list-style-type:disc">Name: xxxxxxxxxx</li>
+                        <li style=" list-style-type:disc">Phone Numner: 0xxxxxxxxxx</li>
+                        <li style=" list-style-type:disc">National ID/ Passport: xxxxxxxxx</li>
+                        <li style=" list-style-type:disc">Province: xxx</li>
+                        <li style=" list-style-type:disc">Pick-up location: xxxxxxx</li>
+                    </ul>
+                    <p>You want to pre-order [Model], [Capacity], [color].5 USD will be deducted from your basic balance for deposit.</p>
+                    <p>You will get gift such as: [xxxx], [xxxx], [xxxx], [xxxx]</p>
+                </div>
+
+
+                <div style="text-align: center">
+                    <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
+                    <button  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
+                </div>
+
+
+            </form>
+
+
+
+
+        </div>
+
+    </div>
+
+
+
+</div>
 </body>
+
 </html>
+
+
+
+
+
+
+
+

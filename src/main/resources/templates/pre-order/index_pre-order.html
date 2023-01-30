@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="css/xzoom.css" />
     <link rel="stylesheet" href="css/demo.css" />
     <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/pupup.css" />
     <script src="js/foundation.min.js"></script>
     <script src="js/setup.js"></script>
     <script src="js/onclickPhone.js"></script>
@@ -101,10 +102,57 @@
             display: none;
         }
 
+
+
+        /* The Modal (background) */
+        .modal1 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal1-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            height: 696px;
+            width: 881px;
+            left: 326px;
+            top: 181px;
+            border-radius: 14px;
+        }
+
+        /* The Close Button */
+        .close1 {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close1:hover,
+        .close1:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body onload="onloadIndex();" onpageshow="pageShow(this)">
 <div class="container" layout:fragment="content">
+
+
     <div class="inp-button" style="position: relative;padding-top: 10px">
         <button data-toggle="modal" data-target="#myModal" class="form-contro"  id="myBtn" style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;position: absolute;right: 0px;background: #eb2227;color: white;font-size: 1rem"><span >Track your order</span></button>
 
@@ -123,6 +171,7 @@
 
 
         </div>
+
 <!--        &lt;!&ndash; Modal &ndash;&gt;-->
 <!--        <div class="modal fade" id="myModal" role="dialog">-->
 <!--            <div class="modal-dialog">-->
@@ -147,6 +196,7 @@
 
     </div>
 
+
     <div class="row" style="margin-bottom: 80px ;padding-top: 45px">
         <div class="large-5 column1" >
             <div class="xzoom-container" >
@@ -164,7 +214,7 @@
 <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
 <!--        </figure>-->
         <div class="row " >
-            <form name="myForm"onsubmit="return validateForm()" method="post" >
+            <form name="myForm"onsubmit="return validateForm()" >
             <div class="" style="display: flex;flex-direction: column;padding-left: 15px" onclick="setCurrentobj(this)">
                 <label >Choose product</label>
                 <select onchange="displayDivDemo('hideValuesOnSelect', this)" class="form-control" name="productCategory"  id="myDiv3" >
@@ -276,14 +326,116 @@
                 <div style="text-align: center">
                     <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
-                    <button type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
-            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
+
                 </div>
 
 
 
+
             </div>
+
+  <button>a</button>
+
+
+
+
             </form>
+
+            <button  id="myBtn1" onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
+
+            <!-- The Modal -->
+            <div id="myModal1" class="modal1">
+
+                <!-- Modal content -->
+                <div class="modal1-content">
+                    <div class="row" style="margin-bottom: 80px ;padding-top: 45px;">
+                        <div class="large-5 column1" style="margin-right: 30px" >
+                            <div class="" >
+                                <img style="width: 485px;height: 339px" src="images/product/iphone/iphone14promax.jpeg" xoriginal="images/product/iphone/iphone14promax.jpeg" />
+
+                            </div>
+                        </div>
+
+                        <!--        <figure class="image-holder column1" style="padding-left: 0px;padding-right: 0px">-->
+                        <!--            &lt;!&ndash;   <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" id="image"> &ndash;&gt;-->
+                        <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image">-->
+                        <!--        </figure>-->
+                        <!--        <figure class="image-preview d-none">-->
+
+                        <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
+                        <!--        </figure>-->
+                        <div class="row " style="padding-top: 34px" >
+                            <form name="myForm"onsubmit="return validateForm()" >
+                                <div >
+
+                                    <h2>Please review and confirm your pre-order</h2>
+
+                                    <ul style="padding-left: 420px">
+                                        <li style=" list-style-type:disc">Name: xxxxxxxxxx</li>
+                                        <li style=" list-style-type:disc">Phone Numner: 0xxxxxxxxxx</li>
+                                        <li style=" list-style-type:disc">National ID/ Passport: xxxxxxxxx</li>
+                                        <li style=" list-style-type:disc">Province: xxx</li>
+                                        <li style=" list-style-type:disc">Pick-up location: xxxxxxx</li>
+                                    </ul>
+                                    <p>You want to pre-order [Model], [Capacity], [color].5 USD will be deducted from your basic balance for deposit.</p>
+                                    <p>You will get gift such as: [xxxx], [xxxx], [xxxx], [xxxx]</p>
+                                </div>
+
+
+                                <div style="text-align: center">
+                                    <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
+                                    <button  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
+                                </div>
+
+
+                            </form>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <script>
+                // Get the modal
+                var modal1 = document.getElementById("myModal1");
+
+                // Get the button that opens the modal
+                var btn1 = document.getElementById("myBtn1");
+
+                // Get the <span> element that closes the modal
+                var span1 = document.getElementsByClassName("close1")[0];
+
+                // When the user clicks the button, open the modal
+                btn1.onclick = function() {
+                    modal1.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span1.onclick = function() {
+                    modal1.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal1) {
+                        modal1.style.display = "none";
+                    }
+                }
+            </script>
+
+
             <script>
                 // Get the modal
                 var modal = document.getElementById("myModal");
@@ -311,6 +463,8 @@
                     }
                 }
             </script>
+
+
 
 
 

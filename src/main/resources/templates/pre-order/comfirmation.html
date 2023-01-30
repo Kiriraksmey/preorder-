@@ -1,0 +1,302 @@
+<html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/xzoom.css" />
+  <link rel="stylesheet" href="css/demo.css" />
+  <link rel="stylesheet" href="css/modal.css" />
+  <link rel="stylesheet" href="css/pupup.css" />
+  <script src="js/foundation.min.js"></script>
+  <script src="js/setup.js"></script>
+  <script src="js/onclickPhone.js"></script>
+
+  <!-- xzoom plugin here -->
+  <script type="text/javascript" src="../dist/xzoom.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="../dist/xzoom.css" media="all" />
+
+  <link rel="stylesheet"
+        href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+  <!--    -->
+  <!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+
+  <!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+  <style>
+
+    body{
+      font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",
+      sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column1 {
+      float: left;
+      width: 43.12%;
+      padding: 10px;
+      height: 300px; /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    .img-box-category{
+      box-sizing: border-box;
+      width: 146px;
+      height: 94.67px;
+      background: #FFEAEA;
+      border: 1px solid #eb2227;
+      border-radius: 6px;
+      opacity: 1;
+      margin-top: 16px;
+      padding-left: 40px;
+    }
+    .img-iphone-category{
+      box-sizing: border-box;
+      width: 304px;
+      height: 83px;
+
+      border: 1px solid #AEAEAE;
+      border-radius: 6px;
+      opacity: 1;
+      margin-top: 16px;
+      padding-left: 40px;
+    }
+
+    .fill-in{
+      font-size: 30px;
+      font-weight: bold;
+      color: red;
+    }
+    .form-control{height: 38px;
+      background-color: white !important;
+      border-radius: 5px;
+      border: 1px solid #AEAEAE;
+      margin-bottom: 12px;
+      margin-top: 8px;
+
+
+    }
+    .form-contro{height: 38px;
+
+      border-radius: 5px;
+
+
+
+    }
+    label{
+
+      font-style: normal;
+      font-weight:normal;
+      font-size: 17px;
+      line-height: 158.02%;
+      letter-spacing: -0.03em;
+
+    }
+    #po{
+      display: none;
+    }
+
+
+
+    /* The Modal (background) */
+    .modal1 {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      padding-top: 100px; /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+
+    }
+
+    /* Modal Content */
+    .modal1-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      height: 696px;
+      width: 881px;
+      left: 326px;
+      top: 181px;
+      border-radius: 14px;
+    }
+
+    /* The Close Button */
+    .close1 {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close1:hover,
+    .close1:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    .tacbox {
+      display:block;
+      padding: 1em;
+      margin: 2em;
+
+
+      max-width: 800px;
+    }
+
+
+
+
+  </style>
+</head>
+<body onload="onloadIndex();" onpageshow="pageShow(this)">
+<div class="container" layout:fragment="content">
+
+
+
+  <div class="row" style="margin-bottom: 325px ;padding-top: 45px;">
+    <div class="large-5 column1" style="margin-right: 30px" >
+      <div  >
+        <img src="images/product/iphone/iphone14promax.jpeg" style="width: 485px;height: 339px" />
+
+      </div>
+    </div>
+
+    <!--        <figure class="image-holder column1" style="padding-left: 0px;padding-right: 0px">-->
+    <!--            &lt;!&ndash;   <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" id="image"> &ndash;&gt;-->
+    <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image">-->
+    <!--        </figure>-->
+    <!--        <figure class="image-preview d-none">-->
+
+    <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
+    <!--        </figure>-->
+    <div class="row " style="padding-top: 34px" >
+      <form name="myForm"onsubmit="return validateForm()"  >
+        <div >
+
+          <h2>We’ve send confirmation code to your phone number,
+            please fill that code into the box below:</h2>
+
+          <input type="text" id="myDiv" name="fname" value=""    placeholder="Verification code" class="form-control " style="border-radius: 5px;border: 1px solid gray">
+        </div>
+        <div class="tacbox">
+          <input id="checkbox" type="checkbox" style="height: 1em;
+      width: 1em;
+      vertical-align: middle;" />
+          <label for="checkbox"> I agree to the <a href="#" id="myBtn1">Terms and Conditions</a>.</label>
+        </div>
+
+        <div style="text-align: center">
+          <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
+          <button  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
+        </div>
+
+
+      </form>
+      <!-- Trigger/Open The Modal -->
+
+
+      <!-- The Modal -->
+      <div id="myModal1" class="modal1">
+
+        <!-- Modal content -->
+        <div class="modal1-content" style="padding-left: 32px">
+          <span class="close1">&times;</span>
+          <h3 style="text-align: center;margin-bottom: 10px">Terms and Conditions (Online Payment)</h3>
+          <p>
+            1. The Online Payment System provided by the Telecommunication Service Provider/Metfone accepts these following methods:<br>
+
+            - VISA, MasterCard, and JCB credit cards<br>
+            - VISA, MasterCard, and JCB debit cards that are activated to be used online<br>
+            - Alipay<br>
+            - Wechat Pay<br>
+            - UnionPay<br>
+            - e-Money<br>
+            2. You can select the refill amount from the list or input the refill amount that you want. The value you will receive shall be
+            compliant with terms and conditions set by the Telecommunication Service Provider/Metfone.<br>
+            3. You acknowledge and accept that in relation to this Online Payment System by credit/debit card and internet banking the
+            Telecommunication Service Provider is solely responsible for a connection to the system or website of the respective commercial banks,
+            card issuers and/or e-payment service providers. Any actions required for payment settlement from any credit/debit card are between the cardholder
+            and the respective commercial banks and/or card issuers and/or e-payment service providers.<br>
+            4. You hereby grant a consent to the Telecommunication Service Provider to access your personal information so that the Telecommunication Service
+            Provider is able to compile and process your personal information as necessary as prescribed by law for the benefit of operation, improvement and/or
+            management of telecommunication business and/or provision of telecommunication service and/or e-payment services including analysis and determination
+            of any marketing plan and activity as well as co-provision of service with any person. You also grant a consent to the Telecommunication Service Provider
+            to disclose<br>
+          </p>
+          <div style="text-align: center">
+
+            <button  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Continue</span></button>
+
+          </div>
+
+        </div>
+
+      </div>
+      <script>
+        // Get the modal
+        var modal1 = document.getElementById("myModal1");
+
+        // Get the button that opens the modal
+        var btn1 = document.getElementById("myBtn1");
+
+        // Get the <span> element that closes the modal
+        var span1 = document.getElementsByClassName("close1")[0];
+
+        // When the user clicks the button, open the modal
+        btn1.onclick = function() {
+          modal1.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span1.onclick = function() {
+          modal1.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+          if (event.target == modal1) {
+            modal1.style.display = "none";
+          }
+        }
+      </script>
+
+
+
+    </div>
+
+  </div>
+
+
+
+</div>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
