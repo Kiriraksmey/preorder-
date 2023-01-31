@@ -45,34 +45,7 @@
       display: table;
       clear: both;
     }
-    .img-box-category{
-      box-sizing: border-box;
-      width: 146px;
-      height: 94.67px;
-      background: #FFEAEA;
-      border: 1px solid #eb2227;
-      border-radius: 6px;
-      opacity: 1;
-      margin-top: 16px;
-      padding-left: 40px;
-    }
-    .img-iphone-category{
-      box-sizing: border-box;
-      width: 304px;
-      height: 83px;
 
-      border: 1px solid #AEAEAE;
-      border-radius: 6px;
-      opacity: 1;
-      margin-top: 16px;
-      padding-left: 40px;
-    }
-
-    .fill-in{
-      font-size: 30px;
-      font-weight: bold;
-      color: red;
-    }
     .form-control{height: 38px;
       background-color: white !important;
       border-radius: 5px;
@@ -89,23 +62,12 @@
 
 
     }
-    label{
 
-      font-style: normal;
-      font-weight:normal;
-      font-size: 17px;
-      line-height: 158.02%;
-      letter-spacing: -0.03em;
-
-    }
-    #po{
-      display: none;
-    }
 
 
 
     /* The Modal (background) */
-    .modal1 {
+    .modal3 {
       display: none; /* Hidden by default */
       position: fixed; /* Stay in place */
       z-index: 1; /* Sit on top */
@@ -122,7 +84,7 @@
     }
 
     /* Modal Content */
-    .modal1-content {
+    .modal3-content {
       background-color: #fefefe;
       margin: auto;
       padding: 20px;
@@ -135,15 +97,15 @@
     }
 
     /* The Close Button */
-    .close1 {
+    .close3 {
       color: #aaaaaa;
       float: right;
       font-size: 28px;
       font-weight: bold;
     }
 
-    .close1:hover,
-    .close1:focus {
+    .close3:hover,
+    .close3:focus {
       color: #000;
       text-decoration: none;
       cursor: pointer;
@@ -192,13 +154,15 @@
           <h2>We’ve send confirmation code to your phone number,
             please fill that code into the box below:</h2>
 
-          <input type="text" id="myDiv" name="fname" value=""    placeholder="Verification code" class="form-control " style="border-radius: 5px;border: 1px solid gray">
+
+
+          <input type="text" id="myDiv" name="fname" value=""    placeholder="Verification code "  class="form-control " style="border-top-color:white;border-radius: 0px;border-right-color:white;border-left-color:white;">
         </div>
         <div class="tacbox">
           <input id="checkbox" type="checkbox" style="height: 1em;
       width: 1em;
       vertical-align: middle;" />
-          <label for="checkbox"> I agree to the <a href="#" id="myBtn1">Terms and Conditions</a>.</label>
+          <label for="checkbox"> I agree to the <a href="#" id="myBtn3">Terms and Conditions</a>.</label>
         </div>
 
         <div style="text-align: center">
@@ -215,11 +179,11 @@
 
 
       <!-- The Modal -->
-      <div id="myModal1" class="modal1">
+      <div id="myModal3" class="modal3">
 
         <!-- Modal content -->
-        <div class="modal1-content" style="padding-left: 32px">
-          <span class="close1">&times;</span>
+        <div class="modal3-content" style="padding-left: 32px">
+          <span class="close3">&times;</span>
           <h3 style="text-align: center;margin-bottom: 10px">Terms and Conditions (Online Payment)</h3>
           <p>
             1. The Online Payment System provided by the Telecommunication Service Provider/Metfone accepts these following methods:<br>
@@ -254,28 +218,28 @@
       </div>
       <script>
         // Get the modal
-        var modal1 = document.getElementById("myModal1");
+        var modal3 = document.getElementById("myModal3");
 
         // Get the button that opens the modal
-        var btn1 = document.getElementById("myBtn1");
+        var btn3 = document.getElementById("myBtn3");
 
         // Get the <span> element that closes the modal
-        var span1 = document.getElementsByClassName("close1")[0];
+        var span3 = document.getElementsByClassName("close3")[0];
 
         // When the user clicks the button, open the modal
-        btn1.onclick = function() {
-          modal1.style.display = "block";
+        btn3.onclick = function() {
+          modal3.style.display = "block";
         }
 
         // When the user clicks on <span> (x), close the modal
-        span1.onclick = function() {
-          modal1.style.display = "none";
+        span3.onclick = function() {
+          modal3.style.display = "none";
         }
 
         // When the user clicks anywhere outside of the modal, close it
         window.onclick = function(event) {
-          if (event.target == modal1) {
-            modal1.style.display = "none";
+          if (event.target == modal3) {
+            modal3.style.display = "none";
           }
         }
       </script>

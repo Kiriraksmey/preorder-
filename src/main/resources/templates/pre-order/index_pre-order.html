@@ -9,6 +9,7 @@
     <script src="js/foundation.min.js"></script>
     <script src="js/setup.js"></script>
     <script src="js/onclickPhone.js"></script>
+    <script src="js/validation.js"></script>
 
     <!-- xzoom plugin here -->
     <script type="text/javascript" src="../dist/xzoom.min.js"></script>
@@ -146,12 +147,68 @@
             text-decoration: none;
             cursor: pointer;
         }
+        /* The Modal (background) */
+        .modal3 {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+
+
+        }
+
+        /* Modal Content */
+        .modal3-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            height: 696px;
+            width: 881px;
+            left: 326px;
+            top: 181px;
+            border-radius: 14px;
+        }
+
+        /* The Close Button */
+        .close3 {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close3:hover,
+        .close3:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+
+        .tacbox {
+            display:block;
+            padding: 1em;
+            margin: 2em;
+
+
+            max-width: 800px;
+        }
+
+
 
     </style>
 </head>
 <body onload="onloadIndex();" onpageshow="pageShow(this)">
 <div class="container" layout:fragment="content">
-
+    <div id="LoginFrom">
 
     <div class="inp-button" style="position: relative;padding-top: 10px">
         <button data-toggle="modal" data-target="#myModal" class="form-contro"  id="myBtn" style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;position: absolute;right: 0px;background: #eb2227;color: white;font-size: 1rem"><span >Track your order</span></button>
@@ -214,7 +271,7 @@
 <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
 <!--        </figure>-->
         <div class="row " >
-            <form name="myForm"onsubmit="return validateForm()" >
+
             <div class="" style="display: flex;flex-direction: column;padding-left: 15px" onclick="setCurrentobj(this)">
                 <label >Choose product</label>
                 <select onchange="displayDivDemo('hideValuesOnSelect', this)" class="form-control" name="productCategory"  id="myDiv3" >
@@ -304,10 +361,10 @@
                         <option>090</option>
 
                     </select>
-                    <input type="text" id="myDiv" name="fname" value=""    placeholder="Phone number(8889894)" class="form-control " style="border-radius: 5px;border: 1px solid gray">
+                    <input type="text" id="LoginPassword" name="fname" value=""    placeholder="Phone number(8889894)" class="form-control " style="border-radius: 5px;border: 1px solid gray">
 
                 </div>
-                <input type="text" id="myDiv1" name="fname" value=""  placeholder="National ID card/passport" class="form-control" style="border-radius: 5px;border: 1px solid gray">
+                <input type="text" id="LoginEmail" name="fname" value=""  placeholder="National ID card/passport" class="form-control" style="border-radius: 5px;border: 1px solid gray">
                 <select class="form-control" >
                     <option>Select provice</option>
                     <option>Phnom Penh</option>
@@ -324,9 +381,11 @@
 
                 </select>
                 <div style="text-align: center">
-                    <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                    <button onclick="return ValidateLoginForm();" id="LoginBtn" data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
 
+                    <button   id="myBtn1" onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
 
                 </div>
 
@@ -335,15 +394,12 @@
 
             </div>
 
-  <button>a</button>
 
 
 
 
-            </form>
 
-            <button  id="myBtn1" onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
-            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
 
 
             <!-- The Modal -->
@@ -368,7 +424,7 @@
                         <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
                         <!--        </figure>-->
                         <div class="row " style="padding-top: 34px" >
-                            <form name="myForm"onsubmit="return validateForm()" >
+
                                 <div >
 
                                     <h2>Please review and confirm your pre-order</h2>
@@ -388,13 +444,13 @@
                                 <div style="text-align: center">
                                     <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
-                                    <button  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                                    <button id="myBtn2"  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
 
                                 </div>
 
 
-                            </form>
+
 
 
 
@@ -407,6 +463,132 @@
 
             </div>
 
+            <!-- The Modal -->
+            <div id="myModal2" class="modal1">
+
+                <!-- Modal content -->
+                <div class="modal1-content">
+                    <div class="row" style="margin-bottom: 325px ;padding-top: 45px;">
+                        <div class="large-5 column1" style="margin-right: 30px" >
+                            <div  >
+                                <img src="images/product/iphone/iphone14promax.jpeg" style="width: 485px;height: 339px" />
+
+                            </div>
+                        </div>
+
+                        <!--        <figure class="image-holder column1" style="padding-left: 0px;padding-right: 0px">-->
+                        <!--            &lt;!&ndash;   <img src="https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" id="image"> &ndash;&gt;-->
+                        <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image">-->
+                        <!--        </figure>-->
+                        <!--        <figure class="image-preview d-none">-->
+
+                        <!--            <img src="images/product/iphone/iphone14promax.jpeg" id="image-preview">-->
+                        <!--        </figure>-->
+                        <div class="row " style="padding-top: 34px" >
+
+                                <div >
+
+                                    <h2>We’ve send confirmation code to your phone number,
+                                        please fill that code into the box below:</h2>
+
+
+
+                                    <input type="text"  name="fname" value=""    placeholder="Verification code "  class="form-control " style="border-top-color:white;border-radius: 0px;border-right-color:white;border-left-color:white;">
+                                </div>
+                                <div class="tacbox">
+                                    <input id="checkbox" type="checkbox" style="height: 1em;width: 1em;vertical-align: middle;" />
+                                    <label for="checkbox"> I agree to the <a href="#" id="myBtn3">Terms and Conditions</a>.</label>
+                                </div>
+
+                                <div style="text-align: center">
+                                    <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
+                                    <button  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
+                                </div>
+
+
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+
+            <!-- The Modal -->
+            <div id="myModal3" class="modal3">
+
+                <!-- Modal content -->
+                <div class="modal3-content" style="padding-left: 32px">
+                    <span class="close3">&times;</span>
+                    <h3 style="text-align: center;margin-bottom: 10px">Terms and Conditions (Online Payment)</h3>
+                    <p>
+                        1. The Online Payment System provided by the Telecommunication Service Provider/Metfone accepts these following methods:<br>
+
+                        - VISA, MasterCard, and JCB credit cards<br>
+                        - VISA, MasterCard, and JCB debit cards that are activated to be used online<br>
+                        - Alipay<br>
+                        - Wechat Pay<br>
+                        - UnionPay<br>
+                        - e-Money<br>
+                        2. You can select the refill amount from the list or input the refill amount that you want. The value you will receive shall be
+                        compliant with terms and conditions set by the Telecommunication Service Provider/Metfone.<br>
+                        3. You acknowledge and accept that in relation to this Online Payment System by credit/debit card and internet banking the
+                        Telecommunication Service Provider is solely responsible for a connection to the system or website of the respective commercial banks,
+                        card issuers and/or e-payment service providers. Any actions required for payment settlement from any credit/debit card are between the cardholder
+                        and the respective commercial banks and/or card issuers and/or e-payment service providers.<br>
+                        4. You hereby grant a consent to the Telecommunication Service Provider to access your personal information so that the Telecommunication Service
+                        Provider is able to compile and process your personal information as necessary as prescribed by law for the benefit of operation, improvement and/or
+                        management of telecommunication business and/or provision of telecommunication service and/or e-payment services including analysis and determination
+                        of any marketing plan and activity as well as co-provision of service with any person. You also grant a consent to the Telecommunication Service Provider
+                        to disclose<br>
+                    </p>
+                    <div style="text-align: center">
+
+                        <button   onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #eb2227;color: white;font-size: 1rem"><span >Continue</span></button>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <script>
+                // Get the modal
+                var modal3 = document.getElementById("myModal3");
+
+                // Get the button that opens the modal
+                var btn3 = document.getElementById("myBtn3");
+
+                // Get the <span> element that closes the modal
+                var span3 = document.getElementsByClassName("close3")[0];
+
+                // When the user clicks the button, open the modal
+                btn3.onclick = function() {
+                    modal3.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span3.onclick = function() {
+                    modal3.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal3) {
+                        modal3.style.display = "none";
+                    }
+                }
+            </script>
+
+
+
+
+
             <script>
                 // Get the modal
                 var modal1 = document.getElementById("myModal1");
@@ -415,7 +597,7 @@
                 var btn1 = document.getElementById("myBtn1");
 
                 // Get the <span> element that closes the modal
-                var span1 = document.getElementsByClassName("close1")[0];
+                var span1 = document.getElementsByClassName("close2")[0];
 
                 // When the user clicks the button, open the modal
                 btn1.onclick = function() {
@@ -431,6 +613,34 @@
                 window.onclick = function(event) {
                     if (event.target == modal1) {
                         modal1.style.display = "none";
+                    }
+                }
+            </script>
+
+            <script>
+                // Get the modal
+                var modal2 = document.getElementById("myModal2");
+
+                // Get the button that opens the modal
+                var btn2 = document.getElementById("myBtn2");
+
+                // Get the <span> element that closes the modal
+                var span2 = document.getElementsByClassName("close2")[0];
+
+                // When the user clicks the button, open the modal
+                btn2.onclick = function() {
+                    modal2.style.display = "block";
+                }
+
+                // When the user clicks on <span> (x), close the modal
+                span2.onclick = function() {
+                    modal2.style.display = "none";
+                }
+
+                // When the user clicks anywhere outside of the modal, close it
+                window.onclick = function(event) {
+                    if (event.target == modal2) {
+                        modal2.style.display = "none";
                     }
                 }
             </script>
@@ -474,7 +684,7 @@
 
     </div>
 
-
+    </div>
 
 </div>
 </body>
