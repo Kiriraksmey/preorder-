@@ -1,58 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script>
-        function myFunction() {
-            var element = document.getElementById("iphone14");
-            console.log(element);
-            element.style.borderColor = "#AEAEAE";
-           // document.getElementById("iphone").style.borderColor = "none";
-            document.getElementById("iphone").style.borderColor = "red";
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        }
-        function myFun() {
-            var element = document.getElementById("iphone");
-            console.log(element);
-            element.style.borderColor = "#AEAEAE";
-            document.getElementById("iphone14").style.borderColor = "red";
-
-        }
-        //
-        // $(document).ready(function(){
-        //     $("button").click(function(){
-        //         $("div").empty();
-        //     });
-        // });
-    </script>
 </head>
 <body>
-<style>
-    .img-iphone-category{
-        box-sizing: border-box;
-        width: 304px;
-        height: 83px;
 
-        border: 1px solid #AEAEAE;
-        border-radius: 6px;
-        opacity: 1;
-        margin-top: 16px;
-        padding-left: 40px;
-    }
-</style>
-<div style="height:100px;background-color:yellow">
-    This is some text
-    <p>This is a paragraph inside the div.</p>
-</div>
-<div class="img-iphone-category" id="iphone" onclick="myFunction()">
-    <p>IPHONE14 PROMAX</p>
-</div>
-<div class="img-iphone-category" id="iphone14" onclick="myFun()">
-    <p>IPHONE14 PROMAX</p>
-</div>
-<p>This is a paragraph outside the div.</p>
-
-<button>Remove content of the div element</button>
-
+<button type="button"  onclick="myFunction()"> click</button>
 </body>
 </html>
+<script>
+    function myFunction(){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+        })
+      
+    }
+
+</script>
