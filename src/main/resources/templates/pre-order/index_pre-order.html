@@ -1,6 +1,8 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{layouts/layout}"
       xmlns:th="http://www.thymeleaf.org">
 <head>
+    <script src="sweetalert2.all.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/xzoom.css" />
     <link rel="stylesheet" href="css/demo.css" />
@@ -201,6 +203,35 @@
 
             max-width: 800px;
         }
+        .swal2-title {
+            position: relative;
+            max-width: 100%;
+            color: inherit;
+
+            padding-top: -1px;
+
+            font-size: 1.875em;
+            font-weight: 600;
+            text-align: center;
+            text-transform: none;
+            word-wrap: break-word;
+            margin-top: -50px;
+            margin-top: -30px;
+        }
+        #swal2-html-container{
+            z-index: 1;
+            margin: 0px 0px 0px;
+            justify-content: center;
+            overflow: auto;
+            color: inherit;
+            font-size: 0.825em;
+            font-weight: normal;
+            line-height: normal;
+            text-align: center;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
 
 
 
@@ -361,11 +392,11 @@
                         <option>090</option>
 
                     </select>
-                    <input type="text" id="LoginPassword" name="fname" value=""    placeholder="Phone number(8889894)" class="form-control " style="border-radius: 5px;border: 1px solid gray">
+                    <input type="text" id="myDiv9" name="fname" value=""    placeholder="Phone number(8889894)" class="form-control " style="border-radius: 5px;border: 1px solid gray">
 
                 </div>
-                <input type="text" id="LoginEmail" name="fname" value=""  placeholder="National ID card/passport" class="form-control" style="border-radius: 5px;border: 1px solid gray">
-                <select class="form-control" >
+                <input type="text" id="myDiv10" name="fname" value=""  placeholder="National ID card/passport" class="form-control" style="border-radius: 5px;border: 1px solid gray">
+                <select class="form-control"  id="myDiv11" >
                     <option>Select provice</option>
                     <option>Phnom Penh</option>
                     <option>Takeo</option>
@@ -381,10 +412,10 @@
 
                 </select>
                 <div style="text-align: center">
-                    <button onclick="return ValidateLoginForm();"   data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                    <button   data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
 
-                    <button   id="myBtn1"  type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                    <button id="myBtn1" onclick="myTest()" type="button" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
 
                 </div>
@@ -503,8 +534,9 @@
                                 <div style="text-align: center">
                                     <button data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
-                                    <button  onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                                    <button onclick="sweetalert()"  type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
+
 
                                 </div>
 
@@ -549,7 +581,7 @@
                     </p>
                     <div style="text-align: center">
 
-                        <button   onclick="openForm()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                        <button   onclick="sweetalert()" type="submit" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #eb2227;color: white;font-size: 1rem"><span >Continue</span></button>
 
                     </div>
@@ -557,122 +589,143 @@
                 </div>
 
             </div>
-            <script>
-                // Get the modal
-                var modal3 = document.getElementById("myModal3");
+<!--            <script>-->
+<!--                // Get the modal-->
+<!--                var modal3 = document.getElementById("myModal3");-->
 
-                // Get the button that opens the modal
-                var btn3 = document.getElementById("myBtn3");
+<!--                // Get the button that opens the modal-->
+<!--                var btn3 = document.getElementById("myBtn3");-->
 
-                // Get the <span> element that closes the modal
-                var span3 = document.getElementsByClassName("close3")[0];
+<!--                // Get the <span> element that closes the modal-->
+<!--                var span3 = document.getElementsByClassName("close3")[0];-->
 
-                // When the user clicks the button, open the modal
-                btn3.onclick = function() {
-                    modal3.style.display = "block";
-                }
+<!--                // When the user clicks the button, open the modal-->
+<!--                btn3.onclick = function() {-->
+<!--                    modal3.style.display = "block";-->
+<!--                }-->
 
-                // When the user clicks on <span> (x), close the modal
-                span3.onclick = function() {
-                    modal3.style.display = "none";
-                }
+<!--                // When the user clicks on <span> (x), close the modal-->
+<!--                span3.onclick = function() {-->
+<!--                    modal3.style.display = "none";-->
+<!--                }-->
 
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal3) {
-                        modal3.style.display = "none";
-                    }
-                }
-            </script>
+<!--                // When the user clicks anywhere outside of the modal, close it-->
+<!--                window.onclick = function(event) {-->
+<!--                    if (event.target == modal3) {-->
+<!--                        modal3.style.display = "none";-->
+<!--                    }-->
+<!--                }-->
+<!--                // Get the modal-->
+<!--                var modal1 = document.getElementById("myModal1");-->
 
+<!--                // Get the button that opens the modal-->
+<!--                var btn1 = document.getElementById("myBtn1");-->
 
+<!--                // Get the <span> element that closes the modal-->
+<!--                var span1 = document.getElementsByClassName("close2")[0];-->
 
+<!--                // When the user clicks the button, open the modal-->
+<!--                btn1.onclick = function() {-->
+<!--                    modal1.style.display = "block";-->
+<!--                }-->
 
+<!--                // When the user clicks on <span> (x), close the modal-->
+<!--                span1.onclick = function() {-->
+<!--                    modal1.style.display = "none";-->
+<!--                }-->
 
-            <script>
-                // Get the modal
-                var modal1 = document.getElementById("myModal1");
+<!--                // When the user clicks anywhere outside of the modal, close it-->
+<!--                window.onclick = function(event) {-->
+<!--                    if (event.target == modal1) {-->
+<!--                        modal1.style.display = "none";-->
+<!--                    }-->
+<!--                }-->
+<!--    -->
+<!--                // Get the modal-->
+<!--                var modal2 = document.getElementById("myModal2");-->
 
-                // Get the button that opens the modal
-                var btn1 = document.getElementById("myBtn1");
+<!--                // Get the button that opens the modal-->
+<!--                var btn2 = document.getElementById("myBtn2");-->
 
-                // Get the <span> element that closes the modal
-                var span1 = document.getElementsByClassName("close2")[0];
+<!--                // Get the <span> element that closes the modal-->
+<!--                var span2 = document.getElementsByClassName("close2")[0];-->
 
-                // When the user clicks the button, open the modal
-                btn1.onclick = function() {
-                    modal1.style.display = "block";
-                }
+<!--                // When the user clicks the button, open the modal-->
+<!--                btn2.onclick = function() {-->
+<!--                    modal2.style.display = "block";-->
+<!--                }-->
 
-                // When the user clicks on <span> (x), close the modal
-                span1.onclick = function() {
-                    modal1.style.display = "none";
-                }
+<!--                // When the user clicks on <span> (x), close the modal-->
+<!--                span2.onclick = function() {-->
+<!--                    modal2.style.display = "none";-->
+<!--                }-->
 
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal1) {
-                        modal1.style.display = "none";
-                    }
-                }
-            </script>
-
-            <script>
-                // Get the modal
-                var modal2 = document.getElementById("myModal2");
-
-                // Get the button that opens the modal
-                var btn2 = document.getElementById("myBtn2");
-
-                // Get the <span> element that closes the modal
-                var span2 = document.getElementsByClassName("close2")[0];
-
-                // When the user clicks the button, open the modal
-                btn2.onclick = function() {
-                    modal2.style.display = "block";
-                }
-
-                // When the user clicks on <span> (x), close the modal
-                span2.onclick = function() {
-                    modal2.style.display = "none";
-                }
-
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal2) {
-                        modal2.style.display = "none";
-                    }
-                }
-            </script>
+<!--                // When the user clicks anywhere outside of the modal, close it-->
+<!--                window.onclick = function(event) {-->
+<!--                    if (event.target == modal2) {-->
+<!--                        modal2.style.display = "none";-->
+<!--                    }-->
+<!--                }-->
+<!--            </script>-->
 
 
-            <script>
-                // Get the modal
-                var modal = document.getElementById("myModal");
+<!--            <script>-->
+<!--                // Get the modal-->
+<!--                var modal = document.getElementById("myModal");-->
 
-                // Get the button that opens the modal
-                var btn = document.getElementById("myBtn");
+<!--                // Get the button that opens the modal-->
+<!--                var btn = document.getElementById("myBtn");-->
 
-                // Get the <span> element that closes the modal
-                var span = document.getElementsByClassName("close")[0];
+<!--                // Get the <span> element that closes the modal-->
+<!--                var span = document.getElementsByClassName("close")[0];-->
 
-                // When the user clicks the button, open the modal
-                btn.onclick = function() {
-                    modal.style.display = "block";
-                }
+<!--                // When the user clicks the button, open the modal-->
+<!--                btn.onclick = function() {-->
+<!--                    modal.style.display = "block";-->
+<!--                }-->
 
-                // When the user clicks on <span> (x), close the modal
-                span.onclick = function() {
-                    modal.style.display = "none";
-                }
+<!--                // When the user clicks on <span> (x), close the modal-->
+<!--                span.onclick = function() {-->
+<!--                    modal.style.display = "none";-->
+<!--                }-->
 
-                // When the user clicks anywhere outside of the modal, close it
-                window.onclick = function(event) {
-                    if (event.target == modal) {
-                        modal.style.display = "none";
-                    }
-                }
-            </script>
+<!--                // When the user clicks anywhere outside of the modal, close it-->
+<!--                window.onclick = function(event) {-->
+<!--                    if (event.target == modal) {-->
+<!--                        modal.style.display = "none";-->
+<!--                    }-->
+<!--                }-->
+<!--          -->
+<!--                function myFunction(){-->
+<!--                    Swal.fire({-->
+<!--                        title: '<h6 style="color:  #39A912;">Transaction Successful</h6>',-->
+<!--                        text: "Metfone will contact to pick up the phone. More info calls 1204",-->
+<!--                        textColor:'#39A912',-->
+<!--                        icon: 'success',-->
+<!--                        confirmButtonColor: '#EB2227',-->
+<!--                        confirmButtonText: 'Back to home'-->
+<!--                    })-->
+
+
+<!--                }-->
+
+<!--            </script>-->
+<!--            <script>-->
+<!--                function sweetalert(){-->
+<!--                    Swal.fire({-->
+<!--                        title: '<h6 style="color:  #39A912;">Transaction Successful</h6>',-->
+<!--                        text: "Metfone will contact to pick up the phone. More info calls 1204",-->
+<!--                        textColor:'#39A912',-->
+<!--                        icon: 'success',-->
+<!--                        confirmButtonColor: '#EB2227',-->
+<!--                        confirmButtonText: 'Back to home'-->
+<!--                    })-->
+
+
+<!--                }-->
+
+<!--            </script>-->
+
 
 
 
@@ -689,7 +742,31 @@
 </div>
 </body>
 
+
 </html>
+<script>
+    function validatePopup(obj, placeholder) {
+        var obj = "#" + obj;
+        var value = $(obj).val();
+
+        $(obj).css("border-color", "red");
+        $(obj).attr('placeholder', placeholder);
+        $('body').append('<style>' + obj + '::placeholder{color:red !important;}</style>')
+        return false;
+    }
+    function myTest(){
+        var test =document.getElementById("myDiv8").value;
+       console.log(test);
+
+        validatePopup("myDiv5", "");
+        validatePopup("myDiv6", "");
+        validatePopup("myDiv7", "");
+        validatePopup("myDiv8", "*Please input customer name");
+        validatePopup("myDiv9", "*Phone numer invalid");
+        validatePopup("myDiv10", "*Please input your national ID card/ Passport");
+        validatePopup("myDiv11", "");
+    }
+</script>
 
 
 

@@ -3,22 +3,146 @@
 <head>
     <script src="sweetalert2.all.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        .swal2-title {
+            position: relative;
+            max-width: 100%;
+            color: inherit;
+
+            padding-top: -1px;
+
+            font-size: 1.875em;
+            font-weight: 600;
+            text-align: center;
+            text-transform: none;
+            word-wrap: break-word;
+            margin-top: -50px;
+        }
+        #swal2-html-container{
+            z-index: 1;
+            margin: 0px 0px 0px;
+            justify-content: center;
+            overflow: auto;
+            color: inherit;
+            font-size: 0.825em;
+            font-weight: normal;
+            line-height: normal;
+            text-align: center;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+    </style>
 
 </head>
 <body>
+<input type="text" th:id="username"  placeholder="" >
 
-<button type="button"  onclick="myFunction()"> click</button>
+<!--<button type="button"  onclick="sweetalert()"> click</button>-->
+
+
+    <div class="row">
+
+        <div class="input3">
+            <input type="text" id="x" class="detail3" name="fornavn"  placeholder="Fornavn*" >
+            <input type="text" id="x1" class="detail3" name="fornavn"  placeholder="Fornavn*" >
+        </div><!-- slut .input -->
+
+<!--        <div class="input3">-->
+
+            <input type="text" id="password" class="detail3"  placeholder="" >
+<!--        </div>&lt;!&ndash; slut .input &ndash;&gt;-->
+        <button onclick="testvall()" >submit</button>
+
+    </div>
+
+<!--<form name="frm">-->
+<!--    Question: <input name="question" /> <br />-->
+<!--    <input name="questio" />-->
+<!--&lt;!&ndash;    <input id="insert" onclick="return IsEmpty();" type="submit" value="Add Question" />&ndash;&gt;-->
+
+<!--</form>-->
+
 </body>
 </html>
+
+<!--<script>-->
+<!--    function sweetalert(){-->
+<!--        Swal.fire({-->
+<!--            title: '<h6 style="color:  #EB2227;">Transaction Unsuccessful</h6>',-->
+<!--            text: "Sorry! You don’t have enough balance to make per-order. Pre-order is required $5 deposit via your phone basic balance. Please top-up and try again.",-->
+<!--            textColor:'#39A912',-->
+<!--            icon: 'error',-->
+<!--            confirmButtonColor: '#EB2227',-->
+<!--            confirmButtonText: 'Back to home'-->
+<!--        })-->
+
+
+<!--    }-->
+
+<!--</script>-->
 <script>
-    function myFunction(){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href="">Why do I have this issue?</a>'
-        })
-      
+    // function validateForm() {
+    //     let x = document.getElementById("x").value;
+    //     let x1 = document.getElementById("x1").value;
+    //
+    //     if (x == "") {
+    //         document.getElementById("x").style.borderColor = "red";
+    //
+    //
+    //     }else if(x1 == ''){
+    //         document.getElementById("x1").style.borderColor = "red";
+    //
+    //     }
+    //
+    // }
+/////////////////////////////////////////////////////
+//     const username = document.getElementById("username");
+//     const password = document.getElementById("password");
+//     const form = document.getElementById("form");
+//     const errorMessage = document.getElementById("errorMessage");
+//     form.addEventListener("submit",(e) =>{
+//         const  errors = [];
+//         if(username.value.trim()===""){
+//             errors.push("Username requied")
+//         }
+//         if(password.value.length <4){
+//             errors.push("password must be at least 4 character ")
+//         }
+//
+//         if(errors.length >0){
+//             e.preventDefault();
+//             errorMessage.toggleAttribute('hidden');
+//             errorMessage.innerHTML = errors.join(', ');
+//         }
+//     })
+//
+//
+//     function IsEmpty() {
+//         if (document.forms['frm'].question.value === "") {
+//             document.forms['frm'].question.style.borderColor = "red";
+//             return false;
+//         }
+//         if (document.forms['frm'].questio.value === "") {
+//             document.forms['frm'].questio.style.borderColor = "red";
+//             return false;
+//         }
+//         return true;
+//     }
+    function validatePopup(obj, placeholder) {
+        var obj = "#" + obj;
+        var value = $(obj).val();
+        $(obj).css("border-color", "red");
+        $(obj).attr('placeholder', placeholder);
+        $('body').append('<style>' + obj + '::placeholder{color:red !important;}</style>')
+        return false;
     }
+   function testvall(){
+        var test = document.getElementById("username").value;
+       if (test = " "){
+        validatePopup("username", "*Please input your verification Code");
+       }
+   }
+
 
 </script>
