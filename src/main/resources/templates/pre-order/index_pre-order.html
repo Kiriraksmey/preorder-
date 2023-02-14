@@ -12,7 +12,7 @@
     <script src="js/foundation.min.js"></script>
     <script src="js/setup.js"></script>
 
-    <script src="js/main.js"></script>
+    <script src="js/preOrder.js"></script>
 
     <!-- xzoom plugin here -->
     <script type="text/javascript" src="../dist/xzoom.min.js"></script>
@@ -34,8 +34,10 @@
 
     </style>
 </head>
-<body onload="onloadIndex();" onpageshow="pageShow(this)">
+<body>
+
 <div class="container" layout:fragment="content">
+    <form id="form" action="#">
     <div id="LoginFrom">
 
     <div class="inp-button" style="position: relative;padding-top: 10px">
@@ -50,7 +52,7 @@
                 <p style="font-size: 25px;font-weight: bold">Track your order</p>
                 <label style="margin-right: 349px;">Verification Code</label>
                 <input type="text"  name="fname" value=""  placeholder="Enter your verification code" class="form-control" style="border-radius: 5px;border: 1px solid gray;width: 476px">
-                <button data-toggle="" data-target="#myModal" class="form-contro"  style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                <button data-toggle=""  data-target="#myModal" class="form-contro"  style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #eb2227;color: white;font-size: 1rem"><span >Search</span></button>
             </div>
 
@@ -64,34 +66,43 @@
 
     <div class="row" style="margin-bottom: 80px ;padding-top: 45px">
         <div class="large-5 column1" >
-            <div class="xzoom-container" >
-                <img class="xzoom" id="xzoom-default" src="images/product/iphone/iphone14promax.jpeg" xoriginal="images/product/iphone/iphone14promax.jpeg" />
+            <div class="xzoom-container" id="test" >
+                <img class="xzoom"  src="images/product-preOrder/category/iphone14promax.jpeg" xoriginal="images/product/iphone/iphone14promax.jpeg" />
 
             </div>
         </div>
 
 
-        <div class="row " >
-
+        <div class="row" >
             <div class="" style="display: flex;flex-direction: column;padding-left: 15px" >
                 <label >Choose product</label>
-                <select onchange="displayProductCategory('hideValuesOnSelect', this)" class="form-control" name="productCategory"  id="productCategory" >
-                    <option value="0">select product</option>
-                    <option value="1">Iphone</option>
+<!--                <select onchange="displayProductCategory('hideValuesOnSelect', this)" class="form-control" id="productCategory" >-->
+<!--                <select onchange="testProduct()" class="form-control" id="productCategory" >-->
+
+<!--                    <option value="0">select product</option>-->
+<!--                    <option value="1">Iphone</option>-->
+<!--                </select>-->
+                <select  class="form-control" th:id="productCategory" onchange="changeProduct(this.value)">
+                    <option>select product</option>
                 </select>
+
+
                 <div class="xzoom-container">
                     <div id="categoryImg" class="xzoom-thumbs">
                         <a id="zoomImg0" onclick="('images/product/iphone/iphone14promax.jpeg')"></a>
                     </div>
-                    <div class="img-box-category" style="position: relative;display: none" id="hideValuesOnSelect">
-                        <img class="xzoomgallery" src="images/product/iphone/iphone14promax.jpeg" style="width: 66.62px;height:58.24px;position: absolute;right: 37px;top:5px">
+                    <div class="img-box-category" style="position: relative" id="hideValuesOnSelect">
+                        <img  th:id="productImage" class="xzoomgallery" src="images/product-preOrder/category/iphone14promax.jpeg" style="display: none;width: 66.62px;height:58.24px;position: absolute;right: 37px;top:5px">
                         <p style="width: 144px;height: 15px;margin-left: 9px;position: absolute;top:68px">Iphone</p>
                     </div>
                 </div>
                 <label>Choose your device</label>
-                <select  class="form-control" name="deviceCategory" id="myDiv4" onchange="displayProductCategory('hideValuesOnSelect1', this)" >
-                    <option value="0">select device</option>
-                    <option value="1">Iphone 14 series</option>
+<!--                <select  class="form-control" name="deviceCategory" id="productSubCategory" onchange="displayProductCategory('hideValuesOnSelect1', this)" >-->
+<!--                    <option value="0">select device</option>-->
+<!--                    <option value="1">Iphone 14 series</option>-->
+<!--                </select>-->
+                <select  class="form-control" name="deviceCategory" onchange="changeImg(this.value)" id="productSubCategory"  >
+                    <option>select device</option>
                 </select>
                 <div class="xzoom-container">
 
@@ -337,12 +348,13 @@
     </div>
 
     </div>
-
+    </form>
 </div>
 </body>
-
-
 </html>
+<script>
+
+</script>
 
 
 

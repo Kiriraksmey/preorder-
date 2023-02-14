@@ -12,6 +12,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,6 +32,32 @@ public class PreorderRequestController {
     @GetMapping(value = "productsCategory")
     public ResponseEntity<?> products() throws IOException {
         URL obj = new URL(url + "productCategory");
+        HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
+        httpURLConnection.setRequestMethod("GET");
+        httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = httpURLConnection.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        StringBuffer response = null;
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String inputLine;
+            response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            // print result
+            System.out.println(response.toString());
+        } else {
+            System.out.println("GET request not worked");
+        }
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping(value = "productSubCategory")
+    public ResponseEntity<?> productsSubCategory(@RequestParam(name = "categoryId") Long id) throws IOException {
+        URL obj = new URL(url + "productSubCategory?categoryId="+ id);
         HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
         httpURLConnection.setRequestMethod("GET");
         httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
