@@ -80,4 +80,29 @@ public class PreorderRequestController {
         }
         return ResponseEntity.ok(response);
     }
+    @GetMapping(value = "productColor")
+    public ResponseEntity<?> productColor() throws IOException {
+        URL obj = new URL(url + "productColor");
+        HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
+        httpURLConnection.setRequestMethod("GET");
+        httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
+        int responseCode = httpURLConnection.getResponseCode();
+        System.out.println("GET Response Code :: " + responseCode);
+        StringBuffer response = null;
+        if (responseCode == HttpURLConnection.HTTP_OK) { // success
+            BufferedReader in = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String inputLine;
+            response = new StringBuffer();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            // print result
+            System.out.println(response.toString());
+        } else {
+            System.out.println("GET request not worked");
+        }
+        return ResponseEntity.ok(response);
+    }
 }

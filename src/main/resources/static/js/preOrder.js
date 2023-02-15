@@ -183,7 +183,9 @@ $.ajax({
         if (obj.length > 0) {
             console.log(obj);
             for (var i = 0; i < obj.length; i++) {
+
                 if (obj[i].set_default == 1){
+                    changeProduct(obj[i].id);
                     $('#productCategory').append(
                         $('<option>').text(obj[i].category_name).attr(
                             'value', obj[i].id).prop('selected', true),
@@ -206,41 +208,19 @@ $.ajax({
     }
 });
 
-
+function setLabelOption(obj,label,value){
+    obj.empty();
+    obj.append(
+        $('<option>').text(label).attr('value', value));
+}
 
 //productSubCategory//
 
-//
-// var data = {};
-// $.ajax({
-//     type: "GET",
-//     contentType: "application/json",
-//     url: CONFIG.pre_order_url + "productSubCategory",
-//     dataType: 'json',
-//     cache: false,
-//     timeout: 600000,
-//     success: function (data) {
-//         var obj = data["productSubCategory"];
-//         console.log(obj.length);
-//         if (obj.length > 0) {
-//             console.log(obj);
-//             for (var i = 0; i < obj.length; i++) {
-//                 $('#productSubCategory').append(
-//                     $('<option>').text(obj[i].subCategoryTitle).attr(
-//                         'value', obj[i].categoryId),
-//                 )
-//
-//             }
-//         }
-//
-//     },
-//     error: function (e) {
-//         console.log("Error !" + e);
-//     }
-// });
+
 function changeProduct(id)
 {
-    $('#productSubCategory').empty();
+      var option = $('#productSubCategory');
+    setLabelOption(option,"Select Device",null);
     var data = {};
     $.ajax({
         type: "GET",
@@ -253,9 +233,12 @@ function changeProduct(id)
             var obj = data["productSubCategory"];
             console.log(obj.length);
             if (obj.length > 0) {
+
                 console.log( obj);
                 for (var i = 0; i < obj.length; i++) {
-                    $('#productSubCategory').append(
+
+
+                    option.append(
                         $('<option>').text(obj[i].subCategoryTitle).attr(
                             'value', obj[i].categoryId),
                     )
@@ -270,7 +253,11 @@ function changeProduct(id)
         }
     });
 }
-function  changeImg(image){
-    alert(image);
+
+
+function productDevice(){
 
 }
+
+
+
