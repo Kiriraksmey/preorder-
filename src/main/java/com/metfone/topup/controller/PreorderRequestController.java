@@ -80,9 +80,9 @@ public class PreorderRequestController {
         }
         return ResponseEntity.ok(response);
     }
-    @GetMapping(value = "productColor")
-    public ResponseEntity<?> productColor() throws IOException {
-        URL obj = new URL(url + "productColor");
+    @GetMapping(value = "productModel")
+    public ResponseEntity<?> productModel(@RequestParam(name = "subCategoryId") Long subCategoryId) throws IOException {
+        URL obj = new URL(url + "productModel?subCategoryId="+ subCategoryId);
         HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
         httpURLConnection.setRequestMethod("GET");
         httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
@@ -105,4 +105,5 @@ public class PreorderRequestController {
         }
         return ResponseEntity.ok(response);
     }
+
 }

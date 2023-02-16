@@ -1,8 +1,8 @@
 //////Chose your product//////////////////////
 
-function displayProductCategory(id, elementValue) {
-    document.getElementById(id).style.display = elementValue.value == 1 ? 'block' : 'none';
-}
+// function displayProductCategory(id, elementValue) {
+//     document.getElementById(id).style.display = elementValue.value == 1 ? 'block' : 'none';
+// }
 
 //////Chose your model//////////////////////
 
@@ -170,6 +170,7 @@ function sweetalertSucess(){
 
 
 var data = {};
+
 $.ajax({
     type: "GET",
     contentType: "application/json",
@@ -179,20 +180,30 @@ $.ajax({
     timeout: 600000,
     success: function (data) {
         var obj = data["productCategory"];
-        console.log(obj.length);
+        console.log(obj[0].values);
+        //   if($(this).val() == 'select product'){
+        //     document.getElementById("hideValuesOnSelect").style.display="none";
+        //
+        // }
+
         if (obj.length > 0) {
             console.log(obj);
             for (var i = 0; i < obj.length; i++) {
 
+
                 if (obj[i].set_default == 1){
                     changeProduct(obj[i].id);
+                   // obj[0].style.display="none";
+                  //  document.getElementById("hideValuesOnSelect").style.display="none";
                     $('#productCategory').append(
                         $('<option>').text(obj[i].category_name).attr(
                             'value', obj[i].id).prop('selected', true),
                     )
 //                                            document.getElementById("thumnailImage").style.display = "block";
 //                                            document.getElementById('thumnailImage').src =obj[i].image;
-                }else{
+                }
+
+                else {
                     $('#productCategory').append(
                         $('<option>').text(obj[i].category_name).attr(
                             'value', obj[i].id),
@@ -209,18 +220,31 @@ $.ajax({
 });
 
 function setLabelOption(obj,label,value){
+
     obj.empty();
     obj.append(
         $('<option>').text(label).attr('value', value));
+
+
 }
+
+
 
 //productSubCategory//
 
 
 function changeProduct(id)
 {
+    // if($('<option>').val() == 'select product'){
+    //     document.getElementById("hideValuesOnSelect").style.display="none";
+    //
+    // }
+
+    // document.getElementById("hideValuesOnSelect").style.display="none";
+
       var option = $('#productSubCategory');
     setLabelOption(option,"Select Device",null);
+
     var data = {};
     $.ajax({
         type: "GET",
@@ -233,20 +257,37 @@ function changeProduct(id)
             var obj = data["productSubCategory"];
             console.log(obj.length);
             if (obj.length > 0) {
-
                 console.log( obj);
                 for (var i = 0; i < obj.length; i++) {
 
+                      if (obj[i].set_default == 1){
+                        option.append(
+                            $('<option>').text(obj[i].subCategoryTitle).attr(
+                            'value', obj[i].categoryId).prop('selected', true),
+                        )
+                        document.getElementById("productImage").style.display="block";
+                        document.getElementById('productImage').src = obj[i].image;
+                        console.log( "image is "+obj[i].image)
 
-                    option.append(
-                        $('<option>').text(obj[i].subCategoryTitle).attr(
-                            'value', obj[i].categoryId),
-                    )
-                      document.getElementById("productImage").style.display="block";
-                     document.getElementById('productImage').src = obj[i].image;
-                     console.log( "image is "+obj[i].image)
+                    }
+                    else {
+                        option.append(
+                            $('<option>').text(obj[i].subCategoryTitle).attr(
+                                'value', obj[i].categoryId),
+                        )
+                        document.getElementById("productImage").style.display="block";
+                        document.getElementById('productImage').src = obj[i].image;
+
+
+                    }
+
+
+
+
                 }
             }
+
+
         },
         error: function (e) {
             console.log("Error !" + e);
@@ -255,7 +296,30 @@ function changeProduct(id)
 }
 
 
-function productDevice(){
+function productDevice(subCategoryId){
+    var data = {};
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: CONFIG.pre_order_url + "productModel?subCategoryId="+ subCategoryId,
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var obj = data["product"];
+            console.log(obj.length);
+            if (obj.length > 0) {
+                for (var i = 0; i < obj.length; i++) {
+                    $('#productModel').append(
+                        $('<p>').text(obj[i].decription).attr(
+                            'value', obj[i].id).prop('selected', true),
+                    )
+
+                }
+            }
+
+        }
+    })
 
 }
 

@@ -83,7 +83,7 @@
 <!--                    <option value="1">Iphone</option>-->
 <!--                </select>-->
                 <select  class="form-control" th:id="productCategory" onchange="changeProduct(this.value)">
-                    <option>select product</option>
+                    <option value="0">select product</option>
                 </select>
 
 
@@ -101,32 +101,22 @@
 <!--                    <option value="0">select device</option>-->
 <!--                    <option value="1">Iphone 14 series</option>-->
 <!--                </select>-->
-                <select  class="form-control" name="deviceCategory"  id="productSubCategory"   >
+                <select  class="form-control" name="deviceCategory"  id="productSubCategory"  onchange="productDevice(this.value)" >
 
                 </select>
                 <div class="xzoom-container">
 
-                    <div  style="position: relative;display: none;margin-bottom: 10px" id="hideValuesOnSelect1">
+                    <div  style="position: relative;margin-bottom: 10px" id="hideValuesOnSelect1">
                         <label>Choose your model</label>
                         <div style="display: flex;flex-direction: row;justify-content: space-between">
-                            <div class="img-iphone-category"  id="iphone" onclick="selectIphone14ProMax()" style="padding-left: 16px">
-                                <p style="margin-bottom: 0px;font-weight: bold" >IPHONE14 PROMAX</p>
-                                <span style="font-size: 12px">6.7-Inch Iphone</span>
+                            <div class="img-iphone-category" id="productModel"  onclick="selectIphone14ProMax()" style="padding-left: 16px">
+                                <p  style="margin-bottom: 0px;font-weight: bold" >IPHONE14 PROMAX</p>
 
-                            </div>
-                            <div class="img-iphone-category" id="iphone14" onclick="selectIphone14Pro()" style="padding-left: 16px">
-                                <p style="margin-bottom: 0px;font-weight: bold" >IPHONE14 PRO</p>
-                                <span style="font-size: 12px">6.7-Inch Iphone</span>
 
                             </div>
 
                         </div>
 
-                        <div class="img-iphone-category" id="iphone14max" onclick="selectIphone14()" style="padding-left: 16px">
-                            <p style="margin-bottom: 0px;font-weight: bold">IPHONE14 </p>
-                            <span style="font-size: 12px">6.7-Inch Iphone</span>
-
-                        </div>
 
 
 
