@@ -7,25 +7,7 @@
 //////Chose your model//////////////////////
 
 
-function selectIphone14ProMax() {
-    var element = document.getElementById("iphone14max");
-    console.log(element);
-    element.style.borderColor = "#AEAEAE";
-    element.style.color = "#000000";
-    element.style.backgroundColor = "#FFFFFF";
 
-    var element = document.getElementById("iphone14");
-    console.log(element);
-    element.style.borderColor = "#AEAEAE";
-    element.style.color = "#000000";
-    element.style.backgroundColor = "#FFFFFF";
-
-    // document.getElementById("iphone").style.borderColor = "none";
-    document.getElementById("iphone").style.borderColor = "red";
-    document.getElementById("iphone").style.color = "#EB2227";
-    document.getElementById("iphone").style.backgroundColor = "#FFEAEA";
-
-}
 function selectIphone14Pro() {
     var element = document.getElementById("iphone");
     console.log(element);
@@ -197,8 +179,10 @@ $.ajax({
                   //  document.getElementById("hideValuesOnSelect").style.display="none";
                     $('#productCategory').append(
                         $('<option>').text(obj[i].category_name).attr(
-                            'value', obj[i].id).prop('selected', true),
+                            'value', obj[i].id).prop('selected', true),//khi click on category-name no se push categoryID
                     )
+
+
 //                                            document.getElementById("thumnailImage").style.display = "block";
 //                                            document.getElementById('thumnailImage').src =obj[i].image;
                 }
@@ -219,6 +203,7 @@ $.ajax({
     }
 });
 
+
 function setLabelOption(obj,label,value){
 
     obj.empty();
@@ -235,12 +220,8 @@ function setLabelOption(obj,label,value){
 
 function changeProduct(id)
 {
-    // if($('<option>').val() == 'select product'){
-    //     document.getElementById("hideValuesOnSelect").style.display="none";
-    //
-    // }
 
-    // document.getElementById("hideValuesOnSelect").style.display="none";
+
 
       var option = $('#productSubCategory');
     setLabelOption(option,"Select Device",null);
@@ -255,25 +236,26 @@ function changeProduct(id)
         timeout: 600000,
         success: function (data) {
             var obj = data["productSubCategory"];
-            console.log(obj.length);
+
+
             if (obj.length > 0) {
-                console.log( obj);
+
                 for (var i = 0; i < obj.length; i++) {
+
 
                       if (obj[i].set_default == 1){
                         option.append(
                             $('<option>').text(obj[i].subCategoryTitle).attr(
-                            'value', obj[i].categoryId).prop('selected', true),
+                            'value', obj[i].id).prop('selected', true),
                         )
-                        document.getElementById("productImage").style.display="block";
-                        document.getElementById('productImage').src = obj[i].image;
+                       //  var test = '<p style="width: 144px;height: 15px;margin-left: 9px;position: absolute;top:68px">'+obj[i].subCategoryTitle+'</p>';
                         console.log( "image is "+obj[i].image)
 
                     }
                     else {
                         option.append(
                             $('<option>').text(obj[i].subCategoryTitle).attr(
-                                'value', obj[i].categoryId),
+                                'value', obj[i].id),
                         )
                         document.getElementById("productImage").style.display="block";
                         document.getElementById('productImage').src = obj[i].image;
@@ -297,6 +279,9 @@ function changeProduct(id)
 
 
 function productDevice(subCategoryId){
+    console.log("the result is" +subCategoryId)
+
+    $('#hideValuesOnSelect1').empty();
     var data = {};
     $.ajax({
         type: "GET",
@@ -306,22 +291,89 @@ function productDevice(subCategoryId){
         cache: false,
         timeout: 600000,
         success: function (data) {
+
             var obj = data["product"];
             console.log(obj.length);
             if (obj.length > 0) {
+
+
                 for (var i = 0; i < obj.length; i++) {
-                    $('#productModel').append(
-                        $('<p>').text(obj[i].decription).attr(
+
+
+                    var products = '<div >' +
+
+
+                        '<button class="img-iphone-category"   onclick="selectIphone14ProMax(this.value)" id="color"  >' +
+                        '<p id="productName"  style="margin-bottom: 0px;font-weight: bold" >' +obj[i].product_name+
+                        '</p>' +
+                        '<span id="productModel"> '+obj[i].decription+'</span>' +
+                        '</button>'+
+                        '</div>';
+
+                    $('#hideValuesOnSelect1').append(products);
+                    $('#color').attr('value', obj[i].id);
+                    console.log("hi"+obj[i].id);
+
+
+                }
+
+            }
+
+
+        }
+    })
+
+}
+
+
+function capacity(obj){
+    console.log("the modelID" +modelId)
+    var data = {};
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: CONFIG.pre_order_url + "productCapacity?modelId="+modelId,
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var obj = data["productCapacity"];
+            console.log(obj.length);
+            if (obj.length > 0) {
+                for (var i = 0; i < obj.length; i++) {
+                    $('#productCapacity').append(
+                        $('<option>').text(obj[i].capacity_name).attr(
                             'value', obj[i].id).prop('selected', true),
                     )
 
+
                 }
+
+
             }
 
         }
     })
 
 }
+function selectIphone14ProMax(modelId) {
+
+    capacity(this.value);
+    var element = document.getElementById("color");
+    console.log(element);
+    element.style.borderColor = "red";
+    element.style.color = "#EB2227";
+    element.style.backgroundColor = "#FFEAEA";
+
+}
+
+
+
+
+
+
+
+
 
 
 
