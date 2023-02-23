@@ -12,37 +12,26 @@
     <script src="js/foundation.min.js"></script>
     <script src="js/setup.js"></script>
 
-    <script src="js/preOrder.js"></script>
+
 
     <!-- xzoom plugin here -->
     <script type="text/javascript" src="../dist/xzoom.min.js"></script>
     <link rel="stylesheet" type="text/css" href="../dist/xzoom.css" media="all" />
-
-    <link rel="stylesheet"
-          href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
-<!--    -->
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
 
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
-    <style>
-
-
-
-    </style>
 </head>
 <body>
 
 <div class="container" layout:fragment="content">
-    <form id="form" action="#">
-    <div id="LoginFrom">
+    <form>
+    <div>
 
-    <div class="inp-button" style="position: relative;padding-top: 10px">
+    <div class="ttt" style="position: relative;padding-top: 10px">
         <button data-toggle="modal" data-target="#myModal" class="form-contro" onclick="modalVerificationCode()"  style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;position: absolute;right: 0px;background: #eb2227;color: white;font-size: 1rem"><span >Track your order</span></button>
-
         <!-- The Modal -->
         <div id="modalVerificationCode" class="modalVericationCode">
 
@@ -101,15 +90,13 @@
 <!--                    <option value="0">select device</option>-->
 <!--                    <option value="1">Iphone 14 series</option>-->
 <!--                </select>-->
-                <select  class="form-control" name="deviceCategory"  id="productSubCategory"  onclick="productDevice(this.value)" >
+                <select  class="form-control" name="deviceCategory"  id="productSubCategory"  onchange="productDevice(this.value)" >
 
                 </select>
-                <div class="xzoom-container">
-
-                    <div  style="display: flex;flex-direction:row;justify-content: space-between;" id="hideValuesOnSelect1">
+                    <div id="btnClick">
 
 <!--                        <div style="display: flex;flex-direction: row;justify-content: space-between">-->
-<!--                            <div class="img-iphone-category"   onclick="selectIphone14ProMax()" style="padding-left: 16px">-->
+<!--                            <button class="img-iphone-category"style="padding-left: 16px">-->
 <!--                                <p id="productName"  style="margin-bottom: 0px;font-weight: bold" ></p>-->
 <!--                                 <span id="productModel"></span>-->
 
@@ -118,13 +105,7 @@
 <!--                        </div>-->
 
 
-
-
-
-
                     </div>
-
-                </div>
                 <label>Choose your capacity</label>
                 <select id="productCapacity" class="form-control" name="capacityCategory">
                     <option>select capacity</option>
@@ -342,10 +323,6 @@
 </div>
 </body>
 </html>
-<script>
-
-</script>
-
 
 
 

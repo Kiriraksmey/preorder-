@@ -1,27 +1,16 @@
 package com.metfone.topup.controller;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.util.EntityUtils;
-import org.omg.CORBA.portable.ResponseHandler;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
+import com.metfone.topup.model.PreOrder.Product;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Scanner;
 
 
 @RestController
@@ -29,7 +18,7 @@ public class PreorderRequestController {
     private final String  url = "http://127.0.0.1:9295/pre-order/";
     private static final String USER_AGENT = "Mozilla/5.0";
 
-    @GetMapping(value = "productsCategory")
+    @PostMapping(value = "/productsCategory")
     public ResponseEntity<?> products() throws IOException {
         URL obj = new URL(url + "productCategory");
         HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
@@ -55,9 +44,9 @@ public class PreorderRequestController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping(value = "productSubCategory")
-    public ResponseEntity<?> productsSubCategory(@RequestParam(name = "categoryId") Long id) throws IOException {
-        URL obj = new URL(url + "productSubCategory?categoryId="+ id);
+    @PostMapping(value = "productSubCategory")
+    public ResponseEntity<?> productSubCategory(@Valid @RequestBody Product products) throws IOException {
+        URL obj = new URL(url + "productSubCategory?categoryId="+products.getCategoryId());
         HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
         httpURLConnection.setRequestMethod("GET");
         httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
@@ -80,9 +69,10 @@ public class PreorderRequestController {
         }
         return ResponseEntity.ok(response);
     }
-    @GetMapping(value = "productModel")
-    public ResponseEntity<?> productModel(@RequestParam(name = "subCategoryId") Long subCategoryId) throws IOException {
-        URL obj = new URL(url + "productModel?subCategoryId="+ subCategoryId);
+
+    @PostMapping(value = "productModel")
+    public ResponseEntity<?> productModel(@Valid @RequestBody Product product) throws IOException {
+        URL obj = new URL(url + "productModel?subCategoryId="+ product.getSubCategoryId());
         HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
         httpURLConnection.setRequestMethod("GET");
         httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
@@ -105,9 +95,9 @@ public class PreorderRequestController {
         }
         return ResponseEntity.ok(response);
     }
-    @GetMapping(value = "productCapacity")
-    public ResponseEntity<?> productCapacity(@RequestParam(name = "modelId") Long modelId) throws IOException {
-        URL obj = new URL(url + "productCapacity?modelId="+ modelId);
+    @PostMapping(value = "productCapacity")
+    public ResponseEntity<?> productCapacity(@Valid @RequestBody Product product) throws IOException {
+        URL obj = new URL(url + "productCapacity?modelId="+ product.getModelId());
         HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
         httpURLConnection.setRequestMethod("GET");
         httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
@@ -130,9 +120,9 @@ public class PreorderRequestController {
         }
         return ResponseEntity.ok(response);
     }
-    @GetMapping(value = "productColor")
-    public ResponseEntity<?> productColor(@RequestParam(name = "modelId") Long modelId) throws IOException {
-        URL obj = new URL(url + "productColor?modelId="+ modelId);
+    @PostMapping(value = "productColor")
+    public ResponseEntity<?> productColor(@Valid @RequestBody Product product) throws IOException {
+        URL obj = new URL(url + "productColor?modelId="+ product.getModelId());
         HttpURLConnection httpURLConnection = (HttpURLConnection) obj.openConnection();
         httpURLConnection.setRequestMethod("GET");
         httpURLConnection.setRequestProperty("User-Agent", USER_AGENT);
