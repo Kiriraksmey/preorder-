@@ -1,85 +1,90 @@
-//////Chose your product//////////////////////
 
-// function displayProductCategory(id, elementValue) {
-//     document.getElementById(id).style.display = elementValue.value == 1 ? 'block' : 'none';
-// }
 
-//////Chose your model//////////////////////
-// function selectIphone14Pro() {
-//     var element = document.getElementById("iphone");
-//     console.log(element);
-//     element.style.borderColor = "#AEAEAE";
-//     element.style.color = "#000000";
-//     element.style.backgroundColor = "#FFFFFF";
-//
-//     var element = document.getElementById("iphone14max");
-//     console.log(element);
-//     element.style.borderColor = "#AEAEAE";
-//     element.style.color = "#000000";
-//     element.style.backgroundColor = "#FFFFFF";
-//
-//     document.getElementById("iphone14").style.borderColor = "red";
-//     document.getElementById("iphone14").style.color = "#EB2227";
-//     document.getElementById("iphone14").style.backgroundColor = "#FFEAEA";
-//
-// }
-// function selectIphone14() {
-//     var element = document.getElementById("iphone");
-//     console.log(element);
-//     element.style.borderColor = "#AEAEAE";
-//     element.style.color = "#000000";
-//     element.style.backgroundColor = "#FFFFFF";
-//
-//     var element = document.getElementById("iphone14");
-//     console.log(element);
-//     element.style.borderColor = "#AEAEAE";
-//     element.style.color = "#000000";
-//     element.style.backgroundColor = "#FFFFFF";
-//
-//     document.getElementById("iphone14max").style.borderColor = "red";
-//     document.getElementById("iphone14max").style.color = "#EB2227";
-//     document.getElementById("iphone14max").style.backgroundColor = "#FFEAEA";
-//
-// }
+////////////////////////////////////////validation///////////////////////////////////////////
+
+function validatePopup(obj, placeholder) {
+	var obj = "#" + obj;
+	var value = $(obj).val();
+
+	$(obj).css("border-color", "red");
+	$(obj).attr('placeholder', placeholder);
+	$('body').append('<style>' + obj + '::placeholder{color:red !important;}</style>')
+	return false;
+}
+
+
+
+function myTest(){
+
+	var productCustomerName =document.getElementById("productCustomerName").value;
+    var productCustomerNum =document.getElementById("productCustomerNum").value;
+    var productCustomerProvince =document.getElementById("productCustomerProvince").value;
+    var productCapacity =document.getElementById("productCapacity").value;
+    var productColor=document.getElementById("productColor").value;
+    var productCustomerId =document.getElementById("productCustomerId").value;
+    if(productCustomerName==="" || productCustomerNum==="" || productCustomerId==="" || productCustomerProvince===""||productCapacity==="" ||productColor==="" ){
+        validatePopup("productCustomerNum", "*Phone numer invalid");
+        validatePopup("productCustomerId", "*Please input your national ID card/ Passport");
+	validatePopup("productCustomerName", "*Please input customer name");
+        validatePopup("productCustomerProvince", "");
+        validatePopup("productCapacity", "");
+        validatePopup("productColor", "");
+
+    }
+    else {
+        modalReviewProduct();
+    }
+
+
+
+
+}
+
 
 ///////////////////Modal/////////////////////////////////////
 
 
-// function modalVerificationCode() {
+
+
+// var btn = document.getElementById("btnVerificationCode");
+//
 //     var modalVerificationCode = document.getElementById("modalVerificationCode");
-//     modalVerificationCode.style.display = "block";
+//
+//
 //     var span = document.getElementsByClassName("closeModal")[0];
+//
+//
+// btn.onclick = function () {
+//     modalVerificationCode.style.display = "block";
+// }
+//
 //
 //     span.onclick = function () {
 //         modalVerificationCode.style.display = "none";
 //     }
-// }
+
+
 // window.onclick = function(event) {
 //     if (event.target == modalVerificationCode) {
 //         modalVerificationCode.style.display = "none";
 //     }
 // }
-// function modalReviewProduct() {
-//     var modal1 = document.getElementById("modalReviewProduct");
-//     modal1.style.display = "block";
-// }
+function modalReviewProduct() {
+    var modal1 = document.getElementById("modalReviewProduct");
+    modal1.style.display = "block";
+    //Get the <span> element that closes the modal
+    var span1 = document.getElementsByClassName("close2")[0];
+
+//When the user clicks on <span> (x), close the modal
+    span1.onclick = function () {
+        modal1.style.display = "none";
+    }
 
 
-// Get the <span> element that closes the modal
-//     var span1 = document.getElementsByClassName("close2")[0];
+}
 
-// When the user clicks on <span> (x), close the modal
-//     span1.onclick = function () {
-//         modal1.style.display = "none";
-//     }
 
-// When the user clicks anywhere outside of the modal, close it
-//     window.onclick = function (event) {
-//         if (event.target == modal1) {
-//             modal1.style.display = "none";
-//         }
-//     }
-// }
+
 
 // function modalProductComfirmation() {
 //
@@ -154,11 +159,6 @@ $.ajax({
     success: function (data) {
         var obj = data["productCategory"];
         console.log(obj[0].values);
-        //   if($(this).val() == 'select product'){
-        //     document.getElementById("hideValuesOnSelect").style.display="none";
-        //
-        // }
-
         if (obj.length > 0) {
             console.log(obj);
             for (var i = 0; i < obj.length; i++) {
@@ -171,8 +171,6 @@ $.ajax({
                             'value', obj[i].id).prop('selected', true),//khi click on category-name no se push categoryID
                     )
 
-//                                            document.getElementById("thumnailImage").style.display = "block";
-//                                            document.getElementById('thumnailImage').src =obj[i].image;
                 }
 
                 else {
@@ -199,7 +197,11 @@ $.ajax({
 
 
  }
-
+function setViewImage(img){
+    document.getElementById("view_image_id").src = img;
+    document.getElementsByClassName("js-image-zoom__zoomed-image")[0].style.backgroundImage = " url(" + img + ")";
+    document.getElementsByClassName("js-image-zoom__zoomed-area")[0].style.height = "auto";
+}
 
 
 //productSubCategory//
@@ -228,10 +230,23 @@ function changeProduct(id) {
                             $('<option>').text(obj[i].subCategoryTitle).attr(
                             'value', obj[i].id).prop('selected', true),
                         )
-                          document.getElementById("productImage").style.display="block";
-                          document.getElementById('productImage').src = obj[i].image;
+                          //  document.getElementById("productImage").style.display="block";
+                          //  document.getElementById('productImage').src = obj[i].image;
+                          document.getElementById('imageCategory').style.display = obj[i].image;
+                          // document.getElementsByClassName("xzoom-container")[0].style.backgroundImage  =  " url("+ obj[i].image + ")";
+                          // document.getElementsByClassName("xzoom-container")[0].style.height = "auto";
+                          // var image= '<div className="xzoom-container">'+
+                          //     '<img  class="xzoom" id="imageCategory" style=" "  src="'+ obj[i].image + ' " xoriginal="' + obj[i].image + '" />'+
+                          //     '</div>';
+                          //
+                          // $("#xzoom-productSub").append(image);
+
                        //  var test = '<p style="width: 144px;height: 15px;margin-left: 9px;position: absolute;top:68px">'+obj[i].subCategoryTitle+'</p>';
-                        console.log( "image is "+obj[i].image)
+
+                          // document.getElementById("imageCategory").src = obj[i].image;
+                          // document.getElementsById("imageCategory")[0].style.backgroundImage = " src=("+ obj[i].image + ")";
+                          // document.getElementsByClassName("xzoom")[0].style.height = "auto";
+                        // console.log( "image is "+obj[i].image)
                     }
                     else {
                         option.append(
@@ -240,6 +255,9 @@ function changeProduct(id) {
                         )
                         document.getElementById("productImage").style.display="block";
                         document.getElementById('productImage').src = obj[i].image;
+                          // document.getElementById("imageCategory").style.display="block";
+                          // document.getElementById('imageCategory').src = obj[i].image;
+
 
                     }
 
@@ -253,6 +271,7 @@ function changeProduct(id) {
         }
     });
 }
+
 
 
 function productDevice(subId){
@@ -275,16 +294,16 @@ function productDevice(subId){
             // panel_model_id.style.display = "";
             if (obj.length >= 1) {
                 for (var i = 0; i < obj.length; i++) {
-                    var productHtml = '<button type="button" id="btns" value="' + obj[i].id + '" onclick="productModel(this.value)">' +
-
-                            '<p id="productName"  style="margin-bottom: 0px;font-weight: bold" >' +obj[i].product_name+
+                    var productHtml = '<button style="width: 246.62px;height:94.24px;position: relative;" type="button" id="btns" value="' + obj[i].id + '" onclick="productModel(this.value)">' +
+                            '<p id="productName"  style=" font-weight: bold;font-size: 14px" >' +obj[i].product_name+
                         '</p>' +
-                        '<span id="productModel"> '+obj[i].decription+'</span>' +
+                        '<span id="productModel" style="margin-top:80px;font-size: 14px"> '+obj[i].decription+'</span>' +
+                        ' </button>'+' <img src="'+obj[i].image +'" id="myImg" alt="Girl in a jacket" width="70" height="60" style="display: none;">';
 
-                        ' </button>';
+                    $("#btnClick").append(productHtml);
 
-                    $("#btnClick").append(productHtml)
                 }
+
             }
         },
         error: function (e) {
@@ -292,7 +311,23 @@ function productDevice(subId){
         }
     });
 }
+function setViewImg(img) {
+    // document.getElementById("myImg").style.display = "block";
+    // document.getElementById('myImg').src = img;
+
+    document.getElementById("imageCategory").src = img;
+    // console.log(document.getElementById("view_image_id").getElementsByClassName("js-image-zoom__zoomed-image"))
+    document.getElementsByClassName("xzoom")[0].style.backgroundImage = " xoriginal(" + img + ")";
+    document.getElementsByClassName("xzoom")[0].style.height = "auto";
+}
+
 function productModel(id) {
+
+    console.log(id);
+    var productCapacity = $('#productCapacity');
+    setLabelOption(productCapacity,"Select Capacity",null);
+    var productColor = $('#productColor');
+    setLabelOption(productColor,"Select Color",null);
 
     var data = {};
     data["modelId"] = id;
@@ -305,123 +340,108 @@ function productModel(id) {
         cache: false,
         timeout: 600000,
         success: function (data) {
+
+
             var obj = data["productCapacity"];
-            console.log(obj.length);
             if (obj.length > 0) {
                 for (var i = 0; i < obj.length; i++) {
-                    $('#productCapacity').append(
+                    productCapacity.append(
                         $('<option>').text(obj[i].capacity_name).attr(
-                            'value', obj[i].id).prop('selected', true),
+                            'value', obj[i].id)
+
+                    )
+                }
+
+            }
+
+        },
+        error: function (e) {
+            console.log("Error !" + e);
+        }
+    });
+
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: CONFIG.pre_order_url + "productColor",
+        data: JSON.stringify(data),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var obj = data["productColor"]
+            if (obj.length > 0) {
+                for (var i = 0; i < obj.length; i++) {
+                    $('#productColor').append(
+                        $('<option>').text(obj[i].color_name).attr(
+                            'value', obj[i].id),
                     )
 
+
+                    //document.getElementById("btns").style.borderColor="red";
 
                 }
 
 
             }
 
+        },
+        error: function (e) {
+            console.log("Error !" + e);
         }
     });
+
 }
 
-//     $.ajax({
-//         type: "POST",
-//         contentType: "application/json",
-//         url: CONFIG.pre_order_url + "productColor",
-//         data: JSON.stringify(data),
-//         dataType: 'json',
-//         cache: false,
-//         timeout: 600000,
-//         success: function (data) {
-//             var obj = data["productColor"];
-//             console.log(obj.length);
-//             if (obj.length > 0) {
-//                 for (var i = 0; i < obj.length; i++) {
-//                     $('#productColor').append(
-//                         $('<option>').text(obj[i].color_name).attr(
-//                             'value', obj[i].id).prop('selected', true),
-//                     )
-//
-//
-//                 }
-//
-//
-//             }
-//
-//         }
-//     })
-//
-// }
-// function changeColor(test) {
-//     console.log(modelId);
-//     var element = document.getElementById("color");
-//
-//     if (element.id == "color") {
-//         element.style.borderColor = "red";
-//         element.style.color = "#EB2227";
-//         element.style.backgroundColor = "#FFEAEA";
-//
-//     }
-//     else {
-//         element.style.borderColor = "";
-//         element.style.color = "";
-//         element.style.backgroundColor = "";
-//
-//     }
-//
-// }
+//    Select Change Color
+$('#productColor').on("change", function () {
+    setViewImg($("#productColor option:selected").attr('data-id'));
+});
 
+const popupTrigger = document.querySelector('.popup-trigger');
+const popup = document.querySelector('.popup');
+const popupClose = document.querySelector('.popup__close');
 
+popupTrigger.addEventListener('click', (e) => {
+    popup.classList.add('show');
+    document.body.style.cssText = `overflow: hidden;`;
 
-//
-//     function productCapacity(modelId) {
-//     console.log(modelId);
-//
-//     var data = {};
-//     $.ajax({
-//         type: "GET",
-//         contentType: "application/json",
-//         url: CONFIG.pre_order_url + "productCapacity?modelId="+modelId,
-//         dataType: 'json',
-//         cache: false,
-//         timeout: 600000,
-//         success: function (data) {
-//             var obj = data["productCapacity"];
-//             console.log(obj.length);
-//             if (obj.length > 0) {
-//                 for (var i = 0; i < obj.length; i++) {
-//                     $('#productCapacity').append(
-//                         $('<option>').text(obj[i].capacity_name).attr(
-//                             'value', obj[i].id).prop('selected', true),
-//                     )
-//
-//
-//                 }
-//
-//
-//             }
-//
-//         }
-//     })
-//
-// }
-//
-//
-//
+});
+popupClose.addEventListener('click', (e) => {
+    popup.classList.remove('show');
+    document.body.style.cssText = '';
+});
 
+// close on click on overlay
 
+popup.addEventListener('click', (e) => {
+    if (e.target === popup) {
+        popup.classList.remove('show');
+        document.body.style.cssText = '';
+    }
+});
+// close on press of escape button
+document.addEventListener('keydown', (e) => {
+    if (e.code === "Escape" && popup.classList.contains('show')) {
+        popup.classList.remove('show');
+        document.body.style.cssText = '';
+    }
+});
+$(".view_model_id").click(function (e) {
+    $("#view_image_id").attr("src", "images/" + $(this).val());
+    $("#thumnailImage").attr("src", "images/" + $(this).val());
+});
+$('#product_id').change(function (e) {
+    alert("werewsfdv");
+});
 
-
-
-
-
-
-    // var parent = element.parentNode;
-    // alert(parent.id);
-    // var color = parent.querySelector("button");
-    // alert(color.id);
-
-
+function onlyNumberKey(evt) {
+    // Only ASCII character in that range allowed
+    var ASCIICode = (evt.which) ? evt.which : evt.keyCode
+    if (ASCIICode > 31 && (ASCIICode < 48 || ASCIICode > 57))
+        return false;
+    return true;
+}
 
 
 

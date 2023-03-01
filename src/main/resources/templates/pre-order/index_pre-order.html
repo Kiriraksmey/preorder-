@@ -27,26 +27,26 @@
 <body>
 
 <div class="container" layout:fragment="content">
-    <form>
+    <form >
     <div>
 
-    <div class="ttt" style="position: relative;padding-top: 10px">
-        <button data-toggle="modal" data-target="#myModal" class="form-contro" onclick="modalVerificationCode()"  style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;position: absolute;right: 0px;background: #eb2227;color: white;font-size: 1rem"><span >Track your order</span></button>
+    <div  style="position: relative;padding-top: 10px">
+        <button   style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;position: absolute;right: 0px;background: #eb2227;color: white;font-size: 1rem"><span >Track your order</span></button>
         <!-- The Modal -->
-        <div id="modalVerificationCode" class="modalVericationCode">
+<!--        <div id="modalVerificationCode" class="modalVericationCode">-->
 
-            <!-- Modal content -->
-            <div class="modalVericationCode-content" style="width: 27%;border-radius: 5px">
-                <span class="closeModal">&times;</span>
-                <p style="font-size: 25px;font-weight: bold">Track your order</p>
-                <label style="margin-right: 349px;">Verification Code</label>
-                <input type="text"  name="fname" value=""  placeholder="Enter your verification code" class="form-control" style="border-radius: 5px;border: 1px solid gray;width: 476px">
-                <button data-toggle=""  data-target="#myModal" class="form-contro"  style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
-            background: #eb2227;color: white;font-size: 1rem"><span >Search</span></button>
-            </div>
+<!--            &lt;!&ndash; Modal content &ndash;&gt;-->
+<!--            <div class="modalVericationCode-content" style="width: 27%;border-radius: 5px">-->
+<!--                <span class="closeModal">&times;</span>-->
+<!--                <p style="font-size: 25px;font-weight: bold">Track your order</p>-->
+<!--                <label style="margin-right: 349px;">Verification Code</label>-->
+<!--                <input type="text"  name="fname" value=""  placeholder="Enter your verification code" class="form-control" style="border-radius: 5px;border: 1px solid gray;width: 476px">-->
+<!--                <button data-toggle=""  data-target="#myModal" class="form-contro"  style="padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;-->
+<!--            background: #eb2227;color: white;font-size: 1rem"><span >Search</span></button>-->
+<!--            </div>-->
 
 
-        </div>
+<!--        </div>-->
 
 
 
@@ -54,9 +54,9 @@
 
 
     <div class="row" style="margin-bottom: 80px ;padding-top: 45px">
-        <div class="large-5 column1" >
-            <div class="xzoom-container" id="test" >
-                <img class="xzoom"  src="images/product-preOrder/category/iphone14promax.jpeg" xoriginal="images/product/iphone/iphone14promax.jpeg" />
+        <div id="xzoom-productSub" class="large-5 column1"  >
+            <div class="xzoom-container" >
+                <img class="xzoom" id="imageCategory" style=""  src="images/product-preOrder/category/iphone14promax.jpeg" xoriginal="" />
 
             </div>
         </div>
@@ -76,12 +76,13 @@
                 </select>
 
 
-                <div class="xzoom-container">
-                    <div id="categoryImg" class="xzoom-thumbs">
-                        <a id="zoomImg0" onclick="('images/product/iphone/iphone14promax.jpeg')"></a>
-                    </div>
+                <div class="">
+<!--                    <div id="categoryImg" class="xzoom-thumbs">-->
+<!--                        <a id="zoomImg0" onclick="('images/product/iphone/iphone14promax.jpeg')"></a>-->
+<!--                    </div>-->
                     <div class="img-box-category" style="position: relative" id="hideValuesOnSelect">
-                        <img  th:id="productImage" class="xzoomgallery" src="images/product-preOrder/category/iphone14promax.jpeg" style="display: none;width: 66.62px;height:58.24px;position: absolute;right: 37px;top:5px">
+
+                        <img  th:id="productImage"  src="images/product/iphone/iphone-14-pro-max-deeppurple.jpg" style="display: none;width: 66.62px;height:58.24px;position: absolute;right: 37px;top:5px;">
 
                     </div>
                 </div>
@@ -93,7 +94,7 @@
                 <select  class="form-control" name="deviceCategory"  id="productSubCategory"  onchange="productDevice(this.value)" >
 
                 </select>
-                    <div id="btnClick">
+                    <div id="btnClick" style="display: flex;flex-direction: row;justify-content: space-between; align-items: center">
 
 <!--                        <div style="display: flex;flex-direction: row;justify-content: space-between">-->
 <!--                            <button class="img-iphone-category"style="padding-left: 16px">-->
@@ -107,7 +108,7 @@
 
                     </div>
                 <label>Choose your capacity</label>
-                <select id="productCapacity" class="form-control" name="capacityCategory">
+                <select id="productCapacity" class="form-control">
                     <option>select capacity</option>
 
                 </select>
@@ -126,7 +127,7 @@
                         <option>Miss</option>
                         <option>Mrs</option>
                     </select>
-                   <input name="name" id="productCustomerName" type="text" placeholder="Customer's name" class="form-control" style="border-radius: 5px;border: 1px solid #AEAEAE">
+                   <input name="name" id="productCustomerName" type="text" placeholder="Customer's name" class="form-control" style="width: 455px;border-radius: 5px;border: 1px solid #AEAEAE">
 
                 </div>
                 <div style="display: flex;flex-direction: row">
@@ -144,10 +145,10 @@
                         <option>090</option>
 
                     </select>
-                    <input type="text" id="productCustomerNum" name="fname" value=""    placeholder="Phone number(8889894)" class="form-control " style="border-radius: 5px;border: 1px solid gray">
+                    <input type="text" id="productCustomerNum" name="fname" value=""  id="phoneNB"  onkeypress="return onlyNumberKey(event)"  placeholder="Phone number(8889894)" class="form-control " style="border-radius: 5px;border: 1px solid gray;width: 455px">
 
                 </div>
-                <input type="text" id="productCustomerId" name="fname" value=""  placeholder="National ID card/passport" class="form-control" style="border-radius: 5px;border: 1px solid gray">
+                <input type="text" id="productCustomerId" name="fname" value=""  placeholder="National ID card/passport" class="form-control" style="border-radius: 5px;border: 1px solid gray;">
                 <select class="form-control"  id="productCustomerProvince" >
                     <option>Select provice</option>
                     <option>Phnom Penh</option>
@@ -164,10 +165,10 @@
 
                 </select>
                 <div style="text-align: center">
-                    <button   data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
-            background: #e2e6ea;color: #212529;font-size: 1rem"><span >Cancel</span></button>
+                    <button id="btnVerificationCode" data-toggle="modal" data-target="#myModal" class="form-contro"  style="margin-right: 10px;width: 110px; padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+            background: #e2e6ea;color: #212529;font-size: 1rem" ><span >Cancel</span></button>
 
-                    <button onclick="modalReviewProduct()"  type="button" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
+                    <button onclick="myTest()"   type="button" data-toggle="modal" data-target="#myModal" class="form-contro"  style="width: 110px;padding: .375rem .75rem;border: none;border-radius: 3px;font-weight: 500;
             background: #eb2227;color: white;font-size: 1rem"><span >Next</span></button>
 
                 </div>
@@ -187,8 +188,8 @@
                     <div class="row" style="margin-bottom: 80px ;padding-top: 45px;">
                         <div class="large-5 column1" style="margin-right: 30px" >
                             <div class="" >
-                                <img style="width: 485px;height: 339px" src="images/product/iphone/iphone14promax.jpeg" xoriginal="images/product/iphone/iphone14promax.jpeg" />
-
+                                <img id="view_image_id" style="width: 485px;height: 339px" src=""  />
+<!--//xoriginal="images/product/iphone/iphone14promax.jpeg"-->
                             </div>
                         </div>
 
